@@ -1,39 +1,78 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Newborn Photography Hub
 
-Welcome,
+## A newborn photography bookings site, where users can create an account, login and create, view, edit or cancel photoshoot bookings for their newborn babies, and the photographer is able to see all the sessions booked in from an admin perspective and if needed, can create, view, edit or delete any Todo items required for the photo sessions
 
-This is the Code Institute student template for Codeanywhere. We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.
+### Features
 
-You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Codeanywhere and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **May 11th, 2023**
+- User Sign Up/Login
+- Create, View, Edit or Delete session bookings
+- Photographer Administrator site to view booked sessions & create Todo list per booking
 
-## Codeanywhere Reminders
+## Deployment
 
-To run a frontend (HTML, CSS, Javascript only) application in Codeanywhere, in the terminal, type:
+*website links go here*
 
-`python3 -m http.server`
+- Installed required technologies for the bare bones of the project, Django, Cloudinary, PostgreSQL & Psycopg2
+- Added these to the requirements.txt file
+- Created a new Django project "newborn_photography"
+- Created a new app called "session_bookings"
+- Added the newly created app to the 'Installed Apps' section in the settings file
+- Migrated the changes to the "manage.py" file
 
-A button should appear to click: _Open Preview_ or _Open Browser_.
+*Forking & Cloning goes here*
 
-To run a frontend (HTML, CSS, Javascript only) application in Codeanywhere with no-cache, you can use this alias for `python3 -m http.server`.
+### Am I Responsive
 
-`http_server`
+*screengrab goes here*
 
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
+## Development
 
-A button should appear to click: _Open Preview_ or _Open Browser_.
+### Wireframes & Database Designs
 
-In Codeanywhere you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
+*Wireframes go here*
+*Database Designs go here*
 
-To log into the Heroku toolbelt CLI:
+### Technologies
 
-1. Log in to your Heroku account and go to _Account Settings_ in the menu under your avatar.
-2. Scroll down to the _API Key_ and click _Reveal_
-3. Copy the key
-4. In Codeanywhere, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
+- Django
+- Gunicorn
+- Cloudinary
+- PostgreSQL
+- dj-database-url
+- Psycopg2
 
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you so do not share it. If you accidentally make it public then you can create a new one with _Regenerate API Key_.
+### Finished Site Screen Grabs
 
----
+## Testing
 
-Happy coding!
+*Manual Testing Goes here*
+*Include Responsiveness, Browser compatibility, resolved bugs, unresolved bugs, Lighthouse, code validation, User Stories Testing, Features Testing*
+**Remember to make the manual testing write-up visual! - Share Test cases, uses tables where appropriate, and include screenshots where possible!**
+
+### Resolved Bugs
+
+*List of resolved bugs goes here*
+
+### Validator Testing
+
+*W3C Nu HTML Checker*
+*W3C Jigsaw CSS Validator*
+*JS Hint Validator*
+*PEP8 Python Validator*
+*Lighthouse perfromace check*
+
+### Unresolved Bugs
+
+*List of any unresolved bugs goes here*
+
+## Credits
+
+### Code
+
+*coding credits goes here*
+
+### Other Credits
+
+[Code Institute](https://codeinstitute.net/) - Used for the below assistance
+
+- I think therefore I blog video tutorials for assistance with initial deployment
