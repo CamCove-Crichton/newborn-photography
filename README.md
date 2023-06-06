@@ -39,6 +39,7 @@
 - Add the Heroku host name to the allowed hosts in settings
 - Create the media, static and templates directories
 - Create a Profile
+- Deployed app with Heroku through Github
 
 *Forking & Cloning goes here*
 
