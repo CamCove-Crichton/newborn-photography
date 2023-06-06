@@ -1,0 +1,1 @@
+web: gunicorn newborn_photography.wsgi
