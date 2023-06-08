@@ -29,6 +29,17 @@ class Booking(models.Model):
 
     class Meta:
         ordering = ['-created_on']
-    
+ 
     def __str__(self):
         return self.booking_name
+
+
+class Todo(models.Model):
+    booking_id = models.ForeignKey(Booking, on_delete=models.CASCADE, related_name="todo")
+    title = models.CharField(max_length=100)
+    details = models.TextField()
+    due_date = models.DateTimeField(auto_now=False)
+    completed = models.BooleanField(default=False)
+    
+    class Meta:
+        ordering = ['title']
