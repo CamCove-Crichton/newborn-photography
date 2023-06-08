@@ -49,6 +49,9 @@
 
 ## Development
 
+- Began by going through all the settings and installing the required libraries to get my project deployed to heroku (Listed deployment steps above)
+- Started working on the first model, called Booking in the models.py file which will handle all the booking information required for the database
+
 ### Wireframes & Database Designs
 
 *Wireframes go here*
