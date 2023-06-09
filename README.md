@@ -53,6 +53,7 @@
 - Started working on the first model, called Booking in the models.py file which will handle all the booking information required for the database
 - Created the Todo model to handle all the Todo items required for a particular booking
 - Created the Personal Info model to handle all the personal details for the client/user, like the Address and Contact number
+- Made the mirgrations using the command line interface, and migrated the models
 
 ### Wireframes & Database Designs
 
