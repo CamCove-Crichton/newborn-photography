@@ -54,7 +54,7 @@ class Todo(models.Model):
 
 class PersonalInfo(models.Model):
     client_id = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="client-details")
+    User, on_delete=models.CASCADE, related_name="client_details")
     house_num = models.CharField(max_length=50)
     street = models.CharField(max_length=100)
     city = models.CharField(max_length=85)
