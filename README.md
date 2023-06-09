@@ -52,6 +52,7 @@
 - Began by going through all the settings and installing the required libraries to get my project deployed to heroku (Listed deployment steps above)
 - Started working on the first model, called Booking in the models.py file which will handle all the booking information required for the database
 - Created the Todo model to handle all the Todo items required for a particular booking
+- Created the Personal Info model to handle all the personal details for the client/user, like the Address and Contact number
 
 ### Wireframes & Database Designs
 
