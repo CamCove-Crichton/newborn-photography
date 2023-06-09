@@ -54,6 +54,9 @@
 - Created the Todo model to handle all the Todo items required for a particular booking
 - Created the Personal Info model to handle all the personal details for the client/user, like the Address and Contact number
 - Made the mirgrations using the command line interface, and migrated the models
+- Created a superuser for the Django admin panel
+- Installed Summernote for WYSIWYG editor for the Special Requests in the Admin panel
+- Linked up Summernote in settings and URLs files and added a class in the Admin file to assign the fields to the summernote_fields list
 
 ### Wireframes & Database Designs
 
@@ -139,6 +142,44 @@
     
         def __str__(self):
             return self.booking_name
+}
+```
+
+```python
+{
+    from .models import Booking
+}
+```
+
+```python
+{
+    admin.site.register(Booking)
+}
+```
+
+```python
+{
+    from django.urls import path, include
+}
+```
+
+```python
+{
+    path('summernote/', include('django_summernote.urls')),
+}
+```
+
+```python
+{
+    from django_summernote.admin import SummernoteModelAdmin
+}
+```
+
+```python
+{
+    class BookingAdmin(SummernoteModelAdmin):
+
+        summernote_fields = ('special_requests')
 }
 ```
 
