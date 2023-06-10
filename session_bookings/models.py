@@ -41,8 +41,10 @@ class Todo(models.Model):
     booking_id = models.ForeignKey(
         Booking, on_delete=models.CASCADE, related_name="todo")
     title = models.CharField(max_length=100)
+    slug = models.SlugField(default='', max_length=250, unique=True, null=True, blank=True)
     details = models.TextField()
     due_date = models.DateTimeField(auto_now=False)
+    created_on = models.DateTimeField(auto_now_add=True)
     completed = models.BooleanField(default=False)
 
     class Meta:
@@ -54,7 +56,7 @@ class Todo(models.Model):
 
 class PersonalInfo(models.Model):
     client_id = models.ForeignKey(
-    User, on_delete=models.CASCADE, related_name="client_details")
+        User, on_delete=models.CASCADE, related_name="client_details")
     house_num = models.CharField(max_length=50)
     street = models.CharField(max_length=100)
     city = models.CharField(max_length=85)

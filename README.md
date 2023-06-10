@@ -59,6 +59,9 @@
 - Linked up Summernote in settings and URLs files and added a class in the Admin file to assign the fields to the summernote_fields list
 - Migrated the changes, and updated the BookingAdmin properties to get the slug field to auto populate with the name of the booking name
 - Added in the properties to enable filtering and searches on the Admin panel
+- Updated the Todo model to add a Slug Field to assist with unique URLs for each todo item created
+- added the Todo model to the list of imports in the admin file to be able to view it within the Admin panel
+- Made migrations and migrated the models to update the database
 
 ### Wireframes & Database Designs
 
