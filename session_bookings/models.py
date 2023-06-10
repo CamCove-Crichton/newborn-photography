@@ -41,7 +41,7 @@ class Todo(models.Model):
     booking_id = models.ForeignKey(
         Booking, on_delete=models.CASCADE, related_name="todo")
     title = models.CharField(max_length=100)
-    slug = models.SlugField(default='', max_length=250, unique=True, null=True, blank=True)
+    slug = models.SlugField(max_length=100, unique=True)
     details = models.TextField()
     due_date = models.DateTimeField(auto_now=False)
     created_on = models.DateTimeField(auto_now_add=True)
@@ -63,6 +63,8 @@ class PersonalInfo(models.Model):
     county = models.CharField(max_length=15)
     postcode = models.CharField(max_length=10)
     mobile_num = models.CharField(max_length=15)
+    created_on = models.DateTimeField(auto_now_add=True)
+    slug = models.SlugField(max_length=100, unique=True)
 
     def __str__(self):
         return f"Address: {self.house_num}\n{self.street}\n{self.city}\n{self.county}\n{self.postcode}\nMobile: {self.mobile_num}"
