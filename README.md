@@ -57,6 +57,8 @@
 - Created a superuser for the Django admin panel
 - Installed Summernote for WYSIWYG editor for the Special Requests in the Admin panel
 - Linked up Summernote in settings and URLs files and added a class in the Admin file to assign the fields to the summernote_fields list
+- Migrated the changes, and updated the BookingAdmin properties to get the slug field to auto populate with the name of the booking name
+- Added in the properties to enable filtering and searches on the Admin panel
 
 ### Wireframes & Database Designs
 
@@ -153,12 +155,6 @@
 
 ```python
 {
-    admin.site.register(Booking)
-}
-```
-
-```python
-{
     from django.urls import path, include
 }
 ```
@@ -177,8 +173,14 @@
 
 ```python
 {
+    @admin.register(Booking)
     class BookingAdmin(SummernoteModelAdmin):
 
+        prepopulated_fields = {'slug': ('booking_name',)}
+        list_filter = ('client', 'booking_date', 'status')
+        list_display = ('booking_name', 'booking_date', 'slug', 'status', 'created_on')
+        search_fields = ['booking_name', 'client',
+                     'babys_name', 'special_requests']
         summernote_fields = ('special_requests')
 }
 ```
