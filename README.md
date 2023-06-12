@@ -67,6 +67,7 @@
 - Add a method to allow the admin to be able to approve requested bookings
 - Updated the Todo model so the due date and details fields are not mandatory and can be left blank
 - Made the mirgrations and migrated the changes to the database
+Began working on the views by creating a class based view to display all Bookings
 
 ### Future Developments
 
@@ -224,6 +225,23 @@
         list_filter = ('city', 'postcode', 'created_on')
         list_display = ('client_id', 'city', 'postcode', 'created_on')
         search_fields = ['street', 'city', 'county', 'postcode']
+}
+```
+
+```python
+{
+    from django.views import generic
+    from .models import Booking
+}
+```
+
+```python
+{
+    class BookingList(generic.ListView):
+    model = Booking
+    queryset = Booking.objects.order_by('-booking_date')
+    template_name = 'bookings.html'
+    paginate_by = 6
 }
 ```
 
