@@ -64,6 +64,11 @@
 - Made migrations and migrated the models to update the database
 - Updated some of the field in the models to ensure certain fields are marked are required and cannot be empty programatically
 - Imported the Personal Info model into the Admin file and registered it to display in the Django admin panel
+- Add a method to allow the admin to be able to approve requested bookings
+
+### Future Developments
+
+- To allow users to be able to have confirmed appointments without the need for the Admin to approve
 
 ### Wireframes & Database Designs
 
