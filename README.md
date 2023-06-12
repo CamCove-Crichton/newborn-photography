@@ -65,6 +65,8 @@
 - Updated some of the field in the models to ensure certain fields are marked are required and cannot be empty programatically
 - Imported the Personal Info model into the Admin file and registered it to display in the Django admin panel
 - Add a method to allow the admin to be able to approve requested bookings
+- Updated the Todo model so the due date and details fields are not mandatory and can be left blank
+- Made the mirgrations and migrated the changes to the database
 
 ### Future Developments
 
@@ -193,6 +195,10 @@
         search_fields = ['booking_name', 'client',
                         'babys_name', 'special_requests']
         summernote_fields = ('special_requests')
+        actions = ['approve_bookings']
+
+        def approve_bookings(self, request, queryset):
+            queryset.update(status=1)
 }
 ```
 
@@ -201,6 +207,7 @@
     @admin.register(Todo)
     class TodoAdmin(SummernoteModelAdmin):
 
+        prepopulated_fields = {'slug': ('title',)}
         list_filter = ('title', 'due_date', 'created_on')
         list_display = ('title', 'due_date', 'completed', 'created_on')
         search_fields = ['title', 'details']
@@ -213,6 +220,7 @@
     @admin.register(PersonalInfo)
     class PersonalInfoAdmin(admin.ModelAdmin):
 
+        prepopulated_fields = {'slug': ('client_id',)}
         list_filter = ('city', 'postcode', 'created_on')
         list_display = ('client_id', 'city', 'postcode', 'created_on')
         search_fields = ['street', 'city', 'county', 'postcode']
