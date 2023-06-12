@@ -62,6 +62,8 @@
 - Updated the Todo model to add a Slug Field to assist with unique URLs for each todo item created
 - added the Todo model to the list of imports in the admin file to be able to view it within the Admin panel
 - Made migrations and migrated the models to update the database
+- Updated some of the field in the models to ensure certain fields are marked are required and cannot be empty programatically
+- Imported the Personal Info model into the Admin file and registered it to display in the Django admin panel
 
 ### Wireframes & Database Designs
 
@@ -158,12 +160,6 @@
 
 ```python
 {
-    admin.site.register(Booking)
-}
-```
-
-```python
-{
     from django.urls import path, include
 }
 ```
@@ -182,9 +178,39 @@
 
 ```python
 {
+    @admin.register(Booking)
     class BookingAdmin(SummernoteModelAdmin):
 
+        prepopulated_fields = {'slug': ('booking_name',)}
+        list_filter = ('client', 'booking_date', 'status')
+        list_display = ('booking_name', 'booking_date',
+                        'slug', 'status', 'created_on')
+        search_fields = ['booking_name', 'client',
+                        'babys_name', 'special_requests']
         summernote_fields = ('special_requests')
+}
+```
+
+```python
+{
+    @admin.register(Todo)
+    class TodoAdmin(SummernoteModelAdmin):
+
+        list_filter = ('title', 'due_date', 'created_on')
+        list_display = ('title', 'due_date', 'completed', 'created_on')
+        search_fields = ['title', 'details']
+        summernote_fields = ('details')
+}
+```
+
+```python
+{
+    @admin.register(PersonalInfo)
+    class PersonalInfoAdmin(admin.ModelAdmin):
+
+        list_filter = ('city', 'postcode', 'created_on')
+        list_display = ('client_id', 'city', 'postcode', 'created_on')
+        search_fields = ['street', 'city', 'county', 'postcode']
 }
 ```
 
