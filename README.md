@@ -67,7 +67,11 @@
 - Add a method to allow the admin to be able to approve requested bookings
 - Updated the Todo model so the due date and details fields are not mandatory and can be left blank
 - Made the mirgrations and migrated the changes to the database
-Began working on the views by creating a class based view to display all Bookings
+- Began working on the views by creating a class based view to display all Bookings
+- Created a base.html file to use to extend all other html pages from as well as the bookings.html file where clients/users will be able to view all their bookings when logged in
+- Created a css directory and a style.css file for the styling of the site
+- Setup the head of my base.html file using boilerplate html, and adding in a couple extra meta tags for seo purposes
+- Added in the link tags for the fonts for the site, using Oswald and Simonetta from Google Fonts
 
 ### Future Developments
 
@@ -114,6 +118,18 @@ Began working on the views by creating a class based view to display all Booking
 ## Credits
 
 ### Code
+
+[Google Fonts](https://fonts.google.com/) - Used the Oswald & Simonetta fonts from Google Fonts
+
+```html
+{
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&family=Simonetta:ital,wght@0,400;0,900;1,400;1,900&display=swap"
+        rel="stylesheet">
+}
+```
 
 [Code Institute](https://codeinstitute.net/) - Used below code in my project from the I think therefore I blog video tutorials
 
