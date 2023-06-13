@@ -72,6 +72,7 @@
 - Created a css directory and a style.css file for the styling of the site
 - Setup the head of my base.html file using boilerplate html, and adding in a couple extra meta tags for seo purposes
 - Added in the link tags for the fonts for the site, using Oswald and Simonetta from Google Fonts
+- Added in my script tag for my Font Awesome kit
 
 ### Future Developments
 
@@ -118,6 +119,8 @@
 ## Credits
 
 ### Code
+
+[Font Awesome](https://fontawesome.com/) - Used Font Awesome for any icons required in the project
 
 [Google Fonts](https://fonts.google.com/) - Used the Oswald & Simonetta fonts from Google Fonts
 
@@ -258,6 +261,12 @@
     queryset = Booking.objects.order_by('-booking_date')
     template_name = 'bookings.html'
     paginate_by = 6
+}
+```
+
+```html
+{
+    {% load static %}
 }
 ```
 
