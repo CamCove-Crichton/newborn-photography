@@ -73,6 +73,10 @@
 - Setup the head of my base.html file using boilerplate html, and adding in a couple extra meta tags for seo purposes
 - Added in the link tags for the fonts for the site, using Oswald and Simonetta from Google Fonts
 - Added in my script tag for my Font Awesome kit
+- Added the bootstrap link tag to the head of my base.html file and then added the bootstrap script tag just before the closing body tag in the base.html file
+- Began by adding in the header element, with a nav element nested in the header
+- Added a main element to insert the main content which will be extended in the other files
+- Then added a footer element as a placeholder for items like the social media link etc.
 
 ### Future Developments
 
@@ -267,6 +271,16 @@
 ```html
 {
     {% load static %}
+}
+```
+
+```html
+{
+    <main>
+        {% block content %}
+        <!-- Main content goes here -->
+        {% endblock content %}
+    </main>
 }
 ```
 
