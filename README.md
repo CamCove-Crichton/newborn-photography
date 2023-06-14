@@ -80,6 +80,8 @@
 - Began working on the header section in the base.html file for the heading and site navigation as well as the signup/login feature
 - Created an index.html file to be used as the home page and extended both the index.html file and the bookings.html file from the base.html file
 - Added in the social links and font awesome icons in the footer section of the base.html file
+- Began working a bit on the content layout for the bookings.html page
+- Then wired up the bookings page as the default page to test it out
 
 ### Future Developments
 
@@ -343,6 +345,42 @@
 ```html
 {
     {% extends "base.html" %}
+}
+```
+
+```html
+{
+    {% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <!-- Bookings column -->
+        <div class="col-12 mt-2">
+            <div class="row">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+}
+```
+
+```python
+{
+    from . import views
+from django.urls import path
+
+urlpatterns = [
+    path('', views.BookingList.as_view(), name='bookings'),
+]
+}
+```
+
+```python
+{
+    path('', include('session_bookings.urls'),
+         name='session_bookings_urls'),
 }
 ```
 
