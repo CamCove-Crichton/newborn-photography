@@ -30,10 +30,47 @@
 </head>
 
 <body>
-
     <header>
+        <!-- Logo, signup/login and navigation -->
+        <div>
+            <a href="#">
+                <h1>
+                    Newborn Photography Hub
+                </h1>
+            </a>
+        </div>
+        <!-- Assitance from code institutes I think therefore I blog walkthrough tutorials -->
+        <div>
+            {% if user.is_authenticated %}
+            <!-- Assistance from code institutes Hello Django walkthrough tutorials -->
+            <a href="#">{{ user.first_name }}</a>
+            {% else %}
+            <a href="#">Signup/Login</a>
+            {% endif %}
+        </div>
         <nav>
-
+            <!-- Assitance from code institutes I think therefore I blog walkthrough tutorials -->
+            <div>
+                <ul>
+                    <li>
+                        <a href="#">Home</a>
+                    </li>
+                    <li>
+                        <a href="#">Blogs</a>
+                    </li>
+                    <li>
+                        <a href="#">Gallery</a>
+                    </li>
+                    <li>
+                        <a href="#">Contact</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li>
+                        <a href="#">Bookings</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
         </nav>
     </header>
 
@@ -44,6 +81,7 @@
         {% endblock content %}
     </main>
 
+    <!-- Footer with social links -->
     <footer>
 
     </footer>
