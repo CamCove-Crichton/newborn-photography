@@ -77,6 +77,8 @@
 - Began by adding in the header element, with a nav element nested in the header
 - Added a main element to insert the main content which will be extended in the other files
 - Then added a footer element as a placeholder for items like the social media link etc.
+- Began working on the header section in the base.html file for the heading and site navigation as well as the signup/login feature
+- Created an index.html file to be used as the home page and extended both the index.html file and the bookings.html file from the base.html file
 
 ### Future Developments
 
@@ -106,7 +108,7 @@
 
 ### Resolved Bugs
 
-*List of resolved bugs goes here*
+- Corrupted database, had to delete the inital database and update the models, and then made the migrations again and migrated the database to rectify the issue
 
 ### Validator Testing
 
@@ -124,6 +126,23 @@
 
 ### Code
 
+[Bootstrap](https://getbootstrap.com/) - Used Bootstrap to assist with styling
+
+```html
+{
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+}
+```
+
+```html
+{
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+}
+```
+
 [Font Awesome](https://fontawesome.com/) - Used Font Awesome for any icons required in the project
 
 [Google Fonts](https://fonts.google.com/) - Used the Oswald & Simonetta fonts from Google Fonts
@@ -138,7 +157,7 @@
 }
 ```
 
-[Code Institute](https://codeinstitute.net/) - Used below code in my project from the I think therefore I blog video tutorials
+[Code Institute](https://codeinstitute.net/) - Used below code in my project from the I think therefore I blog video tutorials as well as the Hello Django video tutorials
 
 ```python
 {
@@ -284,8 +303,54 @@
 }
 ```
 
+```html
+{
+    <div>
+            {% if user.is_authenticated %}
+            <a href="#">{{ user.first_name }}</a>
+            {% else %}
+            <a href="#">Signup/Login</a>
+            {% endif %}
+        </div>
+}
+```
+
+```html
+{
+    <ul>
+                    <li>
+                        <a href="#">Home</a>
+                    </li>
+                    <li>
+                        <a href="#">Blogs</a>
+                    </li>
+                    <li>
+                        <a href="#">Gallery</a>
+                    </li>
+                    <li>
+                        <a href="#">Contact</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li>
+                        <a href="#">Bookings</a>
+                    </li>
+                    {% endif %}
+                </ul>
+}
+```
+
+```html
+{
+    {% extends "base.html" %}
+}
+```
+
 ### Other Credits
 
 [Code Institute](https://codeinstitute.net/) - Used for the below assistance
 
 - I think therefore I blog video tutorials for assistance with initial deployment
+
+[ChatGPT](https://openai.com/blog/chatgpt) - Used ChatGPT for questions and queries in a similar manner as to using google
+
+[Google](https://www.google.com/) - Used Google to do searches on any issues or questions to troubleshoot, remind myself or teach myself
