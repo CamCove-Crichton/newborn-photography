@@ -83,6 +83,7 @@
 - Began working a bit on the content layout for the bookings.html page
 - Then wired up the bookings page as the default page to test it out
 - Continued updating the bookings page to view an image using bootstrap features and uploading an image to cloudinary and using the url for the default booking image if an image has not been provided by the client/user
+- Added in a button to the bookings page to request a new booking, and added a new_booking.html file which extends from the base.html file
 
 ### Future Developments
 
@@ -354,6 +355,13 @@
 {
     {% block content %}
     <div class="container-fluid">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-3">
+                    <a href="#" type="button" class="btn btn-success">New Booking</a>
+                </div>
+            </div>
+        </div>
         <div class="row">
             <!-- Bookings column -->
             <div class="col-12 mt-2">
