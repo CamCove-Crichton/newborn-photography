@@ -101,6 +101,7 @@
 - PostgreSQL
 - dj-database-url
 - Psycopg2
+- Bootstrap
 
 ### Finished Site Screen Grabs
 
@@ -433,3 +434,5 @@ urlpatterns = [
 [ChatGPT](https://openai.com/blog/chatgpt) - Used ChatGPT for questions and queries in a similar manner as to using google
 
 [Google](https://www.google.com/) - Used Google to do searches on any issues or questions to troubleshoot, remind myself or teach myself
+
+[Bootstrap Documentation](https://getbootstrap.com/docs/5.3/getting-started/introduction/) - Used Bootstrap documentation to read up on how to implement and use certain classes and elements
