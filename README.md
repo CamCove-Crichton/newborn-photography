@@ -82,6 +82,7 @@
 - Added in the social links and font awesome icons in the footer section of the base.html file
 - Began working a bit on the content layout for the bookings.html page
 - Then wired up the bookings page as the default page to test it out
+- Continued updating the bookings page to view an image using bootstrap features and uploading an image to cloudinary and using the url for the default booking image if an image has not been provided by the client/user
 
 ### Future Developments
 
@@ -351,18 +352,57 @@
 ```html
 {
     {% block content %}
-<div class="container-fluid">
-    <div class="row">
-        <!-- Bookings column -->
-        <div class="col-12 mt-2">
-            <div class="row">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Bookings column -->
+            <div class="col-12 mt-2">
+                <div class="row">
+                    {% for booking in booking_list %}
+                    <div class="col-12">
+                        <div class="card mb-2">
+                            <div class="card-body">
+                                <div class="image-container">
+                                    {% if "placeholder" in booking.featured_image.url %}
+                                    <img src="https://res.cloudinary.com/dvvi4mkst/image/upload/v1686808069/baby_hug4bo.jpg"
+                                        alt="default booking image" class="card-image-top">
+                                    {% else %}
+                                    <img src="{{ booking.featured_image.ul }}" alt="custom booking image"
+                                        class="card-image-top">
+                                    {% endif %}
+                                    <div class="card-text">
+                                        <h4>{{ booking.babys_name}}'s Newborn Shoot</h4>
+                                        <p>Booking: {{ booking.booking_date }}</p>
+                                        <p>Location: {{ booking.location }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
+                    {% if forloop.counter|divisibleby:1 %}
+                </div>
+                <div class="row">
+                    {% endif %}
+                    {% endfor %}
+                </div>
             </div>
         </div>
-    </div>
-</div>
+        {% if is_paginated %}
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                {% if page_obj.has_previous %}
+                <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; PREV </a></li>
+                {% endif %}
+                {% if page_obj.has_next %}
+                <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
 
-{% endblock content %}
+                {% endif %}
+            </ul>
+        </nav>
+        {% endif %}
+    </div>
+
+    {% endblock content %}
 }
 ```
 
