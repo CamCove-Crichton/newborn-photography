@@ -87,6 +87,7 @@
 - Added in a control statement to display a message if there are no existing bookings on the bookings page for the client/user to view
 - Added a booking detail file to be able to view all the details about the booking
 - Added a new view to have the index.html file be the home page and switch the bookings page to the bookings link
+- Added a new view and wired up the URL to enable a new booking request view
 
 ### Future Developments
 
