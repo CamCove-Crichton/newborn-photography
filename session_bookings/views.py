@@ -33,3 +33,8 @@ class BookingDetail(View):
 class Home(View):
     def get(self, request):
         return render(request, "index.html")
+
+
+class NewBooking(generic.ListView):
+    model = Booking
+    template_name = 'new_booking.html'

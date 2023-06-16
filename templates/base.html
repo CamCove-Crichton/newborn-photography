@@ -66,7 +66,7 @@
                     </li>
                     {% if user.is_authenticated %}
                     <li>
-                        <a href="/bookings">Bookings</a>
+                        <a href="{% url 'bookings' %}">Bookings</a>
                     </li>
                     {% endif %}
                 </ul>
