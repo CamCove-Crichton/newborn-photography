@@ -85,6 +85,7 @@
 - Continued updating the bookings page to view an image using bootstrap features and uploading an image to cloudinary and using the url for the default booking image if an image has not been provided by the client/user
 - Added in a button to the bookings page to request a new booking, and added a new_booking.html file which extends from the base.html file
 - Added in a control statement to display a message if there are no existing bookings on the bookings page for the client/user to view
+- Added a booking detail file to be able to view all the details about the booking
 
 ### Future Developments
 
@@ -380,9 +381,11 @@
                                         class="card-image-top">
                                     {% endif %}
                                     <div class="card-text">
-                                        <h4>{{ booking.babys_name}}'s Newborn Shoot</h4>
-                                        <p>Booking: {{ booking.booking_date }}</p>
-                                        <p>Location: {{ booking.location }}</p>
+                                        <a href="{% url 'booking_detail' booking.slug %}">
+                                            <h4>{{ booking.babys_name}}'s Newborn Shoot</h4>
+                                            <p>Booking: {{ booking.booking_date }}</p>
+                                            <p>Location: {{ booking.location }}</p>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -428,6 +431,7 @@ from django.urls import path
 
 urlpatterns = [
     path('', views.BookingList.as_view(), name='bookings'),
+    path('<slug:slug>', views.BookingDetail.as_view(), name='booking_detail'),
 ]
 }
 ```
@@ -436,6 +440,24 @@ urlpatterns = [
 {
     path('', include('session_bookings.urls'),
          name='session_bookings_urls'),
+}
+```
+
+```python
+{
+    class BookingDetail(View):
+
+    def get(self, request, slug, *args, **kwargs):
+        queryset = Booking.objects
+        booking = get_object_or_404(queryset, slug=slug)
+
+        return render(
+            request,
+            "booking_detail.html",
+            {
+                "booking": booking
+            },
+        )
 }
 ```
 
