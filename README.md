@@ -86,6 +86,7 @@
 - Added in a button to the bookings page to request a new booking, and added a new_booking.html file which extends from the base.html file
 - Added in a control statement to display a message if there are no existing bookings on the bookings page for the client/user to view
 - Added a booking detail file to be able to view all the details about the booking
+- Added a new view to have the index.html file be the home page and switch the bookings page to the bookings link
 
 ### Future Developments
 
@@ -458,6 +459,14 @@ urlpatterns = [
                 "booking": booking
             },
         )
+}
+```
+
+```python
+{
+    class Home(View):
+    def get(self, request):
+        return render(request, "index.html")
 }
 ```
 
