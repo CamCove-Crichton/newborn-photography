@@ -1,0 +1,22 @@
+<!-- Assitance from code institutes I think therefore I blog walkthrough tutorials -->
+{% extends "base.html" %}
+
+{% block content %}
+<div>
+    <h1>Booking Details</h1>
+</div>
+<ul>
+    <li>Booking Name: {{ booking.booking_name }}</li>
+    <li>Date: {{ booking.booking_date }}</li>
+    <li>Baby's Name: {{ booking.babys_name }}</li>
+    <li>Baby's Due Date: {{booking.babys_due_date }}</li>
+    <li>Baby's Gender: {{ booking.babys_gender }}</li>
+    <li>Location: {{ booking.location }}</li>
+    <li>Special Requests: {{ booking.special_requests }}</li>
+    <li>How You Found Me: {{ booking.how_you_found_me }}</li>
+    <li>Consent to use images: {{ booking.consent }}</li>
+    <li>Uploaded Image: {{ booking.featured_image }}</li>
+    <li>Booking Status: {{ booking.status }}</li>
+</ul>
+
+{% endblock content %}
