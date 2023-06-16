@@ -84,6 +84,7 @@
 - Then wired up the bookings page as the default page to test it out
 - Continued updating the bookings page to view an image using bootstrap features and uploading an image to cloudinary and using the url for the default booking image if an image has not been provided by the client/user
 - Added in a button to the bookings page to request a new booking, and added a new_booking.html file which extends from the base.html file
+- Added in a control statement to display a message if there are no existing bookings on the bookings page for the client/user to view
 
 ### Future Developments
 
@@ -367,7 +368,7 @@
             <div class="col-12 mt-2">
                 <div class="row">
                     {% for booking in booking_list %}
-                    <div class="col-12">
+                    <div class="col-md-4">
                         <div class="card mb-2">
                             <div class="card-body">
                                 <div class="image-container">
@@ -388,10 +389,15 @@
                         </div>
                     </div>
 
-                    {% if forloop.counter|divisibleby:1 %}
+                    {% if forloop.counter|divisibleby:3 %}
                 </div>
                 <div class="row">
                     {% endif %}
+                    <!-- Assitance from code institutes Hello Django walkthrough tutorials -->
+                    {% empty %}
+                    <div class="container-fluid">
+                        <p>You currently have no bookings</p>
+                    </div>
                     {% endfor %}
                 </div>
             </div>
