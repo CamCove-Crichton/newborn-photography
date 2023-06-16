@@ -1,3 +1,4 @@
+# Assitance from code institutes I think therefore I blog walkthrough tutorials
 from django.shortcuts import render, get_object_or_404
 # Assitance from code institutes I think therefore I blog walkthrough tutorials
 from django.views import generic, View
@@ -27,3 +28,8 @@ class BookingDetail(View):
                 "booking": booking
             },
         )
+
+
+class Home(View):
+    def get(self, request):
+        return render(request, "index.html")
