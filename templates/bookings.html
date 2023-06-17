@@ -22,10 +22,10 @@
                             <div class="image-container">
                                 {% if "placeholder" in booking.featured_image.url %}
                                 <img src="https://res.cloudinary.com/dvvi4mkst/image/upload/v1686808069/baby_hug4bo.jpg"
-                                    alt="default booking image" class="card-image-top">
+                                    alt="default booking image" class="card-image-top img-fluid">
                                 {% else %}
                                 <img src="{{ booking.featured_image.ul }}" alt="custom booking image"
-                                    class="card-image-top">
+                                    class="card-image-top img-fluid">
                                 {% endif %}
                                 <div class="card-text">
                                     <a href="{% url 'booking_detail' booking.slug %}">
