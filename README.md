@@ -91,6 +91,7 @@
 - Installed allauth to enable authentication for signup and logins and added it to the requirements file and then added it to the list of installed apps in the settings.py file and included the allauth URLs in the projects urls file
 - Created a site id to tell django the site id, so it can handle multiple sites and created login and logout redirects in the settings file and then ran the mirgrations
 - Updated the base.html with the href urls for the signup, login and logout buttons
+- Copied across the account template files from django into my project, and then adjusted the signup, login and logout html templates to extend from my base.html file
 
 ### Future Developments
 
