@@ -90,6 +90,7 @@
 - Added a new view and wired up the URL to enable a new booking request view
 - Installed allauth to enable authentication for signup and logins and added it to the requirements file and then added it to the list of installed apps in the settings.py file and included the allauth URLs in the projects urls file
 - Created a site id to tell django the site id, so it can handle multiple sites and created login and logout redirects in the settings file and then ran the mirgrations
+- Updated the base.html with the href urls for the signup, login and logout buttons
 
 ### Future Developments
 
@@ -488,6 +489,31 @@ urlpatterns = [
 
     LOGIN_REDIRECT_URL = '/'
     LOGOUT_REDIRECT_URL = '/'
+}
+```
+
+```python
+{
+    ACCOUNT_EMAIL_VERIFICATION = 'none'
+}
+```
+
+```html
+{
+    <li>
+        <a href="{% url 'account_logout' %}">Logout</a>
+    </li>
+}
+```
+
+```html
+{
+    <li>
+        <a href="{% url 'account_signup' %}">Signup</a>
+    </li>
+    <li>
+        <a href="{% url 'account_login' %}">Login</a>
+    </li>
 }
 ```
 
