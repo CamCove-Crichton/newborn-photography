@@ -88,6 +88,8 @@
 - Added a booking detail file to be able to view all the details about the booking
 - Added a new view to have the index.html file be the home page and switch the bookings page to the bookings link
 - Added a new view and wired up the URL to enable a new booking request view
+- Installed allauth to enable authentication for signup and logins and added it to the requirements file and then added it to the list of installed apps in the settings.py file and included the allauth URLs in the projects urls file
+- Created a site id to tell django the site id, so it can handle multiple sites and created login and logout redirects in the settings file and then ran the mirgrations
 
 ### Future Developments
 
@@ -227,6 +229,7 @@
 ```python
 {
     path('summernote/', include('django_summernote.urls')),
+    path('accounts/', include('allauth.urls')),
 }
 ```
 
@@ -468,6 +471,23 @@ urlpatterns = [
     class Home(View):
     def get(self, request):
         return render(request, "index.html")
+}
+```
+
+```python
+{
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+}
+```
+
+```python
+{
+    SITE_ID = 1
+
+    LOGIN_REDIRECT_URL = '/'
+    LOGOUT_REDIRECT_URL = '/'
 }
 ```
 
