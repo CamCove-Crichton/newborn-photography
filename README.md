@@ -92,10 +92,14 @@
 - Created a site id to tell django the site id, so it can handle multiple sites and created login and logout redirects in the settings file and then ran the mirgrations
 - Updated the base.html with the href urls for the signup, login and logout buttons
 - Copied across the account template files from django into my project, and then adjusted the signup, login and logout html templates to extend from my base.html file
+- Created the basic layout for the new booking request form
 
 ### Future Developments
 
 - To allow users to be able to have confirmed appointments without the need for the Admin to approve
+- To allow users to signup or login using social media accounts
+- To allow users to reset their password if they cannot remember their existing password
+- To have users receive an authentication email when signing up to validatate their email address
 
 ### Wireframes & Database Designs
 
@@ -111,6 +115,7 @@
 - dj-database-url
 - Psycopg2
 - Bootstrap
+- Django allauth
 
 ### Finished Site Screen Grabs
 
@@ -123,6 +128,7 @@
 ### Resolved Bugs
 
 - Corrupted database, had to delete the inital database and update the models, and then made the migrations again and migrated the database to rectify the issue
+- Could not connect up the index.html view and realised I was using the url of the file and not the assigned name for the url in the control statement
 
 ### Validator Testing
 
@@ -529,3 +535,5 @@ urlpatterns = [
 [Google](https://www.google.com/) - Used Google to do searches on any issues or questions to troubleshoot, remind myself or teach myself
 
 [Bootstrap Documentation](https://getbootstrap.com/docs/5.3/getting-started/introduction/) - Used Bootstrap documentation to read up on how to implement and use certain classes and elements
+
+[Stack Overflow](https://stackoverflow.com/) - Used stack overflow when troubleshooting issues
