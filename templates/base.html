@@ -41,12 +41,24 @@
         </div>
         <!-- Assitance from code institutes I think therefore I blog walkthrough tutorials -->
         <div>
-            {% if user.is_authenticated %}
-            <!-- Assistance from code institutes Hello Django walkthrough tutorials -->
-            <a href="#">{{ user.first_name }}</a>
-            {% else %}
-            <a href="#">Signup/Login</a>
-            {% endif %}
+            <ul>
+                {% if user.is_authenticated %}
+                <!-- Assistance from code institutes Hello Django walkthrough tutorials -->
+                <li>
+                    <a href="#">{{ user.first_name }}</a>
+                </li>
+                <li>
+                    <a href="#">Logout</a>
+                </li>
+                {% else %}
+                <li>
+                    <a href="#">Signup</a>
+                </li>
+                <li>
+                    <a href="#">Login</a>
+                </li>
+                {% endif %}
+            </ul>
         </div>
         <nav>
             <!-- Assitance from code institutes I think therefore I blog walkthrough tutorials -->
