@@ -10,13 +10,41 @@
     <li>Date: {{ booking.booking_date }}</li>
     <li>Baby's Name: {{ booking.babys_name }}</li>
     <li>Baby's Due Date: {{booking.babys_due_date }}</li>
-    <li>Baby's Gender: {{ booking.babys_gender }}</li>
-    <li>Location: {{ booking.location }}</li>
-    <li>Special Requests: {{ booking.special_requests }}</li>
+
+    <!-- Baby's Gender -->
+    {% if booking.babys_gender == 1 %}
+    <li>Baby's Gender: Male </li>
+    {% elif booking.babys_gender == 2 %}
+    <li>Baby's Gender: Female </li>
+    {% else %}
+    <li>Baby's Gender: Unknown </li>
+    {% endif %}
+
+    <!-- Booking Location -->
+    {% if booking.location == 1 %}
+    <li>Location: Home</li>
+    {% else %}
+    <li>Location: Studio</li>
+    {% endif %}
+
+    <li>Special Requests: {{ booking.special_requests|safe }}</li>
     <li>How You Found Me: {{ booking.how_you_found_me }}</li>
-    <li>Consent to use images: {{ booking.consent }}</li>
+
+    <!-- Media Consent -->
+    {% if booking.consent == 1 %}
+    <li>Consent to use images: Yes</li>
+    {% else %}
+    <li>Consent to use images: No</li>
+    {% endif %}
+
     <li>Uploaded Image: {{ booking.featured_image }}</li>
-    <li>Booking Status: {{ booking.status }}</li>
+
+    <!-- Booking Status -->
+    {% if booking.status == 1 %}
+    <li>Booking Status: Confirmed</li>
+    {% else %}
+    <li>Booking Status: Awaiting Confirmation</li>
+    {% endif %}
 </ul>
 
 {% endblock content %}

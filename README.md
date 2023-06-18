@@ -93,6 +93,7 @@
 - Updated the base.html with the href urls for the signup, login and logout buttons
 - Copied across the account template files from django into my project, and then adjusted the signup, login and logout html templates to extend from my base.html file
 - Created the basic layout for the new booking request form
+- Updated the bookings page and bookings detail page with some control statements to display the choices in a human readable format
 
 ### Future Developments
 
