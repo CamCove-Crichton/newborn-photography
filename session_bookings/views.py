@@ -3,6 +3,7 @@ from django.shortcuts import render, get_object_or_404
 # Assitance from code institutes I think therefore I blog walkthrough tutorials
 from django.views import generic, View
 from .models import Booking
+from .forms import BookingForm
 
 # Assitance from code institutes I think therefore I blog walkthrough tutorials
 
@@ -38,3 +39,4 @@ class Home(View):
 class NewBooking(generic.ListView):
     model = Booking
     template_name = 'new_booking.html'
+    context = BookingForm()

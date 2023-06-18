@@ -95,6 +95,9 @@
 - Created the basic layout for the new booking request form
 - Updated the bookings page and bookings detail page with some control statements to display the choices in a human readable format
 - Updated the general layout/look of the signup, login and logout pages with a few bootstrap classes
+- Installed Django Crispy Forms to assist with the flexibility and customization of the forms and updated the requirements.txt file
+- Updated the setting file to add crispy forms to the installed apps
+- Created a forms file for form classes to utilise crispy forms when adding the form to the class based view in the views.py file, then proveeded to update the new booking template accordingly to utilise crispy forms
 
 ### Future Developments
 
@@ -118,6 +121,7 @@
 - Psycopg2
 - Bootstrap
 - Django allauth
+- Django Crispy Forms
 
 ### Finished Site Screen Grabs
 
@@ -489,6 +493,7 @@ urlpatterns = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'crispy_forms',
 }
 ```
 
@@ -533,6 +538,40 @@ urlpatterns = [
         <div class="col-md-8 mt-3 offset-md-2"></div>
     </div>
 </div>
+}
+```
+
+```python
+{
+    CRISPY_TEMPLATE_PACK = 'bootstrap4'
+}
+```
+
+```python
+{
+    from .models import Booking
+    from django.contrib.auth.models import User
+    from django import forms
+
+
+    class BookingForm(forms.ModelForm):
+        class Meta:
+            model = Booking
+            fields = ('booking_name', 'booking_date', 'babys_due_date', 'babys_name', 'babys_gender',
+                        'location', 'special_requests', 'how_you_found_me', 'consent', 'featured_image', 'status',)
+}
+```
+
+```html
+{
+    {% load_crispy_forms_tags %}
+}
+```
+
+```html
+{
+    {{ booking_form | crispy }}
+    {% csrf_token %}
 }
 ```
 

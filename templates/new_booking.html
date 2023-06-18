@@ -2,11 +2,17 @@
 {% extends "base.html" %}
 
 {% block content %}
+
+<!-- Assitance from code institutes I think therefore I blog walkthrough tutorials -->
+{% load crispy_forms_tags %}
+
 <div>
     <h1>New Booking Request</h1>
 </div>
 <div class="container-fluid">
-    <form>
+    <form method="post">
+        {{ booking_form | crispy }}
+        {% csrf_token %}
         <!-- Booking Name -->
         <div class="mb-3">
             <label for="booking-name" class="form-label">Booking Name</label>
@@ -109,7 +115,7 @@
             <input type="file" class="form-control" id="booking-img">
         </div>
 
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary btn-lg">Submit</button>
     </form>
 </div>
 
