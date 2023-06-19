@@ -36,11 +36,58 @@ class Home(View):
         return render(request, "index.html")
 
 
+# class NewBooking(generic.ListView):
+#     model = Booking
+#     template_name = 'new_booking.html'
+
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context['form'] = BookingForm()
+#         return context
+
+#     def post(self, request, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context['form'] = BookingForm()
+
+#         new_booking_request = BookingForm(data=request.POST)
+
+#         if new_booking_request.is_valid():
+#             new_booking_request.instance.email = request.user.email
+#             new_booking_request.instance.name = request.user.username
+#         else:
+#             new_booking_request = BookingForm()
+
+#         return context
+
 class NewBooking(generic.ListView):
     model = Booking
-    template_name = 'new_booking.html'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['form'] = BookingForm()
-        return context
+    def get(self, request, *args, **kwargs):
+
+        return render(
+            request,
+            "new_booking.html",
+            {
+                "submitted": False,
+                "form": BookingForm()
+            },
+        )
+
+    def post(self, request, *args, **kwargs):
+
+        new_booking_request = BookingForm(data=request.POST)
+
+        if new_booking_request.is_valid():
+            new_booking_request.instance.email = request.user.email
+            new_booking_request.instance.name = request.user.username
+        else:
+            new_booking_request = BookingForm()
+
+        return render(
+            request,
+            "new_booking.html",
+            {
+                "submitted": True,
+                "form": BookingForm()
+            },
+        )
