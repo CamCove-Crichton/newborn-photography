@@ -39,4 +39,8 @@ class Home(View):
 class NewBooking(generic.ListView):
     model = Booking
     template_name = 'new_booking.html'
-    context = BookingForm()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = BookingForm()
+        return context

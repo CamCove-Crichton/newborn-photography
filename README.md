@@ -152,6 +152,17 @@
 
 ### Code
 
+[ChatGpt](https://openai.com/blog/chatgpt) - Asked ChatGpt if it was possible to assign the context for a view to my BookingForm class to utilise crispy forms, to which I was told yes but the preffered way to do it was the below
+
+```pyton
+{
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = BookingForm()
+        return context
+}
+```
+
 [Bootstrap](https://getbootstrap.com/) - Used Bootstrap to assist with styling
 
 ```html
