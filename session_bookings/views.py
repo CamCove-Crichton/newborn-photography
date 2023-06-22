@@ -9,15 +9,24 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.text import slugify
 
 
-# Assitance from code institutes I think therefore I blog walkthrough tutorials
-class BookingList(generic.ListView):
+# Assitance from code institutes I think therefore I blog walkthrough tutorials & ChatGpt
+class BookingList(LoginRequiredMixin, generic.ListView):
     """
-    BookingList class creates a view for the user to see all the bookings they have already made
+    BookingList class creates a view for the user to see all the bookings made
     """
     model = Booking
-    queryset = Booking.objects.order_by('-booking_date')
     template_name = 'bookings.html'
     paginate_by = 6
+
+    def get_queryset(self):
+        """
+        Filters bookings to display only the currently logged in users bookings
+        """
+        # Assitance from ChatGpt
+        user = self.request.user
+        queryset = super().get_queryset().filter(client=user).order_by('-booking_date')
+
+        return queryset
 
 
 # Assitance from code institutes I think therefore I blog walkthrough tutorials
@@ -43,6 +52,7 @@ class Home(View):
     """
     The Home class returns the render of the index.html file to return to the home page
     """
+
     def get(self, request):
         return render(request, "index.html")
 

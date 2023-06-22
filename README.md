@@ -99,6 +99,7 @@
 - Updated the setting file to add crispy forms to the installed apps
 - Created a forms file for form classes to utilise crispy forms when adding the form to the class based view in the views.py file, then proveeded to update the new booking template accordingly to utilise crispy forms
 - Got the new booking request to submit and to save to the database using slugify to covert the bookiing name to a slug and assign it to the slug field in the model as well as assign the uploaded file to the featured image field in the database
+- Update the BookingList view to display only the currently logged in user's bookings to the user
 
 ### Future Developments
 
@@ -191,6 +192,21 @@
                     "form": BookingForm()
                 },
             )
+}
+```
+
+```python
+{
+    class BookingList(LoginRequiredMixin, generic.ListView):
+}
+```
+
+```python
+{
+    user = self.request.user
+        queryset = super().get_queryset().filter(client=user).order_by('-booking_date')
+
+        return queryset
 }
 ```
 
