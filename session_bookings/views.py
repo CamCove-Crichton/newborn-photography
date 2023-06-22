@@ -1,5 +1,5 @@
 # Assitance from code institutes I think therefore I blog walkthrough tutorials
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 # Assitance from code institutes I think therefore I blog walkthrough tutorials
 from django.views import generic, View
 from .models import Booking
@@ -93,7 +93,7 @@ class NewBooking(LoginRequiredMixin, generic.ListView):
             booking.slug = slugify(booking.booking_name)
             booking.featured_image = new_booking_request.cleaned_data['featured_image']
             booking.save()
-            return render(request, "bookings.html")
+            return redirect('bookings')
         else:
             return render(
                 request,
