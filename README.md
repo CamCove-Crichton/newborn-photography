@@ -98,6 +98,7 @@
 - Installed Django Crispy Forms to assist with the flexibility and customization of the forms and updated the requirements.txt file
 - Updated the setting file to add crispy forms to the installed apps
 - Created a forms file for form classes to utilise crispy forms when adding the form to the class based view in the views.py file, then proveeded to update the new booking template accordingly to utilise crispy forms
+- Got the new booking request to submit and to save to the database using slugify to covert the bookiing name to a slug and assign it to the slug field in the model as well as assign the uploaded file to the featured image field in the database
 
 ### Future Developments
 
@@ -135,6 +136,9 @@
 
 - Corrupted database, had to delete the inital database and update the models, and then made the migrations again and migrated the database to rectify the issue
 - Could not connect up the index.html view and realised I was using the url of the file and not the assigned name for the url in the control statement
+- Was unable to get my bookings view to diplay and found that when the initial new booking request was posted to the database that it was without a slug and so it was causing an error
+- The initial route of the slug field being assigned a value was incorrect and so was returning a str which was an invalid value, so I used slugify to use the booking name and create a slug for the booking request before it gets saved
+- The featured image is being assigned the uploaded file, but is currently not displaying when viewing the template, but instead the alt attribute value is displayed - I found that there was a typo in my template that was missing the 'r' in url, so it is displaying correctly now
 
 ### Validator Testing
 
@@ -146,7 +150,7 @@
 
 ### Unresolved Bugs
 
-*List of any unresolved bugs goes here*
+- None that I have found
 
 ## Credits
 
@@ -160,6 +164,33 @@
         context = super().get_context_data(**kwargs)
         context['form'] = BookingForm()
         return context
+}
+```
+
+```html
+{
+    <form method="post" enctype="multipart/form-data">
+}
+```
+
+```python
+{
+    # Assitance from code institutes I think therefore I blog walkthrough tutorials & ChatGpt
+        if new_booking_request.is_valid():
+            booking = new_booking_request.save(commit=False)
+            booking.client = request.user
+            booking.slug = slugify(booking.booking_name)
+            booking.featured_image = new_booking_request.cleaned_data['featured_image']
+            booking.save()
+            return render(request, "bookings.html")
+        else:
+            return render(
+                request,
+                "new_booking.html",
+                {
+                    "form": BookingForm()
+                },
+            )
 }
 ```
 
