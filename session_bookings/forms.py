@@ -9,4 +9,9 @@ class BookingForm(forms.ModelForm):
     class Meta:
         model = Booking
         fields = ('booking_name', 'booking_date', 'babys_due_date', 'babys_name', 'babys_gender',
-                  'location', 'special_requests', 'how_you_found_me', 'consent', 'featured_image', 'status',)
+                  'location', 'special_requests', 'how_you_found_me', 'consent', 'featured_image',)
+
+        # def __init__(self, *args, **kwargs):
+        #     super().__init__(*args, **kwargs)
+
+        #     self.fields['client'].queryset = User.objects.all()
