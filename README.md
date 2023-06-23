@@ -103,6 +103,7 @@
 - I decided to update the Booking model to separate the booking date and time into their own fields, and display them in the form as separate inputs
 - I also imported redirect from django shortcuts in my views.py file to redirect to the bookings.html template once a new booking request form has been submitted
 - Updated the New Booking Request form class to accept the date format in a day-month-year format and the widgets format to render the date in a day-month-year format
+- Update the view booking url to include the id, and create a new view and url and template to start the process to enable users to edit their bookings
 
 ### Future Developments
 
