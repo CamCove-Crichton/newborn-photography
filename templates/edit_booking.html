@@ -1,0 +1,21 @@
+<!-- Assitance from code institutes I think therefore I blog walkthrough tutorials -->
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- Assitance from code institutes I think therefore I blog walkthrough tutorials -->
+{% load crispy_forms_tags %}
+
+<div>
+    <h1>Edit Booking Request</h1>
+</div>
+<div class="container-fluid">
+    <!-- Assistance from ChatGpt -->
+    <form method="post" enctype="multipart/form-data">
+        {{ form|crispy }}
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary btn-lg">Update</button>
+    </form>
+</div>
+
+{% endblock content %}

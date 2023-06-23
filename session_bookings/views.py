@@ -67,7 +67,8 @@ class NewBooking(LoginRequiredMixin, generic.ListView):
     # Assitance from code institutes I think therefore I blog walkthrough tutorials
     def get(self, request, *args, **kwargs):
         """
-        Fetches the content to display from the BookingForm() which uses crispy forms and is located in the forms.py file
+        Fetches the content to display from the BookingForm() which uses
+        crispy forms and is located in the forms.py file
         """
 
         return render(
@@ -102,3 +103,26 @@ class NewBooking(LoginRequiredMixin, generic.ListView):
                     "form": BookingForm()
                 },
             )
+
+
+class EditBooking(LoginRequiredMixin, generic.ListView):
+    """
+    The EditBooking class is to create a view for users to be able to edit their booking details
+    """
+    model = Booking
+    form_class = BookingForm
+
+    # Assitance from code institutes I think therefore I blog walkthrough tutorials
+    def get(self, request, *args, **kwargs):
+        """
+        Fetches the content to display from the BookingForm() which uses
+        crispy forms and is located in the forms.py file
+        """
+
+        return render(
+            request,
+            "edit_booking.html",
+            {
+                "form": BookingForm()
+            },
+        )
