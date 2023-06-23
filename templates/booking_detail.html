@@ -47,5 +47,11 @@
     <li>Booking Status: Awaiting Confirmation</li>
     {% endif %}
 </ul>
+<div class="row">
+    <div class="col-md-3">
+        <a href="{% url 'edit_booking' booking.slug booking.id %}" type="button" class="btn btn-success">Edit
+            Booking</a>
+    </div>
+</div>
 
 {% endblock content %}

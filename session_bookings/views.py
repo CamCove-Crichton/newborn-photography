@@ -110,7 +110,6 @@ class EditBooking(LoginRequiredMixin, generic.ListView):
     The EditBooking class is to create a view for users to be able to edit their booking details
     """
     model = Booking
-    form_class = BookingForm
 
     # Assitance from code institutes I think therefore I blog walkthrough tutorials
     def get(self, request, *args, **kwargs):
@@ -118,11 +117,38 @@ class EditBooking(LoginRequiredMixin, generic.ListView):
         Fetches the content to display from the BookingForm() which uses
         crispy forms and is located in the forms.py file
         """
+        booking_id = kwargs['id']
+        booking = get_object_or_404(Booking, id=booking_id)
+        form = BookingForm(instance=booking)
+        context = {
+            "form": form
+        }
 
-        return render(
-            request,
-            "edit_booking.html",
-            {
-                "form": BookingForm()
-            },
-        )
+        return render(request, "edit_booking.html", context)
+
+    # Assitance from code institutes I think therefore I blog walkthrough tutorials
+    def post(self, request, *args, **kwargs):
+        """
+        Submits the new booking request, when it is valid, to the database
+        """
+
+        booking_id = kwargs['id']
+        booking = get_object_or_404(Booking, id=booking_id)
+        form = BookingForm(instance=booking)
+        context = {
+            "form": form
+        }
+
+        update_booking = BookingForm(
+            request.POST, request.FILES, instance=booking)
+
+        # Assitance from code institutes I think therefore I blog walkthrough tutorials & ChatGpt
+        if update_booking.is_valid():
+            booking = update_booking.save(commit=False)
+            booking.client = request.user
+            booking.slug = slugify(booking.booking_name)
+            booking.featured_image = update_booking.cleaned_data['featured_image']
+            booking.save()
+            return redirect('bookings')
+        else:
+            return render(request, "edit_booking.html", context)
