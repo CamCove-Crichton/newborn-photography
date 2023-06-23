@@ -102,6 +102,7 @@
 - Update the BookingList view to display only the currently logged in user's bookings to the user
 - I decided to update the Booking model to separate the booking date and time into their own fields, and display them in the form as separate inputs
 - I also imported redirect from django shortcuts in my views.py file to redirect to the bookings.html template once a new booking request form has been submitted
+- Updated the New Booking Request form class to accept the date format in a day-month-year format and the widgets format to render the date in a day-month-year format
 
 ### Future Developments
 
@@ -209,6 +210,15 @@
         queryset = super().get_queryset().filter(client=user).order_by('-booking_date')
 
         return queryset
+}
+```
+
+```python
+{
+    booking_date = forms.DateField(
+        input_formats=['%d-%m-%y', '%d-%m-%Y'], widget=forms.DateInput(format='%d-%m-%y'),)
+    babys_due_date = forms.DateField(
+        input_formats=['%d-%m-%y', '%d-%m-%Y'], widget=forms.DateInput(format='%d-%m-%y'),)
 }
 ```
 

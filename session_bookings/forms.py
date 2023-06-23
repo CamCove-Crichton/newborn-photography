@@ -10,6 +10,11 @@ class BookingForm(forms.ModelForm):
     The New Booking Request form which utilises crispy forms in
     the html template
     """
+    # Assitance from ChatGpt on how to change the accepted date format input in the form
+    booking_date = forms.DateField(input_formats=['%d-%m-%y', '%d-%m-%Y'], widget=forms.DateInput(format='%d-%m-%y'),)
+    babys_due_date = forms.DateField(
+        input_formats=['%d-%m-%y', '%d-%m-%Y'], widget=forms.DateInput(format='%d-%m-%y'),)
+
     class Meta:
         model = Booking
         fields = ('booking_name', 'booking_date', 'booking_time',
