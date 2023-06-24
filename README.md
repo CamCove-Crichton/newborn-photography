@@ -145,6 +145,7 @@
 - Was unable to get my bookings view to diplay and found that when the initial new booking request was posted to the database that it was without a slug and so it was causing an error
 - The initial route of the slug field being assigned a value was incorrect and so was returning a str which was an invalid value, so I used slugify to use the booking name and create a slug for the booking request before it gets saved
 - The featured image is being assigned the uploaded file, but is currently not displaying when viewing the template, but instead the alt attribute value is displayed - I found that there was a typo in my template that was missing the 'r' in url, so it is displaying correctly now
+- Created a script.js file to be able to add custom JavaScript and link up both my style.css and script.js files to my base.html file to implement my custom css and JavaScript
 
 ### Validator Testing
 
