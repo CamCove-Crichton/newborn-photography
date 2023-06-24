@@ -104,6 +104,7 @@
 - I also imported redirect from django shortcuts in my views.py file to redirect to the bookings.html template once a new booking request form has been submitted
 - Updated the New Booking Request form class to accept the date format in a day-month-year format and the widgets format to render the date in a day-month-year format
 - Update the view booking url to include the id, and create a new view and url and template to start the process to enable users to edit their bookings
+- Completed the view code to enable booking edits and to update the database with edited info
 
 ### Future Developments
 
@@ -649,6 +650,58 @@ urlpatterns = [
 ```python
 {
     redirect('bookings')
+}
+```
+
+```python
+{
+    class EditBooking(LoginRequiredMixin, generic.ListView):
+    """
+    The EditBooking class is to create a view for users to be able to edit their booking details
+    """
+    model = Booking
+
+    # Assitance from code institutes I think therefore I blog walkthrough tutorials
+    def get(self, request, *args, **kwargs):
+        """
+        Fetches the content to display from the BookingForm() which uses
+        crispy forms and is located in the forms.py file
+        """
+        booking_id = kwargs['id']
+        booking = get_object_or_404(Booking, id=booking_id)
+        form = BookingForm(instance=booking)
+        context = {
+            "form": form
+        }
+
+        return render(request, "edit_booking.html", context)
+
+    # Assitance from code institutes I think therefore I blog walkthrough tutorials
+    def post(self, request, *args, **kwargs):
+        """
+        Submits the new booking request, when it is valid, to the database
+        """
+
+        booking_id = kwargs['id']
+        booking = get_object_or_404(Booking, id=booking_id)
+        form = BookingForm(instance=booking)
+        context = {
+            "form": form
+        }
+
+        update_booking = BookingForm(
+            request.POST, request.FILES, instance=booking)
+
+        # Assitance from code institutes I think therefore I blog walkthrough tutorials & ChatGpt
+        if update_booking.is_valid():
+            booking = update_booking.save(commit=False)
+            booking.client = request.user
+            booking.slug = slugify(booking.booking_name)
+            booking.featured_image = update_booking.cleaned_data['featured_image']
+            booking.save()
+            return redirect('bookings')
+        else:
+            return render(request, "edit_booking.html", context)
 }
 ```
 
