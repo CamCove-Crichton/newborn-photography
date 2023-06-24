@@ -152,3 +152,25 @@ class EditBooking(LoginRequiredMixin, generic.ListView):
             return redirect('bookings')
         else:
             return render(request, "edit_booking.html", context)
+
+
+class DeleteBooking(LoginRequiredMixin, generic.ListView):
+    """
+    The EditBooking class is to create a view for users to be able to edit their booking details
+    """
+    model = Booking
+
+    # Assitance from code institutes I think therefore I blog walkthrough tutorials
+    def get(self, request, *args, **kwargs):
+        """
+        Fetches the content to display from the BookingForm() which uses
+        crispy forms and is located in the forms.py file
+        """
+        booking_id = kwargs['id']
+        booking = get_object_or_404(Booking, id=booking_id)
+        form = BookingForm(instance=booking)
+        context = {
+            "form": form
+        }
+
+        return render(request, "edit_booking.html", context)

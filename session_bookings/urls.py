@@ -11,4 +11,6 @@ urlpatterns = [
     path('new_booking/', views.NewBooking.as_view(), name='new_booking'),
     path('edit_booking/<slug:slug>/<int:id>',
          views.EditBooking.as_view(), name='edit_booking'),
+    path('delete_booking/<slug:slug>/<int:id>',
+         views.DeleteBooking.as_view(), name='delete_booking'),
 ]
