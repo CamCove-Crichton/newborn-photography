@@ -14,6 +14,8 @@ class BookingForm(forms.ModelForm):
     booking_date = forms.DateField(input_formats=['%d-%m-%y', '%d-%m-%Y'], widget=forms.DateInput(format='%d-%m-%y'),)
     babys_due_date = forms.DateField(
         input_formats=['%d-%m-%y', '%d-%m-%Y'], widget=forms.DateInput(format='%d-%m-%y'),)
+    booking_time = forms.TimeField(
+        input_formats=['%H:%M'], widget=forms.TimeInput(format='%H:%M'),)
 
     class Meta:
         model = Booking
