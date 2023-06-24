@@ -105,6 +105,7 @@
 - Updated the New Booking Request form class to accept the date format in a day-month-year format and the widgets format to render the date in a day-month-year format
 - Update the view booking url to include the id, and create a new view and url and template to start the process to enable users to edit their bookings
 - Completed the view code to enable booking edits and to update the database with edited info
+- Added in a cancel button on the new booking request form, so users can cancel the bookings request if they no longer wish to make a booking request
 
 ### Future Developments
 
@@ -112,6 +113,7 @@
 - To allow users to signup or login using social media accounts
 - To allow users to reset their password if they cannot remember their existing password
 - To have users receive an authentication email when signing up to validatate their email address
+- To add defensive programming to the cancel booking request before submitting it
 
 ### Wireframes & Database Designs
 
