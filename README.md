@@ -106,6 +106,7 @@
 - Update the view booking url to include the id, and create a new view and url and template to start the process to enable users to edit their bookings
 - Completed the view code to enable booking edits and to update the database with edited info
 - Added in a cancel button on the new booking request form, so users can cancel the bookings request if they no longer wish to make a booking request
+- Created a script.js file for my custon JavaScript, and linked up both my style.css and script.js files in the base.html file, and added a bit of custom css to ensure it is wired up correctly and added an event listener to my script.js file to infom when the DOM content is loaded and to ensure my script.js file is wired up correctly
 
 ### Future Developments
 
@@ -164,6 +165,16 @@
 ## Credits
 
 ### Code
+
+[Techie Delight](https://www.techiedelight.com/) - Used to remind myself how to ensure my DOM content is loaded before my JavaScript runs
+
+```javascript
+{
+    document.addEventListener("DOMContentLoaded", function () {
+        console.log('Page is loaded');
+    });
+}
+```
 
 [ChatGpt](https://openai.com/blog/chatgpt) - Asked ChatGpt if it was possible to assign the context for a view to my BookingForm class to utilise crispy forms, to which I was told yes but the preffered way to do it was the below
 
