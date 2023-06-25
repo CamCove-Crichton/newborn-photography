@@ -107,6 +107,7 @@
 - Completed the view code to enable booking edits and to update the database with edited info
 - Added in a cancel button on the new booking request form, so users can cancel the bookings request if they no longer wish to make a booking request
 - Created a script.js file for my custon JavaScript, and linked up both my style.css and script.js files in the base.html file, and added a bit of custom css to ensure it is wired up correctly and added an event listener to my script.js file to infom when the DOM content is loaded and to ensure my script.js file is wired up correctly
+- Updated the base.html file with a jQuery CDN script to utilise jQuery within my JavaScript code
 
 ### Future Developments
 
@@ -132,6 +133,7 @@
 - Bootstrap
 - Django allauth
 - Django Crispy Forms
+- jQuery
 
 ### Finished Site Screen Grabs
 
