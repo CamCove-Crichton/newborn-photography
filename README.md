@@ -240,6 +240,24 @@
 }
 ```
 
+```javascript
+{
+    function deleteModal() {
+        let deleteButtons = document.getElementsByClassName('deleteBtn');
+
+        for (let deleteButton of deleteButtons) {
+            deleteButton.addEventListener("click", function () {
+                let modal = this.closest(".modal");
+                $(modal).modal("show");
+            });
+        }
+    }
+
+    // Calling the delete modal function
+    deleteModal();
+}
+```
+
 [Bootstrap](https://getbootstrap.com/) - Used Bootstrap to assist with styling
 
 ```html
