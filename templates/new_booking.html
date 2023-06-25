@@ -19,9 +19,37 @@
                 <div class="col-md-1">
                     <button type="submit" class="btn btn-primary btn-lg">Submit</button>
                 </div>
+                <!-- Button trigger modal -->
                 <div class="col-md-1">
-                    <a href="{% url 'bookings' %}" class="deleteBtn btn btn-danger btn-lg">Cancel</a>
+                    <button type="button" class="deleteBtn btn btn-danger btn-lg" onclick="deleteModal('#myModal1')">
+                        Cancel
+                    </button>
                 </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="myModal1" tabindex="-1" role="dialog"
+                    aria-labelledby="confirmCancelModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="confirmCancelModalLabel">Cancel Booking Request</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Are you sure you want to cancel this booking request?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <a href="{% url 'bookings' %}" type="button" class="btn btn-primary">Confirm</a>
+                                <!-- <button type="button" class="btn btn-primary">Confirm</button> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="col-md-1">
+                    <a href="{% url 'bookings' %}" class="deleteBtn btn btn-danger btn-lg">Cancel</a>
+                </div> -->
             </div>
         </div>
 

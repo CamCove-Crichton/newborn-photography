@@ -109,6 +109,7 @@
 - Created a script.js file for my custon JavaScript, and linked up both my style.css and script.js files in the base.html file, and added a bit of custom css to ensure it is wired up correctly and added an event listener to my script.js file to infom when the DOM content is loaded and to ensure my script.js file is wired up correctly
 - Updated the base.html file with a jQuery CDN script to utilise jQuery within my JavaScript code
 - Began working on implementing some defensive programming for cancel and delete buttons on the site by adding a deleteModal function in the script.js file
+- Updated the deleteModal function to display the modal when the cancel button is clicked to confirm the cancellation request before actually confirmation the cancellation and redirecting to the bookings page
 
 ### Future Developments
 
@@ -162,7 +163,7 @@
 
 ### Unresolved Bugs
 
-- None that I have found
+- I have an issue with the cnacel button, that it is not responsive on the first click, but only on the 2ns click, so need to look into this and correct
 
 ## Credits
 
@@ -242,19 +243,19 @@
 
 ```javascript
 {
-    function deleteModal() {
-        let deleteButtons = document.getElementsByClassName('deleteBtn');
+    function deleteModal(targetModal) {
+    let deleteButtons = document.getElementsByClassName("deleteBtn");
 
-        for (let deleteButton of deleteButtons) {
-            deleteButton.addEventListener("click", function () {
-                let modal = this.closest(".modal");
-                $(modal).modal("show");
-            });
-        }
+    for (let deleteButton of deleteButtons) {
+        deleteButton.addEventListener("click", handleDeleteButtonClick.bind(null, targetModal), { once: true });
     }
 
-    // Calling the delete modal function
-    deleteModal();
+    function handleDeleteButtonClick(targetModal) {
+        console.log("Delete button clicked");
+        let modal = document.querySelector(targetModal);
+        $(modal).modal("show");
+    }
+}
 }
 ```
 
