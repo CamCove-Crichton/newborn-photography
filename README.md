@@ -110,6 +110,7 @@
 - Updated the base.html file with a jQuery CDN script to utilise jQuery within my JavaScript code
 - Began working on implementing some defensive programming for cancel and delete buttons on the site by adding a deleteModal function in the script.js file
 - Updated the deleteModal function to display the modal when the cancel button is clicked to confirm the cancellation request before actually confirmation the cancellation and redirecting to the bookings page
+- Finished updating the deleteBooking view and updated the booking_detail template to display the modal to confirm the deletion of the booking before deleting the record from the database, so effectively adding my defensive programming to both the cancel and delete buttons
 
 ### Future Developments
 
@@ -117,7 +118,6 @@
 - To allow users to signup or login using social media accounts
 - To allow users to reset their password if they cannot remember their existing password
 - To have users receive an authentication email when signing up to validatate their email address
-- To add defensive programming to the cancel booking request before submitting it
 
 ### Wireframes & Database Designs
 
@@ -737,6 +737,31 @@ urlpatterns = [
             return redirect('bookings')
         else:
             return render(request, "edit_booking.html", context)
+}
+```
+
+```python
+{
+    class DeleteBooking(LoginRequiredMixin, generic.ListView):
+    """
+    The DeleteBooking class is to enable users to delete one of thier bookings
+    """
+    model = Booking
+
+    def get(self, request, *args, **kwargs):
+        """
+        Fetches the content to delete a record from the database which uses the booking id
+        """
+        booking_id = kwargs['id']
+        booking = get_object_or_404(Booking, id=booking_id)
+        form = BookingForm(instance=booking)
+        context = {
+            "form": form
+        }
+
+        booking.delete()
+
+        return redirect('bookings')
 }
 ```
 
