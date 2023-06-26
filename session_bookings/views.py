@@ -154,17 +154,16 @@ class EditBooking(LoginRequiredMixin, generic.ListView):
             return render(request, "edit_booking.html", context)
 
 
+# Assistance from Code Institutes Hello Django & I think therefore I blog walkthrough tutorials
 class DeleteBooking(LoginRequiredMixin, generic.ListView):
     """
-    The EditBooking class is to create a view for users to be able to edit their booking details
+    The DeleteBooking class is to enable users to delete one of thier bookings
     """
     model = Booking
 
-    # Assitance from code institutes I think therefore I blog walkthrough tutorials
     def get(self, request, *args, **kwargs):
         """
-        Fetches the content to display from the BookingForm() which uses
-        crispy forms and is located in the forms.py file
+        Fetches the content to delete a record from the database which uses the booking id
         """
         booking_id = kwargs['id']
         booking = get_object_or_404(Booking, id=booking_id)
@@ -173,4 +172,6 @@ class DeleteBooking(LoginRequiredMixin, generic.ListView):
             "form": form
         }
 
-        return render(request, "edit_booking.html", context)
+        booking.delete()
+
+        return redirect('bookings')
