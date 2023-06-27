@@ -13,4 +13,5 @@ urlpatterns = [
          views.EditBooking.as_view(), name='edit_booking'),
     path('delete_booking/<slug:slug>/<int:id>',
          views.DeleteBooking.as_view(), name='delete_booking'),
+    path('admin-panel/', views.AdministratorView.as_view(), name='admin_panel'),
 ]

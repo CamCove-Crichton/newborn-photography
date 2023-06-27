@@ -1,12 +1,14 @@
 # Assitance from code institutes I think therefore I blog walkthrough tutorials
 from django.shortcuts import render, get_object_or_404, redirect
-# Assitance from code institutes I think therefore I blog walkthrough tutorials
 from django.views import generic, View
 from .models import Booking
 from .forms import BookingForm
+
 # Assistance from ChatGpt
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.text import slugify
+from django.contrib.admin.views.decorators import staff_member_required
+from django.utils.decorators import method_decorator
 
 
 # Assitance from code institutes I think therefore I blog walkthrough tutorials & ChatGpt
@@ -175,3 +177,16 @@ class DeleteBooking(LoginRequiredMixin, generic.ListView):
         booking.delete()
 
         return redirect('bookings')
+
+
+# Assitance from Code Institutes I thing therefore I blog walkthrough tutorials and ChatGpt
+@method_decorator(staff_member_required(login_url='account_login'), name='dispatch')
+class AdministratorView(generic.ListView):
+
+    model = Booking
+    template_name = 'administrator_panel.html'
+    paginate_by = 6
+    context_object_name = 'bookings'
+
+    def get_queryset(self):
+        return super().get_queryset().order_by('booking_date')
