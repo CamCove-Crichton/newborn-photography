@@ -80,9 +80,15 @@
                         <a href="#">Contact</a>
                     </li>
                     {% if user.is_authenticated %}
+                    {% if user.is_superuser %}
+                    <li>
+                        <a href="{% url 'admin_panel' %}">Client Bookings</a>
+                    </li>
+                    {% else %}
                     <li>
                         <a href="{% url 'bookings' %}">Bookings</a>
                     </li>
+                    {% endif %}
                     {% endif %}
                 </ul>
             </div>
