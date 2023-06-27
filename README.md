@@ -259,6 +259,47 @@
 }
 ```
 
+```python
+{
+    from django.contrib.admin.views.decorators import staff_member_required
+    from django.utils.decorators import method_decorator
+}
+```
+
+```python
+{
+    # Assitance from Code Institutes I thing therefore I blog walkthrough tutorials and ChatGpt
+    @method_decorator(staff_member_required(login_url='account_login'), name='dispatch')
+    class AdministratorView(generic.ListView):
+
+        model = Booking
+        template_name = 'administrator_panel.html'
+        paginate_by = 6
+        context_object_name = 'bookings'
+
+        def get_queryset(self):
+            return super().get_queryset().order_by('booking_date')
+}
+```
+
+```python
+{
+    path('admin-panel/', views.AdministratorView.as_view(), name='admin_panel'),
+}
+```
+
+```html
+{
+    {% for booking in bookings %}
+}
+```
+
+```html
+{
+    {% if user.is_superuser %}
+}
+```
+
 [Bootstrap](https://getbootstrap.com/) - Used Bootstrap to assist with styling
 
 ```html
