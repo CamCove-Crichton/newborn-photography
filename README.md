@@ -111,6 +111,7 @@
 - Began working on implementing some defensive programming for cancel and delete buttons on the site by adding a deleteModal function in the script.js file
 - Updated the deleteModal function to display the modal when the cancel button is clicked to confirm the cancellation request before actually confirmation the cancellation and redirecting to the bookings page
 - Finished updating the deleteBooking view and updated the booking_detail template to display the modal to confirm the deletion of the booking before deleting the record from the database, so effectively adding my defensive programming to both the cancel and delete buttons
+- Created an Administrator view, so the Admin can login to the site and have access to the Client Bookings. Essentially where the client can manage the admin side of things, and where they will be able to add Todo items for each individual booking but where they can see all the bookings made by any of the clients signed up to the site
 
 ### Future Developments
 
@@ -152,6 +153,10 @@
 - Was unable to get my bookings view to diplay and found that when the initial new booking request was posted to the database that it was without a slug and so it was causing an error
 - The initial route of the slug field being assigned a value was incorrect and so was returning a str which was an invalid value, so I used slugify to use the booking name and create a slug for the booking request before it gets saved
 - The featured image is being assigned the uploaded file, but is currently not displaying when viewing the template, but instead the alt attribute value is displayed - I found that there was a typo in my template that was missing the 'r' in url, so it is displaying correctly now
+- Had an issue with the AdministratorView or at the time AdministratorPanelView not being defined in my urls.py file, and I realised that it was because I had not added the 'views.' to the front of my class name
+- Struggled with getting the view to actually display what I was intending for it to display, and tried different decorators on my AdministratorView and thought I needed one then for my Home view but I then realised it was the fine with just a method_decorator on the AdministratorView and using a control statement in my administrator_panel.html template to check is the user thet is logged in is a superuser
+- I had a 400 Bad Request error displaying then and realised I had left off a '%' in my control statement which then fixed the issue
+- I struggled to get the template to iterate through all the bookings with the code in my AdministratorView, and found out more about the generic.ListView from django, that I do not need to have a get method, as this is built in with the ListView, and also learnt that the get_queryset() also gets all the objects that is assigned to the model attribute, and so did not have to decalare a variable "bookings = Booking.objects.all()", and that I could use the get_queryset() method and overide it with the parent class using super() to then do things like hpw to display the objects, and with assigning context_object_name, I could use this in my control statement in my administrator_panel.html template to iterate through the objects and display them by booking date
 
 ### Validator Testing
 
