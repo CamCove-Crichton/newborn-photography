@@ -43,8 +43,9 @@ class Todo(models.Model):
         Booking, on_delete=models.CASCADE, related_name="todo")
     title = models.CharField(max_length=100, null=False, blank=False)
     slug = models.SlugField(max_length=100, unique=True)
-    details = models.TextField(null=True)
-    due_date = models.DateTimeField(auto_now=False, null=True)
+    details = models.TextField(null=True, blank=True)
+    due_date = models.DateField(auto_now=False, blank=True, default=None)
+    due_time = models.TimeField(auto_now=False, blank=True, default='12:00')
     created_on = models.DateTimeField(auto_now_add=True)
     completed = models.BooleanField(null=False, blank=False, default=False)
 
