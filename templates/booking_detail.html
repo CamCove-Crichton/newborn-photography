@@ -6,6 +6,7 @@
     <h1>Booking Details</h1>
 </div>
 <ul>
+    <!-- General Details -->
     <li>Booking Name: {{ booking.booking_name }}</li>
     <li>Date: {{ booking.booking_date }}</li>
     <li>Time: {{ booking.booking_time }}</li>
@@ -28,6 +29,7 @@
     <li>Location: Studio</li>
     {% endif %}
 
+    <!-- Requests & How you found me -->
     <li>Special Requests: {{ booking.special_requests|safe }}</li>
     <li>How You Found Me: {{ booking.how_you_found_me }}</li>
 
@@ -47,11 +49,23 @@
     <li>Booking Status: Awaiting Confirmation</li>
     {% endif %}
 </ul>
+
+<!-- Admin Todo List -->
+{% if user.is_superuser %}
+<div class="row">
+    <div class="col-md-3">
+        <a href="#" type="button" class="btn btn-primary btn-lg">Add Todo</a>
+    </div>
+</div>
+{% endif %}
+
+<!-- Edit Booking -->
 <div class="row">
     <div class="col-md-3">
         <a href="{% url 'edit_booking' booking.slug booking.id %}" type="button" class="btn btn-success btn-lg">Edit
             Booking</a>
     </div>
+
     <!-- Button trigger modal -->
     <div class="col-md-3">
         <button type="button" class="deleteBtn btn btn-danger btn-lg" onclick="deleteModal('#myModal2')">
