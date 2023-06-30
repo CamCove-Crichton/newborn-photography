@@ -1,0 +1,62 @@
+<!-- Assitance from code institutes I think therefore I blog walkthrough tutorials -->
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- Assitance from code institutes I think therefore I blog walkthrough tutorials -->
+{% load crispy_forms_tags %}
+
+<div>
+    <h1>New Todo Item:</h1>
+</div>
+<div class="container-fluid">
+    <!-- Assistance from ChatGpt -->
+    <form method="post">
+        {{ form|crispy }}
+        {% csrf_token %}
+        {{ booking.id }}
+        <input type="hidden" name="slug" value="{{ booking.slug }}">
+        <input type="hidden" name="id" value="{{ booking.id }}">
+        <div class="container-fluid">
+            <div class="row mt-3">
+                <div class="col-md-1">
+                    <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+                </div>
+                <!-- Button trigger modal -->
+                <div class="col-md-1">
+                    <button type="button" class="deleteBtn btn btn-danger btn-lg" onclick="deleteModal('#myModal3')">
+                        Cancel
+                    </button>
+                </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="myModal3" tabindex="-1" role="dialog"
+                    aria-labelledby="confirmCancelModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="confirmCancelModalLabel">Cancel New Todo Item</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Are you sure you want to cancel this new Todo item?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <a href="{% url 'booking_detail' booking.slug booking.id %}" type="button"
+                                    class="btn btn-primary">Confirm</a>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+{% endblock content %}

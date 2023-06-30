@@ -1,8 +1,8 @@
 # Assitance from code institutes I think therefore I blog walkthrough tutorials
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.views import generic, View
-from .models import Booking
-from .forms import BookingForm
+from .models import Booking, Todo
+from .forms import BookingForm, TodoForm
 
 # Assistance from ChatGpt
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -190,3 +190,74 @@ class AdministratorView(generic.ListView):
 
     def get_queryset(self):
         return super().get_queryset().order_by('booking_date')
+
+
+class NewTodo(LoginRequiredMixin, generic.ListView):
+    """
+    The NewTodo class is to create a view for superusers to fill in a todo form
+    and submit it to add to a list of todo items related to that booking
+    """
+    model = Todo
+    form_class = TodoForm
+
+    # Assitance from code institutes I think therefore I blog walkthrough
+    # tutorials & ChatGpt
+    def get(self, request, *args, **kwargs):
+        """
+        Fetches the content to display from the TodoForm() which uses
+        crispy forms and is located in the forms.py file
+        """
+
+        # Get the slug and id from the URL parameters
+        slug = self.kwargs['slug']
+        booking_id = self.kwargs['id']
+
+        # Retrieve the booking object based on the slug and id
+        queryset = Booking.objects.all()
+        booking = get_object_or_404(queryset, slug=slug, id=booking_id)
+
+        return render(
+            request,
+            "new_todo.html",
+            {
+                "form": TodoForm(),
+                "booking": booking,
+            },
+        )
+
+    # Assitance from code institutes I think therefore I blog walkthrough
+    # tutorials & ChatGpt
+
+    def post(self, request, *args, **kwargs):
+        """
+        Submits the new todo item, when it is valid, to the database
+        """
+
+        form = TodoForm(request.POST)
+
+        print("Before if statement")
+        if form.is_valid():
+            todo_item = form.save(commit=False)
+
+            # Get the booking related to the todo item
+            booking_slug = request.POST['slug']
+            booking_id = request.POST['id']
+            booking = get_object_or_404(
+                Booking, slug=booking_slug, id=booking_id)
+
+            # Set the booking_id and slug for the todo item
+            todo_item.booking_id = booking
+            todo_item.slug = slugify(todo_item.title)
+            print(booking_id)
+
+            todo_item.save()
+
+            return redirect('booking_detail', slug=booking_slug, id=booking_id)
+        else:
+            return render(
+                request,
+                "new_todo.html",
+                {
+                    "form": form
+                },
+            )
