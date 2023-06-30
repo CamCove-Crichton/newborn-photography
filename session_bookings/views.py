@@ -38,14 +38,16 @@ class BookingDetail(View):
     """
 
     def get(self, request, slug, *args, **kwargs):
-        queryset = Booking.objects
-        booking = get_object_or_404(queryset, slug=slug)
+        # Assistance from ChatGpt
+        booking = get_object_or_404(Booking, slug=slug)
+        todos = Todo.objects.filter(booking_id=booking)
 
         return render(
             request,
             "booking_detail.html",
             {
-                "booking": booking
+                "booking": booking,
+                "todos": todos
             },
         )
 

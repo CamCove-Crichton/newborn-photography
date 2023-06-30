@@ -52,6 +52,20 @@
 
 <!-- Admin Todo List -->
 {% if user.is_superuser %}
+<h3>Todo Items:</h3>
+{% for todo in todos %}
+<div class="row">
+    <div class="col-md-3">
+        {{ todo.title }}
+    </div>
+    <div class="col-md-3">
+        {{ todo.due_date }}
+    </div>
+    <div class="col-md-3">
+        {{ todo.completed }}
+    </div>
+</div>
+{% endfor %}
 <div class="row">
     <div class="col-md-3">
         <a href="{% url 'new_todo' booking.slug booking.id %}" type="button" class="btn btn-primary">Add Todo</a>

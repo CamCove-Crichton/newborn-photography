@@ -113,6 +113,7 @@
 - Finished updating the deleteBooking view and updated the booking_detail template to display the modal to confirm the deletion of the booking before deleting the record from the database, so effectively adding my defensive programming to both the cancel and delete buttons
 - Created an Administrator view, so the Admin can login to the site and have access to the Client Bookings. Essentially where the client can manage the admin side of things, and where they will be able to add Todo items for each individual booking but where they can see all the bookings made by any of the clients signed up to the site
 - Added in a NewTodo view for the Admin to have access to, when viewing the booking detail, so they can add a todo item for thet particluar booking for anything the Admin may need to action before the photo session
+- Updated the BookingDetail view to enable displaying the todo items within the template, and updated the booking_detail.html template to iterate through todo items added to the booking and only display them if the user logged in is the Admin
 
 ### Future Developments
 
@@ -387,6 +388,13 @@
 {
     <input type="hidden" name="slug" value="{{ booking.slug }}">
     <input type="hidden" name="id" value="{{ booking.id }}">
+}
+```
+
+```python
+{
+    booking = get_object_or_404(Booking, slug=slug)
+    todos = Todo.objects.filter(booking_id=booking)
 }
 ```
 
