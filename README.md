@@ -112,6 +112,7 @@
 - Updated the deleteModal function to display the modal when the cancel button is clicked to confirm the cancellation request before actually confirmation the cancellation and redirecting to the bookings page
 - Finished updating the deleteBooking view and updated the booking_detail template to display the modal to confirm the deletion of the booking before deleting the record from the database, so effectively adding my defensive programming to both the cancel and delete buttons
 - Created an Administrator view, so the Admin can login to the site and have access to the Client Bookings. Essentially where the client can manage the admin side of things, and where they will be able to add Todo items for each individual booking but where they can see all the bookings made by any of the clients signed up to the site
+- Added in a NewTodo view for the Admin to have access to, when viewing the booking detail, so they can add a todo item for thet particluar booking for anything the Admin may need to action before the photo session
 
 ### Future Developments
 
@@ -157,6 +158,11 @@
 - Struggled with getting the view to actually display what I was intending for it to display, and tried different decorators on my AdministratorView and thought I needed one then for my Home view but I then realised it was the fine with just a method_decorator on the AdministratorView and using a control statement in my administrator_panel.html template to check is the user thet is logged in is a superuser
 - I had a 400 Bad Request error displaying then and realised I had left off a '%' in my control statement which then fixed the issue
 - I struggled to get the template to iterate through all the bookings with the code in my AdministratorView, and found out more about the generic.ListView from django, that I do not need to have a get method, as this is built in with the ListView, and also learnt that the get_queryset() also gets all the objects that is assigned to the model attribute, and so did not have to decalare a variable "bookings = Booking.objects.all()", and that I could use the get_queryset() method and overide it with the parent class using super() to then do things like hpw to display the objects, and with assigning context_object_name, I could use this in my control statement in my administrator_panel.html template to iterate through the objects and display them by booking date
+- Had a error to say Todo was not defined when creating my TodoForm, and realised I had not imported the Todo model, so imported the Todo model and it was cleared
+- Had the same error when defining my view as well as the TodoForm was not defined, so I imported both the Todo model and the TodoForm and the errors were cleared
+- Had an issue with getting the new_todo template displaying. I kept getting a NoReverseMatch error for the url I had input for the href in the confirmation for cancelling the new todo item, as it could not find the id & slug in which I was asking it to return to, until I decided to send it back to the bookings template, which solved the issue for the time being
+- I then had an issue with the form submitting to the database and it was because it was not assiging the slug and id, so I needed to needed to assign a booking_id and a booking_slug so it could be associated with a particular booking, before using the get_object_or_404() method. After getting this from the Booking model, I assigned it to an attribute called 'booking'. Using 'booking', I then assigned it to the new todo item, and used slugify to convert the title of the todo to the slug before saving it, which solved the issue to a point, but when it was trying to post to the database, it was still not able to access the booking id and the slug to which it was related to, so in the get method of the NewTodo view, I did a similar thing, where I assigned attributes slug and booking_id the values of url parameters, and using the queryset attribute, I got all the objects from the Booking model, and then assigning the attribute 'booking' in the get method, using the get_object_or_404() method by the accessing the queryset and using the slug and booking_id as arguments, which solved this side of the issue
+- The last issue was back to the NoReverseMatch again, and realised I had not updated the href in my booking_detail template to match the url path, and once I updated this, it posted to the database
 
 ### Validator Testing
 
@@ -302,6 +308,85 @@
 ```html
 {
     {% if user.is_superuser %}
+}
+```
+
+```python
+{
+    class NewTodo(LoginRequiredMixin, generic.ListView):
+    """
+    The NewTodo class is to create a view for superusers to fill in a todo form
+    and submit it to add to a list of todo items related to that booking
+    """
+    model = Todo
+    form_class = TodoForm
+
+    # Assitance from code institutes I think therefore I blog walkthrough
+    # tutorials & ChatGpt
+    def get(self, request, *args, **kwargs):
+        """
+        Fetches the content to display from the TodoForm() which uses
+        crispy forms and is located in the forms.py file
+        """
+
+        # Get the slug and id from the URL parameters
+        slug = self.kwargs['slug']
+        booking_id = self.kwargs['id']
+
+        # Retrieve the booking object based on the slug and id
+        queryset = Booking.objects.all()
+        booking = get_object_or_404(queryset, slug=slug, id=booking_id)
+
+        return render(
+            request,
+            "new_todo.html",
+            {
+                "form": TodoForm(),
+                "booking": booking,
+            },
+        )
+
+    # Assitance from code institutes I think therefore I blog walkthrough
+    # tutorials & ChatGpt
+
+    def post(self, request, *args, **kwargs):
+        """
+        Submits the new todo item, when it is valid, to the database
+        """
+
+        form = TodoForm(request.POST)
+
+        if form.is_valid():
+            todo_item = form.save(commit=False)
+
+            # Get the booking related to the todo item
+            booking_slug = request.POST['slug']
+            booking_id = request.POST['id']
+            booking = get_object_or_404(
+                Booking, slug=booking_slug, id=booking_id)
+
+            # Set the booking_id and slug for the todo item
+            todo_item.booking_id = booking
+            todo_item.slug = slugify(todo_item.title)
+
+            todo_item.save()
+
+            return redirect('booking_detail', slug=booking_slug, id=booking_id)
+        else:
+            return render(
+                request,
+                "new_todo.html",
+                {
+                    "form": form
+                },
+            )
+}
+```
+
+```html
+{
+    <input type="hidden" name="slug" value="{{ booking.slug }}">
+    <input type="hidden" name="id" value="{{ booking.id }}">
 }
 ```
 
