@@ -54,7 +54,8 @@
 {% if user.is_superuser %}
 <div class="row">
     <div class="col-md-3">
-        <a href="#" type="button" class="btn btn-primary btn-lg">Add Todo</a>
+        <a href="{% url 'new_todo' booking.slug booking.id %}" type="button" class="btn btn-primary">Add Todo</a>
+
     </div>
 </div>
 {% endif %}
