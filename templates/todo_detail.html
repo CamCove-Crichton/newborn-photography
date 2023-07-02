@@ -1,0 +1,29 @@
+<!-- Assitance from code institutes I think therefore I blog walkthrough tutorials -->
+{% extends "base.html" %}
+
+{% block content %}
+<div>
+    <h1>Todo Item Details</h1>
+</div>
+<ul>
+    <!-- General Details -->
+    <li>Title: {{ todo_item.title }}</li>
+    <li>Details: {{ todo_item.details }}</li>
+    <li>Due Date: {{ todo_item.due_date }}</li>
+    <li>Due Time: {{ todo_item.due_time }}</li>
+    {% if todo_item.completed == True %}
+    <li>Status: Done</li>
+    {% else %}
+    <li>Status: In Progress</li>
+    {% endif %}
+</ul>
+
+<!-- Edit Todo -->
+<div class="row">
+    <div class="col-md-3">
+        <a href="#" type="button" class="btn btn-success btn-lg">Edit
+            Todo Item</a>
+    </div>
+
+
+    {% endblock content %}

@@ -54,17 +54,22 @@
 {% if user.is_superuser %}
 <h3>Todo Items:</h3>
 {% for todo in todos %}
-<div class="row">
-    <div class="col-md-3">
-        {{ todo.title }}
+<a href="{% url 'todo_detail' slug=todo.slug id=todo.id %}">
+    <div class="row rounded border border-dark-subtle">
+        <div class="col-md-3">
+            <h6>Item Name:</h6>
+            <p>{{ todo.title }}</p>
+        </div>
+        <div class="col-md-3">
+            <h6>Due Date:</h6>
+            <p>{{ todo.due_date }}</p>
+        </div>
+        <div class="col-md-3">
+            <h6>Status</h6>
+            <p>{{ todo.completed }}</p>
+        </div>
     </div>
-    <div class="col-md-3">
-        {{ todo.due_date }}
-    </div>
-    <div class="col-md-3">
-        {{ todo.completed }}
-    </div>
-</div>
+</a>
 {% endfor %}
 <div class="row">
     <div class="col-md-3">

@@ -250,7 +250,6 @@ class NewTodo(LoginRequiredMixin, generic.ListView):
             # Set the booking_id and slug for the todo item
             todo_item.booking_id = booking
             todo_item.slug = slugify(todo_item.title)
-            print(booking_id)
 
             todo_item.save()
 
@@ -263,3 +262,23 @@ class NewTodo(LoginRequiredMixin, generic.ListView):
                     "form": form
                 },
             )
+
+
+# Assitance from code institutes I think therefore I blog walkthrough tutorials
+class TodoDetail(View):
+    """
+    TodoDetail class gets all the details about a todo item to display it to the admin
+    """
+
+    def get(self, request, slug, id):
+        # Assistance from ChatGpt
+        
+        todo_item = get_object_or_404(Todo, slug=slug, id=id)
+
+        return render(
+            request,
+            "todo_detail.html",
+            {
+                "todo_item": todo_item
+            },
+        )

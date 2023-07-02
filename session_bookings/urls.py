@@ -16,5 +16,7 @@ urlpatterns = [
     path('admin-panel/', views.AdministratorView.as_view(), name='admin_panel'),
     path('bookings/<slug:slug>/<int:id>/new_todo/',
          views.NewTodo.as_view(), name='new_todo'),
+    path('todo_item/<slug:slug>/<int:id>/', views.TodoDetail.as_view(), name='todo_detail'),
+
 
 ]
