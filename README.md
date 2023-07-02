@@ -114,6 +114,7 @@
 - Created an Administrator view, so the Admin can login to the site and have access to the Client Bookings. Essentially where the client can manage the admin side of things, and where they will be able to add Todo items for each individual booking but where they can see all the bookings made by any of the clients signed up to the site
 - Added in a NewTodo view for the Admin to have access to, when viewing the booking detail, so they can add a todo item for thet particluar booking for anything the Admin may need to action before the photo session
 - Updated the BookingDetail view to enable displaying the todo items within the template, and updated the booking_detail.html template to iterate through todo items added to the booking and only display them if the user logged in is the Admin
+- Added in a view and created a template for the admin to view the full details of a todo item, and gave it the url path using the slug and the id
 
 ### Future Developments
 
@@ -164,6 +165,7 @@
 - Had an issue with getting the new_todo template displaying. I kept getting a NoReverseMatch error for the url I had input for the href in the confirmation for cancelling the new todo item, as it could not find the id & slug in which I was asking it to return to, until I decided to send it back to the bookings template, which solved the issue for the time being
 - I then had an issue with the form submitting to the database and it was because it was not assiging the slug and id, so I needed to needed to assign a booking_id and a booking_slug so it could be associated with a particular booking, before using the get_object_or_404() method. After getting this from the Booking model, I assigned it to an attribute called 'booking'. Using 'booking', I then assigned it to the new todo item, and used slugify to convert the title of the todo to the slug before saving it, which solved the issue to a point, but when it was trying to post to the database, it was still not able to access the booking id and the slug to which it was related to, so in the get method of the NewTodo view, I did a similar thing, where I assigned attributes slug and booking_id the values of url parameters, and using the queryset attribute, I got all the objects from the Booking model, and then assigning the attribute 'booking' in the get method, using the get_object_or_404() method by the accessing the queryset and using the slug and booking_id as arguments, which solved this side of the issue
 - The last issue was back to the NoReverseMatch again, and realised I had not updated the href in my booking_detail template to match the url path, and once I updated this, it posted to the database
+- Had another issue with accessing the todo_detail template from the booking_detail template, and found that I was not actually looking at how django was trying to access the url, as I kept getting the NoReverseMatch so it was not getting the id and the slug values of the record, and found that because I was actually in the BookingDetail view, I was using the wrong naming for accessing the todo item, as in the BookingDetail view, the context was being accessed by "todos", and so I adjusted the arguments for the url path, and django was able to access the slug and the id
 
 ### Validator Testing
 
@@ -412,6 +414,28 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
         crossorigin="anonymous"></script>
+}
+```
+
+```python
+{
+    class TodoDetail(View):
+        """
+        TodoDetail class gets all the details about a todo item to display it to the admin
+        """
+
+        def get(self, request, slug, id):
+            # Assistance from ChatGpt
+        
+            todo_item = get_object_or_404(Todo, slug=slug, id=id)
+
+            return render(
+                request,
+                "todo_detail.html",
+                {
+                    "todo_item": todo_item
+                },
+            )
 }
 ```
 
