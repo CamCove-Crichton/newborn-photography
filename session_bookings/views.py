@@ -237,7 +237,6 @@ class NewTodo(LoginRequiredMixin, generic.ListView):
 
         form = TodoForm(request.POST)
 
-        print("Before if statement")
         if form.is_valid():
             todo_item = form.save(commit=False)
 
@@ -272,7 +271,7 @@ class TodoDetail(View):
 
     def get(self, request, slug, id):
         # Assistance from ChatGpt
-        
+
         todo_item = get_object_or_404(Todo, slug=slug, id=id)
 
         return render(
@@ -282,3 +281,59 @@ class TodoDetail(View):
                 "todo_item": todo_item
             },
         )
+
+
+class EditTodo(LoginRequiredMixin, generic.ListView):
+    """
+    The EditTodo class is to create a view for the admin to be able to edit their todo items details
+    """
+    model = Todo
+
+    # Assitance from code institutes I think therefore I blog walkthrough tutorials
+    def get(self, request, *args, **kwargs):
+        """
+        Fetches the content to display from the BookingForm() which uses
+        crispy forms and is located in the forms.py file
+        """
+        todo_id = kwargs['id']
+        todo_item = get_object_or_404(Todo, id=todo_id)
+        booking = todo_item.booking_id
+
+        form = TodoForm(instance=todo_item)
+        context = {
+            "form": form,
+            "booking_slug": booking.slug,
+            "booking_id": booking.id
+        }
+
+        return render(request, "edit_todo.html", context)
+
+    # Assitance from code institutes I think therefore I blog walkthrough tutorials
+    def post(self, request, *args, **kwargs):
+        """
+        Submits the new booking request, when it is valid, to the database
+        """
+
+        todo_id = kwargs['id']
+        todo_item = get_object_or_404(Todo, id=todo_id)
+        form = TodoForm(instance=todo_item)
+        context = {
+            "form": form
+        }
+
+        update_todo = TodoForm(
+            request.POST, instance=todo_item)
+
+        # Assitance from code institutes I think therefore I blog walkthrough tutorials & ChatGpt
+        if update_todo.is_valid():
+            todo_item = update_todo.save(commit=False)
+            todo_item.slug = slugify(todo_item.title)
+            todo_item.save()
+
+            # Get the booking related to the todo item
+            booking_slug = todo_item.booking_id.slug
+            booking_id = todo_item.booking_id.id
+
+            return redirect('booking_detail', slug=booking_slug, id=booking_id)
+        else:
+            return render(request, "edit_todo.html", context)
