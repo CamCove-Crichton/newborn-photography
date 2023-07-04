@@ -21,4 +21,6 @@ urlpatterns = [
          views.TodoDetail.as_view(), name='todo_detail'),
     path('edit_todo/<slug:slug>/<int:id>/',
          views.EditTodo.as_view(), name='edit_todo'),
+    path('delete_todo/<slug:slug>/<int:id>/',
+         views.DeleteTodo.as_view(), name='delete_todo'),
 ]

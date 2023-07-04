@@ -360,3 +360,29 @@ class EditTodo(LoginRequiredMixin, generic.ListView):
             return redirect('booking_detail', slug=booking_slug, id=booking_id)
         else:
             return render(request, "edit_todo.html", context)
+
+
+# Assistance from Code Institutes Hello Django & I think therefore I blog
+# walkthrough tutorials
+class DeleteTodo(LoginRequiredMixin, generic.ListView):
+    """
+    The DeleteTodo class is to enable the admin to delete one of thier
+    todo items
+    """
+    model = Todo
+
+    def get(self, request, *args, **kwargs):
+        """
+        Fetches the content to delete a record from the database which uses
+        the booking id
+        """
+        todo_id = kwargs['id']
+        todo_item = get_object_or_404(Todo, id=todo_id)
+
+        # Get the booking related to the todo item
+        booking_slug = todo_item.booking_id.slug
+        booking_id = todo_item.booking_id.id
+
+        todo_item.delete()
+
+        return redirect('booking_detail', slug=booking_slug, id=booking_id)
