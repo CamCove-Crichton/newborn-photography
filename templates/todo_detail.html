@@ -21,7 +21,8 @@
 <!-- Edit Todo -->
 <div class="row">
     <div class="col-md-3">
-        <a href="#" type="button" class="btn btn-success btn-lg">Edit
+        <a href="{% url 'edit_todo' slug=todo_item.slug id=todo_item.id %}" type="button"
+            class="btn btn-success btn-lg">Edit
             Todo Item</a>
     </div>
 

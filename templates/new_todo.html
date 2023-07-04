@@ -14,7 +14,6 @@
     <form method="post">
         {{ form|crispy }}
         {% csrf_token %}
-        {{ booking.id }}
         <input type="hidden" name="slug" value="{{ booking.slug }}">
         <input type="hidden" name="id" value="{{ booking.id }}">
         <div class="container-fluid">
@@ -46,9 +45,6 @@
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                 <a href="{% url 'booking_detail' booking.slug booking.id %}" type="button"
                                     class="btn btn-primary">Confirm</a>
-
-
-
                             </div>
                         </div>
                     </div>
