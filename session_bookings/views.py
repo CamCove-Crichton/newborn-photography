@@ -11,7 +11,8 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.utils.decorators import method_decorator
 
 
-# Assitance from code institutes I think therefore I blog walkthrough tutorials & ChatGpt
+# Assitance from code institutes I think therefore I blog walkthrough
+# tutorials & ChatGpt
 class BookingList(LoginRequiredMixin, generic.ListView):
     """
     BookingList class creates a view for the user to see all the bookings made
@@ -26,7 +27,8 @@ class BookingList(LoginRequiredMixin, generic.ListView):
         """
         # Assitance from ChatGpt
         user = self.request.user
-        queryset = super().get_queryset().filter(client=user).order_by('-booking_date')
+        queryset = super().get_queryset().filter(client=user).order_by(
+            '-booking_date')
 
         return queryset
 
@@ -34,7 +36,8 @@ class BookingList(LoginRequiredMixin, generic.ListView):
 # Assitance from code institutes I think therefore I blog walkthrough tutorials
 class BookingDetail(View):
     """
-    BookingDetail class gets all the details about a booking to display it to the user
+    BookingDetail class gets all the details about a booking to display it to
+    the user
     """
 
     def get(self, request, slug, *args, **kwargs):
@@ -54,7 +57,8 @@ class BookingDetail(View):
 
 class Home(View):
     """
-    The Home class returns the render of the index.html file to return to the home page
+    The Home class returns the render of the index.html file to return to the
+    home page
     """
 
     def get(self, request):
@@ -63,12 +67,14 @@ class Home(View):
 
 class NewBooking(LoginRequiredMixin, generic.ListView):
     """
-    The NewBooking class is to create a view for users to fill in a form and submit it to make a booking
+    The NewBooking class is to create a view for users to fill in a form and
+    submit it to make a booking
     """
     model = Booking
     form_class = BookingForm
 
-    # Assitance from code institutes I think therefore I blog walkthrough tutorials
+    # Assitance from code institutes I think therefore I blog walkthrough
+    # tutorials
     def get(self, request, *args, **kwargs):
         """
         Fetches the content to display from the BookingForm() which uses
@@ -83,7 +89,8 @@ class NewBooking(LoginRequiredMixin, generic.ListView):
             },
         )
 
-    # Assitance from code institutes I think therefore I blog walkthrough tutorials
+    # Assitance from code institutes I think therefore I blog walkthrough
+    # tutorials
     def post(self, request, *args, **kwargs):
         """
         Submits the new booking request, when it is valid, to the database
@@ -91,12 +98,14 @@ class NewBooking(LoginRequiredMixin, generic.ListView):
 
         new_booking_request = BookingForm(request.POST, request.FILES)
 
-        # Assitance from code institutes I think therefore I blog walkthrough tutorials & ChatGpt
+        # Assitance from code institutes I think therefore I blog walkthrough
+        # tutorials & ChatGpt
         if new_booking_request.is_valid():
             booking = new_booking_request.save(commit=False)
             booking.client = request.user
             booking.slug = slugify(booking.booking_name)
-            booking.featured_image = new_booking_request.cleaned_data['featured_image']
+            booking.featured_image = new_booking_request.cleaned_data[
+                'featured_image']
             booking.save()
             return redirect('bookings')
         else:
@@ -111,11 +120,13 @@ class NewBooking(LoginRequiredMixin, generic.ListView):
 
 class EditBooking(LoginRequiredMixin, generic.ListView):
     """
-    The EditBooking class is to create a view for users to be able to edit their booking details
+    The EditBooking class is to create a view for users to be able to edit
+    their booking details
     """
     model = Booking
 
-    # Assitance from code institutes I think therefore I blog walkthrough tutorials
+    # Assitance from code institutes I think therefore I blog walkthrough
+    # tutorials
     def get(self, request, *args, **kwargs):
         """
         Fetches the content to display from the BookingForm() which uses
@@ -130,7 +141,8 @@ class EditBooking(LoginRequiredMixin, generic.ListView):
 
         return render(request, "edit_booking.html", context)
 
-    # Assitance from code institutes I think therefore I blog walkthrough tutorials
+    # Assitance from code institutes I think therefore I blog walkthrough
+    # tutorials
     def post(self, request, *args, **kwargs):
         """
         Submits the new booking request, when it is valid, to the database
@@ -146,19 +158,22 @@ class EditBooking(LoginRequiredMixin, generic.ListView):
         update_booking = BookingForm(
             request.POST, request.FILES, instance=booking)
 
-        # Assitance from code institutes I think therefore I blog walkthrough tutorials & ChatGpt
+        # Assitance from code institutes I think therefore I blog walkthrough
+        # tutorials & ChatGpt
         if update_booking.is_valid():
             booking = update_booking.save(commit=False)
             booking.client = request.user
             booking.slug = slugify(booking.booking_name)
-            booking.featured_image = update_booking.cleaned_data['featured_image']
+            booking.featured_image = update_booking.cleaned_data[
+                'featured_image']
             booking.save()
             return redirect('bookings')
         else:
             return render(request, "edit_booking.html", context)
 
 
-# Assistance from Code Institutes Hello Django & I think therefore I blog walkthrough tutorials
+# Assistance from Code Institutes Hello Django & I think therefore I blog
+# walkthrough tutorials
 class DeleteBooking(LoginRequiredMixin, generic.ListView):
     """
     The DeleteBooking class is to enable users to delete one of thier bookings
@@ -167,7 +182,8 @@ class DeleteBooking(LoginRequiredMixin, generic.ListView):
 
     def get(self, request, *args, **kwargs):
         """
-        Fetches the content to delete a record from the database which uses the booking id
+        Fetches the content to delete a record from the database which uses
+        the booking id
         """
         booking_id = kwargs['id']
         booking = get_object_or_404(Booking, id=booking_id)
@@ -181,8 +197,10 @@ class DeleteBooking(LoginRequiredMixin, generic.ListView):
         return redirect('bookings')
 
 
-# Assitance from Code Institutes I thing therefore I blog walkthrough tutorials and ChatGpt
-@method_decorator(staff_member_required(login_url='account_login'), name='dispatch')
+# Assitance from Code Institutes I thing therefore I blog walkthrough
+# tutorials and ChatGpt
+@method_decorator(
+    staff_member_required(login_url='account_login'), name='dispatch')
 class AdministratorView(generic.ListView):
 
     model = Booking
@@ -266,7 +284,8 @@ class NewTodo(LoginRequiredMixin, generic.ListView):
 # Assitance from code institutes I think therefore I blog walkthrough tutorials
 class TodoDetail(View):
     """
-    TodoDetail class gets all the details about a todo item to display it to the admin
+    TodoDetail class gets all the details about a todo item to display it to
+    the admin
     """
 
     def get(self, request, slug, id):
@@ -285,14 +304,16 @@ class TodoDetail(View):
 
 class EditTodo(LoginRequiredMixin, generic.ListView):
     """
-    The EditTodo class is to create a view for the admin to be able to edit their todo items details
+    The EditTodo class is to create a view for the admin to be able to edit
+    their todo items details
     """
     model = Todo
 
-    # Assitance from code institutes I think therefore I blog walkthrough tutorials
+    # Assitance from code institutes I think therefore I blog walkthrough
+    # tutorials & from ChatGpt
     def get(self, request, *args, **kwargs):
         """
-        Fetches the content to display from the BookingForm() which uses
+        Fetches the content to display from the TodoForm() which uses
         crispy forms and is located in the forms.py file
         """
         todo_id = kwargs['id']
@@ -308,10 +329,11 @@ class EditTodo(LoginRequiredMixin, generic.ListView):
 
         return render(request, "edit_todo.html", context)
 
-    # Assitance from code institutes I think therefore I blog walkthrough tutorials
+    # Assitance from code institutes I think therefore I blog walkthrough
+    # tutorials & from ChatGpt
     def post(self, request, *args, **kwargs):
         """
-        Submits the new booking request, when it is valid, to the database
+        Submits the updated Todo request, when it is valid, to the database
         """
 
         todo_id = kwargs['id']
@@ -324,7 +346,8 @@ class EditTodo(LoginRequiredMixin, generic.ListView):
         update_todo = TodoForm(
             request.POST, instance=todo_item)
 
-        # Assitance from code institutes I think therefore I blog walkthrough tutorials & ChatGpt
+        # Assitance from code institutes I think therefore I blog walkthrough
+        # tutorials & ChatGpt
         if update_todo.is_valid():
             todo_item = update_todo.save(commit=False)
             todo_item.slug = slugify(todo_item.title)
