@@ -115,6 +115,7 @@
 - Added in a NewTodo view for the Admin to have access to, when viewing the booking detail, so they can add a todo item for thet particluar booking for anything the Admin may need to action before the photo session
 - Updated the BookingDetail view to enable displaying the todo items within the template, and updated the booking_detail.html template to iterate through todo items added to the booking and only display them if the user logged in is the Admin
 - Added in a view and created a template for the admin to view the full details of a todo item, and gave it the url path using the slug and the id
+- Added in a view to enable the admin to edit the todo items and created a url path and a template for the view
 
 ### Future Developments
 
@@ -436,6 +437,26 @@
                     "todo_item": todo_item
                 },
             )
+}
+```
+
+```python
+{
+    booking = todo_item.booking_id
+
+        form = TodoForm(instance=todo_item)
+        context = {
+            "form": form,
+            "booking_slug": booking.slug,
+            "booking_id": booking.id
+        }
+}
+```
+
+```python
+{
+    booking_slug = todo_item.booking_id.slug
+    booking_id = todo_item.booking_id.id
 }
 ```
 
