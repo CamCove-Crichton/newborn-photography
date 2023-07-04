@@ -41,15 +41,17 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+                                <!-- If Admin is logged in return to admin panel else normal bookings -->
+                                {% if user.is_superuser %}
+                                <a href="{% url 'admin_panel' %}" type="button" class="btn btn-primary">Confirm</a>
+                                {% else %}
                                 <a href="{% url 'bookings' %}" type="button" class="btn btn-primary">Confirm</a>
-                                <!-- <button type="button" class="btn btn-primary">Confirm</button> -->
+                                {% endif %}
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- <div class="col-md-1">
-                    <a href="{% url 'bookings' %}" class="deleteBtn btn btn-danger btn-lg">Cancel</a>
-                </div> -->
             </div>
         </div>
 
