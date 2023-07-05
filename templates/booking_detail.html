@@ -58,11 +58,19 @@
     <div class="row rounded border border-dark-subtle">
         <div class="col-md-3">
             <h6>Item Name:</h6>
+            {% if todo.completed == True %}
+            <p><s>{{ todo.title }}</s></p>
+            {% else %}
             <p>{{ todo.title }}</p>
+            {% endif %}
         </div>
         <div class="col-md-3">
             <h6>Due Date:</h6>
+            {% if todo.completed == True %}
+            <p><s>{{ todo.due_date }}</s></p>
+            {% else %}
             <p>{{ todo.due_date }}</p>
+            {% endif %}
         </div>
         <div class="col-md-3">
             <h6>Status</h6>

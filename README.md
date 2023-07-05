@@ -117,6 +117,7 @@
 - Added in a view and created a template for the admin to view the full details of a todo item, and gave it the url path using the slug and the id
 - Added in a view to enable the admin to edit the todo items and created a url path and a template for the view
 - Created a DeleteTodo view and url path to enable the Admin to delete a todo item if required
+- Updated the booking_detail template to have a strikethrough on todo items if their status is done
 
 ### Future Developments
 
