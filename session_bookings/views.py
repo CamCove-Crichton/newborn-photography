@@ -9,6 +9,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.text import slugify
 from django.contrib.admin.views.decorators import staff_member_required
 from django.utils.decorators import method_decorator
+from django.contrib import messages
 
 
 # Assitance from code institutes I think therefore I blog walkthrough
@@ -270,6 +271,8 @@ class NewTodo(LoginRequiredMixin, generic.ListView):
 
             todo_item.save()
 
+            messages.success(request, "New Todo item successfully added")
+
             return redirect('booking_detail', slug=booking_slug, id=booking_id)
         else:
             return render(
@@ -356,6 +359,8 @@ class EditTodo(LoginRequiredMixin, generic.ListView):
             # Get the booking related to the todo item
             booking_slug = todo_item.booking_id.slug
             booking_id = todo_item.booking_id.id
+
+            messages.success(request, "Todo item successfully updated")
 
             return redirect('booking_detail', slug=booking_slug, id=booking_id)
         else:

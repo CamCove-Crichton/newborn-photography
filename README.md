@@ -175,6 +175,7 @@
 - The last issue was back to the NoReverseMatch again, and realised I had not updated the href in my booking_detail template to match the url path, and once I updated this, it posted to the database
 - Had another issue with accessing the todo_detail template from the booking_detail template, and found that I was not actually looking at how django was trying to access the url, as I kept getting the NoReverseMatch so it was not getting the id and the slug values of the record, and found that because I was actually in the BookingDetail view, I was using the wrong naming for accessing the todo item, as in the BookingDetail view, the context was being accessed by "todos", and so I adjusted the arguments for the url path, and django was able to access the slug and the id
 - I was having an issue when trying to confirm the deletion of a todo item, and was getting the error "as_view() takes 1 positional argument but 2 were given", and after reading a bit and looking on stack overflow, I realised I was missing the parentheses at the end of the as_view(), so I added them and this fixed the issue
+- My setTimeout function was not working correctly, as it was not dismissing the messages, and still had to be done manually and and after looking at my console logs, I saw a console log message, which I had removed from my javascript file, was still appearing, and so tried a hard reload to clear the cache and that solved the issue
 
 ### Validator Testing
 
@@ -187,7 +188,6 @@
 ### Unresolved Bugs
 
 - I have an issue with the cancel button, that it is not responsive on the first click, but only on the 2nd click, so need to look into this and correct
-- My setTimeout function is not working correctly, as it is not dismissing the messages, and still has to be done manually and so I need to look into this
 
 ## Credits
 
