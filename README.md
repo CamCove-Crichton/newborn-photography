@@ -119,6 +119,7 @@
 - Created a DeleteTodo view and url path to enable the Admin to delete a todo item if required
 - Updated the booking_detail template to have a strikethrough on todo items if their status is done
 - Added in a message alert feature to display messages for things like logging in and logging out, using django messages, along with bootstrap and javascript
+- Started to implement messages using django messages to assist with displaying messages to the user when actions had been taken on the site
 
 ### Future Developments
 
@@ -203,7 +204,7 @@
 }
 ```
 
-[ChatGpt](https://openai.com/blog/chatgpt) - Asked ChatGpt if it was possible to assign the context for a view to my BookingForm class to utilise crispy forms, to which I was told yes but the preffered way to do it was the below
+[ChatGpt](https://openai.com/blog/chatgpt) - Used ChatGpt to assist with troubleshooting at times when I stuggled to understand what errors meant
 
 ```pyton
 {
