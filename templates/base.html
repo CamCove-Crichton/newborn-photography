@@ -34,6 +34,7 @@
 
 <body>
     <header>
+
         <!-- Logo, signup/login and navigation -->
         <div>
             <a href="/">
@@ -65,6 +66,7 @@
         </div>
         <nav>
             <!-- Assitance from code institutes I think therefore I blog walkthrough tutorials -->
+            <!-- Site Navigation -->
             <div>
                 <ul>
                     <li>
@@ -93,6 +95,24 @@
                 </ul>
             </div>
         </nav>
+
+        <!-- Assitance from code institutes I think therefore I blog walkthrough tutorials -->
+        <!-- Messages -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    {% for message in messages %}
+                    <div class="alert {{ message.tags }} alert-dismissible fade show" id="msg" role="alert">
+                        {{ message | safe }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+
+                        </button>
+                    </div>
+
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
     </header>
 
     <!-- Assitance from code institutes I think therefore I blog walkthrough tutorials -->

@@ -1,5 +1,3 @@
-console.log("Custom JavaScript file loaded");
-
 // Assistance from Techie Delight
 document.addEventListener("DOMContentLoaded", function () {
     console.log('Page is loaded');
@@ -20,3 +18,10 @@ function deleteModal(targetModal) {
         $(modal).modal("show");
     }
 }
+
+// Assistance from code institutes I think therefore I blog walkthrough tutorials
+setTimeout(function () {
+    let messages = document.getElementById('msg');
+    let alert = new bootstrap.Alert(messages);
+    alert.close();
+}, 2500);
