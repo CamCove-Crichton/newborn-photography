@@ -116,6 +116,7 @@
 - Updated the BookingDetail view to enable displaying the todo items within the template, and updated the booking_detail.html template to iterate through todo items added to the booking and only display them if the user logged in is the Admin
 - Added in a view and created a template for the admin to view the full details of a todo item, and gave it the url path using the slug and the id
 - Added in a view to enable the admin to edit the todo items and created a url path and a template for the view
+- Created a DeleteTodo view and url path to enable the Admin to delete a todo item if required
 
 ### Future Developments
 
@@ -123,6 +124,10 @@
 - To allow users to signup or login using social media accounts
 - To allow users to reset their password if they cannot remember their existing password
 - To have users receive an authentication email when signing up to validatate their email address
+- To allow the admin to be able to edit the blog content, and add new blogs to the site
+- To allow users to be able to like and comment on blog posts
+- To have the admin be able to update images on the gallery page
+- To allow users the ability to like or favorite images in the gallery as poses they would like to try achieve in their photoshoot session
 
 ### Wireframes & Database Designs
 
@@ -167,6 +172,7 @@
 - I then had an issue with the form submitting to the database and it was because it was not assiging the slug and id, so I needed to needed to assign a booking_id and a booking_slug so it could be associated with a particular booking, before using the get_object_or_404() method. After getting this from the Booking model, I assigned it to an attribute called 'booking'. Using 'booking', I then assigned it to the new todo item, and used slugify to convert the title of the todo to the slug before saving it, which solved the issue to a point, but when it was trying to post to the database, it was still not able to access the booking id and the slug to which it was related to, so in the get method of the NewTodo view, I did a similar thing, where I assigned attributes slug and booking_id the values of url parameters, and using the queryset attribute, I got all the objects from the Booking model, and then assigning the attribute 'booking' in the get method, using the get_object_or_404() method by the accessing the queryset and using the slug and booking_id as arguments, which solved this side of the issue
 - The last issue was back to the NoReverseMatch again, and realised I had not updated the href in my booking_detail template to match the url path, and once I updated this, it posted to the database
 - Had another issue with accessing the todo_detail template from the booking_detail template, and found that I was not actually looking at how django was trying to access the url, as I kept getting the NoReverseMatch so it was not getting the id and the slug values of the record, and found that because I was actually in the BookingDetail view, I was using the wrong naming for accessing the todo item, as in the BookingDetail view, the context was being accessed by "todos", and so I adjusted the arguments for the url path, and django was able to access the slug and the id
+- I was having an issue when trying to confirm the deletion of a todo item, and was getting the error "as_view() takes 1 positional argument but 2 were given", and after reading a bit and looking on stack overflow, I realised I was missing the parentheses at the end of the as_view(), so I added them and this fixed the issue
 
 ### Validator Testing
 
@@ -178,7 +184,7 @@
 
 ### Unresolved Bugs
 
-- I have an issue with the cnacel button, that it is not responsive on the first click, but only on the 2ns click, so need to look into this and correct
+- I have an issue with the cancel button, that it is not responsive on the first click, but only on the 2nd click, so need to look into this and correct
 
 ## Credits
 
