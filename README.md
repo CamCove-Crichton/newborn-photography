@@ -118,6 +118,7 @@
 - Added in a view to enable the admin to edit the todo items and created a url path and a template for the view
 - Created a DeleteTodo view and url path to enable the Admin to delete a todo item if required
 - Updated the booking_detail template to have a strikethrough on todo items if their status is done
+- Added in a message alert feature to display messages for things like logging in and logging out, using django messages, along with bootstrap and javascript
 
 ### Future Developments
 
@@ -186,6 +187,7 @@
 ### Unresolved Bugs
 
 - I have an issue with the cancel button, that it is not responsive on the first click, but only on the 2nd click, so need to look into this and correct
+- My setTimeout function is not working correctly, as it is not dismissing the messages, and still has to be done manually and so I need to look into this
 
 ## Credits
 
@@ -953,6 +955,54 @@ urlpatterns = [
         booking.delete()
 
         return redirect('bookings')
+}
+```
+
+```python
+{
+    from django.contrib.messages import constants as messages
+}
+```
+
+```python
+{
+    MESSAGE_TAGS = {
+        messages.DEBUG: 'alert-info',
+        messages.INFO: 'alert-info',
+        messages.SUCCESS: 'alert-success',
+        messages.WARNING: 'alert-warning',
+        messages.ERROR: 'alert-danger',
+    }
+}
+```
+
+```html
+{
+    <div class="container">
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    {% for message in messages %}
+                    <div class="alert {{ message.tags }} alert-dismissible fade show" id="msg" role="alert">
+                        {{ message | safe }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                            
+                        </button>
+                    </div>
+
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+}
+```
+
+```javascript
+{
+    setTimeout(function () {
+        let messages = document.getElementById('msg');
+        let alert = new bootstrap.Alert(messages);
+        alert.close();
+    }, 2500);
 }
 ```
 
