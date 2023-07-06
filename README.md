@@ -120,10 +120,11 @@
 - Updated the booking_detail template to have a strikethrough on todo items if their status is done
 - Added in a message alert feature to display messages for things like logging in and logging out, using django messages, along with bootstrap and javascript
 - Started to implement messages using django messages to assist with displaying messages to the user when actions had been taken on the site
+- Updated remaining views with success messages to display to the user when an action has been done successfully
+- Added in the ability to allow users to be able to have confirmed appointments without the need for the Admin to approve, by having it check the database for any existing appointments on the day, and if no appointments exist, then the appointment is booked in and the status is changed to confirmed
 
 ### Future Developments
 
-- To allow users to be able to have confirmed appointments without the need for the Admin to approve
 - To allow users to signup or login using social media accounts
 - To allow users to reset their password if they cannot remember their existing password
 - To have users receive an authentication email when signing up to validatate their email address
@@ -408,6 +409,17 @@
 {
     booking = get_object_or_404(Booking, slug=slug)
     todos = Todo.objects.filter(booking_id=booking)
+}
+```
+
+```python
+{
+    booking_date = new_booking_request.cleaned_data['booking_date']
+    existing_booking = Booking.objects.filter(
+        booking_date=booking_date).first()
+    if existing_booking:
+        messages.error(
+                    request, "The selected date is unavailable, please choose a different date.")
 }
 ```
 
