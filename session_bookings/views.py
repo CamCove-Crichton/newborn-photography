@@ -102,15 +102,31 @@ class NewBooking(LoginRequiredMixin, generic.ListView):
         # Assitance from code institutes I think therefore I blog walkthrough
         # tutorials & ChatGpt
         if new_booking_request.is_valid():
-            booking = new_booking_request.save(commit=False)
-            booking.client = request.user
-            booking.slug = slugify(booking.booking_name)
-            booking.featured_image = new_booking_request.cleaned_data[
-                'featured_image']
-            booking.save()
-            # Display message
-            messages.success(request, "Session booking successfully requested")
-            return redirect('bookings')
+            booking_date = new_booking_request.cleaned_data['booking_date']
+            existing_booking = Booking.objects.filter(
+                booking_date=booking_date).first()
+            if existing_booking:
+                messages.error(
+                    request, "The selected date is unavailable, please choose a different date.")
+                return render(
+                    request,
+                    "new_booking.html",
+                    {
+                        "form": BookingForm()
+                    },
+                )
+            else:
+                booking = new_booking_request.save(commit=False)
+                booking.client = request.user
+                booking.slug = slugify(booking.booking_name)
+                booking.featured_image = new_booking_request.cleaned_data[
+                    'featured_image']
+                booking.status = 1
+                booking.save()
+                # Display message
+                messages.success(
+                    request, "Session booking successfully requested")
+                return redirect('bookings')
         else:
             return render(
                 request,
