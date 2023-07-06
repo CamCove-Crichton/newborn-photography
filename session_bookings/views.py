@@ -108,6 +108,8 @@ class NewBooking(LoginRequiredMixin, generic.ListView):
             booking.featured_image = new_booking_request.cleaned_data[
                 'featured_image']
             booking.save()
+            # Display message
+            messages.success(request, "Session booking successfully requested")
             return redirect('bookings')
         else:
             return render(
@@ -146,7 +148,7 @@ class EditBooking(LoginRequiredMixin, generic.ListView):
     # tutorials
     def post(self, request, *args, **kwargs):
         """
-        Submits the new booking request, when it is valid, to the database
+        Submits the updated booking request, when it is valid, to the database
         """
 
         booking_id = kwargs['id']
@@ -168,6 +170,8 @@ class EditBooking(LoginRequiredMixin, generic.ListView):
             booking.featured_image = update_booking.cleaned_data[
                 'featured_image']
             booking.save()
+            # Display message
+            messages.success(request, "Session booking successfully updated")
             return redirect('bookings')
         else:
             return render(request, "edit_booking.html", context)
@@ -188,12 +192,10 @@ class DeleteBooking(LoginRequiredMixin, generic.ListView):
         """
         booking_id = kwargs['id']
         booking = get_object_or_404(Booking, id=booking_id)
-        form = BookingForm(instance=booking)
-        context = {
-            "form": form
-        }
 
         booking.delete()
+        # Display message
+        messages.success(request, "Session booking successfully deleted")
 
         return redirect('bookings')
 
@@ -270,7 +272,7 @@ class NewTodo(LoginRequiredMixin, generic.ListView):
             todo_item.slug = slugify(todo_item.title)
 
             todo_item.save()
-
+            # Display message
             messages.success(request, "New Todo item successfully added")
 
             return redirect('booking_detail', slug=booking_slug, id=booking_id)
@@ -293,7 +295,6 @@ class TodoDetail(View):
 
     def get(self, request, slug, id):
         # Assistance from ChatGpt
-
         todo_item = get_object_or_404(Todo, slug=slug, id=id)
 
         return render(
@@ -389,5 +390,7 @@ class DeleteTodo(LoginRequiredMixin, generic.ListView):
         booking_id = todo_item.booking_id.id
 
         todo_item.delete()
+
+        messages.success(request, "Todo item successfully deleted")
 
         return redirect('booking_detail', slug=booking_slug, id=booking_id)
