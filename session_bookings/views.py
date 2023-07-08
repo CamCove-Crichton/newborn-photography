@@ -128,6 +128,9 @@ class NewBooking(LoginRequiredMixin, generic.ListView):
                     request, "Session booking successfully requested")
                 return redirect('bookings')
         else:
+            # Display message
+            messages.error(
+                request, "Invalid form data, please check your inputs")
             return render(
                 request,
                 "new_booking.html",
@@ -158,6 +161,8 @@ class EditBooking(LoginRequiredMixin, generic.ListView):
             "form": form
         }
 
+        messages.success(request, "Edit booking page loaded successfully")
+
         return render(request, "edit_booking.html", context)
 
     # Assitance from code institutes I think therefore I blog walkthrough
@@ -166,30 +171,44 @@ class EditBooking(LoginRequiredMixin, generic.ListView):
         """
         Submits the updated booking request, when it is valid, to the database
         """
-
         booking_id = kwargs['id']
         booking = get_object_or_404(Booking, id=booking_id)
-        form = BookingForm(instance=booking)
+        form = BookingForm(request.POST, request.FILES, instance=booking)
         context = {
             "form": form
         }
 
-        update_booking = BookingForm(
-            request.POST, request.FILES, instance=booking)
+        unedited_date = booking.booking_date
 
         # Assitance from code institutes I think therefore I blog walkthrough
         # tutorials & ChatGpt
-        if update_booking.is_valid():
-            booking = update_booking.save(commit=False)
-            booking.client = request.user
-            booking.slug = slugify(booking.booking_name)
-            booking.featured_image = update_booking.cleaned_data[
+        if form.is_valid():
+            edited_booking = form.save(commit=False)
+            # Check if the booking date has been modifed
+            if edited_booking.booking_date != unedited_date:
+                # Perform duplicate data check
+                duplicate_booking = Booking.objects.filter(
+                    booking_date=edited_booking.booking_date).exclude(
+                        id=booking_id).first()
+                if duplicate_booking:
+                    # Display error message
+                    messages.error(
+                        request, "The selected date is unavailable, please choose a different date.")
+                    return render(request, "edit_booking.html", context)
+
+            edited_booking.client = request.user
+            edited_booking.slug = slugify(edited_booking.booking_name)
+            edited_booking.featured_image = form.cleaned_data[
                 'featured_image']
-            booking.save()
+            edited_booking.status = 1
+            edited_booking.save()
             # Display message
             messages.success(request, "Session booking successfully updated")
             return redirect('bookings')
         else:
+            # Display message
+            messages.error(
+                request, "Invalid form data, please check your inputs")
             return render(request, "edit_booking.html", context)
 
 
@@ -293,6 +312,9 @@ class NewTodo(LoginRequiredMixin, generic.ListView):
 
             return redirect('booking_detail', slug=booking_slug, id=booking_id)
         else:
+            # Display message
+            messages.error(
+                request, "Invalid form data, please check your inputs")
             return render(
                 request,
                 "new_todo.html",
@@ -381,6 +403,9 @@ class EditTodo(LoginRequiredMixin, generic.ListView):
 
             return redirect('booking_detail', slug=booking_slug, id=booking_id)
         else:
+            # Display message
+            messages.error(
+                request, "Invalid form data, please check your inputs")
             return render(request, "edit_todo.html", context)
 
 
