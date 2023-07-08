@@ -121,7 +121,7 @@
 - Added in a message alert feature to display messages for things like logging in and logging out, using django messages, along with bootstrap and javascript
 - Started to implement messages using django messages to assist with displaying messages to the user when actions had been taken on the site
 - Updated remaining views with success messages to display to the user when an action has been done successfully
-- Added in the ability to allow users to be able to have confirmed appointments without the need for the Admin to approve, by having it check the database for any existing appointments on the day, and if no appointments exist, then the appointment is booked in and the status is changed to confirmed
+- Added in the ability to allow users to be able to have confirmed appointments without the need for the Admin to approve, by having it check the database for any existing appointments on the day, and if no appointments exist, then the appointment is booked in and the status is changed to confirmed, and this is the same if a user tries to edit a booking date, and if there is a booking in the system already, another one cannot be booked for the same day and a message is displayed to ask the user to selected another date
 
 ### Future Developments
 
@@ -178,6 +178,7 @@
 - Had another issue with accessing the todo_detail template from the booking_detail template, and found that I was not actually looking at how django was trying to access the url, as I kept getting the NoReverseMatch so it was not getting the id and the slug values of the record, and found that because I was actually in the BookingDetail view, I was using the wrong naming for accessing the todo item, as in the BookingDetail view, the context was being accessed by "todos", and so I adjusted the arguments for the url path, and django was able to access the slug and the id
 - I was having an issue when trying to confirm the deletion of a todo item, and was getting the error "as_view() takes 1 positional argument but 2 were given", and after reading a bit and looking on stack overflow, I realised I was missing the parentheses at the end of the as_view(), so I added them and this fixed the issue
 - My setTimeout function was not working correctly, as it was not dismissing the messages, and still had to be done manually and and after looking at my console logs, I saw a console log message, which I had removed from my javascript file, was still appearing, and so tried a hard reload to clear the cache and that solved the issue
+- Had an issue that when trying to edit a booking and get it to check the database for any existing bookings if the user trys to edit the date, so that there cannot be more than one booking in a day, but the if statement was always seeing a False value and so the code in the if statement code block was being missed even when the date had changed. After using some print statements, I found that it was because both the edited date and the booking date were the same, so I stored the original booking date in a variable before the form is validated, and used that variable in my if statement, and that fixed the issue
 
 ### Validator Testing
 
@@ -420,6 +421,18 @@
     if existing_booking:
         messages.error(
                     request, "The selected date is unavailable, please choose a different date.")
+}
+```
+
+```python
+{
+    # Check if the booking date has been modifed
+            if edited_booking.booking_date != unedited_date:
+                # Perform duplicate data check
+                duplicate_booking = Booking.objects.filter(
+                    booking_date=edited_booking.booking_date).exclude(
+                        id=booking_id).first()
+                if duplicate_booking:
 }
 ```
 
