@@ -122,6 +122,7 @@
 - Started to implement messages using django messages to assist with displaying messages to the user when actions had been taken on the site
 - Updated remaining views with success messages to display to the user when an action has been done successfully
 - Added in the ability to allow users to be able to have confirmed appointments without the need for the Admin to approve, by having it check the database for any existing appointments on the day, and if no appointments exist, then the appointment is booked in and the status is changed to confirmed, and this is the same if a user tries to edit a booking date, and if there is a booking in the system already, another one cannot be booked for the same day and a message is displayed to ask the user to selected another date
+- I customised the new booking request template to add note or messages about certain inputs when the user is requesting a booking
 
 ### Future Developments
 
@@ -132,6 +133,7 @@
 - To allow users to be able to like and comment on blog posts
 - To have the admin be able to update images on the gallery page
 - To allow users the ability to like or favorite images in the gallery as poses they would like to try achieve in their photoshoot session
+- To allow users to customise their profile, like adding their address and contact number and a profile picture
 
 ### Wireframes & Database Designs
 
@@ -433,6 +435,15 @@
                     booking_date=edited_booking.booking_date).exclude(
                         id=booking_id).first()
                 if duplicate_booking:
+}
+```
+
+```html
+{
+    <div class="form-group">
+            {{ form.booking_name|as_crispy_field }}
+            <small class="text-muted">Please enter a unique name for your baby's newborn photoshoot</small>
+        </div>
 }
 ```
 
