@@ -3,18 +3,22 @@ from .models import Booking, Todo
 from django.contrib.auth.models import User
 from django import forms
 
-
 # Assitance from code institutes I think therefore I blog walkthrough tutorials
+
+
 class BookingForm(forms.ModelForm):
     """
     The New Booking Request form which utilises crispy forms in
     the html template
     """
-    # Assitance from ChatGpt on how to change the accepted date format input in the form
+    # Assitance from ChatGpt on how to change the accepted date format
+    # input in the form
     booking_date = forms.DateField(
-        input_formats=['%d-%m-%y', '%d-%m-%Y'], widget=forms.DateInput(format='%d-%m-%y'),)
+        input_formats=['%d-%m-%y', '%d-%m-%Y'], widget=forms.DateInput(
+            format='%d-%m-%y'),)
     babys_due_date = forms.DateField(
-        input_formats=['%d-%m-%y', '%d-%m-%Y'], widget=forms.DateInput(format='%d-%m-%y'),)
+        input_formats=['%d-%m-%y', '%d-%m-%Y'], widget=forms.DateInput(
+            format='%d-%m-%y'),)
     booking_time = forms.TimeField(
         input_formats=['%H:%M'], widget=forms.TimeInput(format='%H:%M'),)
 
@@ -32,7 +36,8 @@ class TodoForm(forms.ModelForm):
     utilising crispy forms in the html template
     """
     due_date = forms.DateField(
-        input_formats=['%d-%m-%y', '%d-%m-%Y'], widget=forms.DateInput(format='%d-%m-%y'),)
+        input_formats=['%d-%m-%y', '%d-%m-%Y'], widget=forms.DateInput(
+            format='%d-%m-%y'),)
     due_time = forms.TimeField(
         input_formats=['%H:%M'], widget=forms.TimeInput(format='%H:%M'),)
 
