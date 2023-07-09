@@ -123,6 +123,7 @@
 - Updated remaining views with success messages to display to the user when an action has been done successfully
 - Added in the ability to allow users to be able to have confirmed appointments without the need for the Admin to approve, by having it check the database for any existing appointments on the day, and if no appointments exist, then the appointment is booked in and the status is changed to confirmed, and this is the same if a user tries to edit a booking date, and if there is a booking in the system already, another one cannot be booked for the same day and a message is displayed to ask the user to selected another date
 - I customised the new booking request template to add note or messages about certain inputs when the user is requesting a booking
+- Added in some validation to check if the booking date is after the due date, and if it is before the due date then a message is displayed to the user
 
 ### Future Developments
 
@@ -134,6 +135,7 @@
 - To have the admin be able to update images on the gallery page
 - To allow users the ability to like or favorite images in the gallery as poses they would like to try achieve in their photoshoot session
 - To allow users to customise their profile, like adding their address and contact number and a profile picture
+- If forms return with invalid input messages, I would like to get the form to remain with prepopulated fields that the user already input to make for a better UX
 
 ### Wireframes & Database Designs
 
@@ -444,6 +446,30 @@
             {{ form.booking_name|as_crispy_field }}
             <small class="text-muted">Please enter a unique name for your baby's newborn photoshoot</small>
         </div>
+}
+```
+
+```python
+{
+    try:
+        formats = ['%d-%m-%y', '%d-%m-%Y']
+        for fmt in formats:
+            booking_datetime = datetime.combine(date1, datetime.min.time())
+            due_datetime = datetime.combine(date2, datetime.min.time())
+            booking_date = booking_datetime.strftime(fmt)
+            due_date = due_datetime.strftime(fmt)
+            booking_datetime = datetime.strptime(booking_date, fmt)
+            due_datetime = datetime.strptime(due_date, fmt)
+            if booking_datetime > due_datetime:
+                return True
+    except ValueError:
+        return False
+}
+```
+
+```python
+{
+    if not validate_booking_date(self, booking_date, due_date):
 }
 ```
 

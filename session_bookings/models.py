@@ -69,4 +69,11 @@ class PersonalInfo(models.Model):
     slug = models.SlugField(max_length=100, unique=True)
 
     def __str__(self):
-        return f"Address: {self.house_num}\n{self.street}\n{self.city}\n{self.county}\n{self.postcode}\nMobile: {self.mobile_num}"
+        return (
+            f"Address: {self.house_num}\n"
+            f"{self.street}\n"
+            f"{self.city}\n"
+            f"{self.county}\n"
+            f"{self.postcode}\n"
+            f"Mobile: {self.mobile_num}"
+        )
