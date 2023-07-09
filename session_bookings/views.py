@@ -11,6 +11,9 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.utils.decorators import method_decorator
 from django.contrib import messages
 
+from datetime import datetime
+from .utils.booking_utils import validate_booking_date
+
 
 # Assitance from code institutes I think therefore I blog walkthrough
 # tutorials & ChatGpt
@@ -96,13 +99,26 @@ class NewBooking(LoginRequiredMixin, generic.ListView):
         """
         Submits the new booking request, when it is valid, to the database
         """
-
         new_booking_request = BookingForm(request.POST, request.FILES)
 
         # Assitance from code institutes I think therefore I blog walkthrough
         # tutorials & ChatGpt
         if new_booking_request.is_valid():
+            # Validate booking date is not before due date
             booking_date = new_booking_request.cleaned_data['booking_date']
+            due_date = new_booking_request.cleaned_data['babys_due_date']
+            if not validate_booking_date(self, booking_date, due_date):
+                messages.error(
+                    request, "Invalid date. Booking date cannot be before the due date.")
+                return render(
+                    request,
+                    "new_booking.html",
+                    {
+                        "form": BookingForm()
+                    },
+                )
+
+            # Check for existing booking in database
             existing_booking = Booking.objects.filter(
                 booking_date=booking_date).first()
             if existing_booking:
@@ -123,12 +139,13 @@ class NewBooking(LoginRequiredMixin, generic.ListView):
                     'featured_image']
                 booking.status = 1
                 booking.save()
-                # Display message
+
+                # Display success message
                 messages.success(
                     request, "Session booking successfully requested")
                 return redirect('bookings')
         else:
-            # Display message
+            # Display error message
             messages.error(
                 request, "Invalid form data, please check your inputs")
             return render(
@@ -160,8 +177,6 @@ class EditBooking(LoginRequiredMixin, generic.ListView):
         context = {
             "form": form
         }
-
-        messages.success(request, "Edit booking page loaded successfully")
 
         return render(request, "edit_booking.html", context)
 
@@ -196,17 +211,26 @@ class EditBooking(LoginRequiredMixin, generic.ListView):
                         request, "The selected date is unavailable, please choose a different date.")
                     return render(request, "edit_booking.html", context)
 
+            # Validate booking date is not before due date
+            booking_date = edited_booking.booking_date
+            due_date = edited_booking.babys_due_date
+            if not validate_booking_date(self, booking_date, due_date):
+                # Display error message
+                messages.error(
+                    request, "Invalid date. Booking date cannot be before the due date.")
+                return render(request, "edit_booking.html", context)
+
             edited_booking.client = request.user
             edited_booking.slug = slugify(edited_booking.booking_name)
             edited_booking.featured_image = form.cleaned_data[
                 'featured_image']
             edited_booking.status = 1
             edited_booking.save()
-            # Display message
+            # Display success message
             messages.success(request, "Session booking successfully updated")
             return redirect('bookings')
         else:
-            # Display message
+            # Display error message
             messages.error(
                 request, "Invalid form data, please check your inputs")
             return render(request, "edit_booking.html", context)
@@ -229,7 +253,7 @@ class DeleteBooking(LoginRequiredMixin, generic.ListView):
         booking = get_object_or_404(Booking, id=booking_id)
 
         booking.delete()
-        # Display message
+        # Display success message
         messages.success(request, "Session booking successfully deleted")
 
         return redirect('bookings')
@@ -307,12 +331,12 @@ class NewTodo(LoginRequiredMixin, generic.ListView):
             todo_item.slug = slugify(todo_item.title)
 
             todo_item.save()
-            # Display message
+            # Display success message
             messages.success(request, "New Todo item successfully added")
 
             return redirect('booking_detail', slug=booking_slug, id=booking_id)
         else:
-            # Display message
+            # Display error message
             messages.error(
                 request, "Invalid form data, please check your inputs")
             return render(
@@ -399,11 +423,12 @@ class EditTodo(LoginRequiredMixin, generic.ListView):
             booking_slug = todo_item.booking_id.slug
             booking_id = todo_item.booking_id.id
 
+            # Display success message
             messages.success(request, "Todo item successfully updated")
 
             return redirect('booking_detail', slug=booking_slug, id=booking_id)
         else:
-            # Display message
+            # Display error message
             messages.error(
                 request, "Invalid form data, please check your inputs")
             return render(request, "edit_todo.html", context)
@@ -432,6 +457,7 @@ class DeleteTodo(LoginRequiredMixin, generic.ListView):
 
         todo_item.delete()
 
+        # Display success message
         messages.success(request, "Todo item successfully deleted")
 
         return redirect('booking_detail', slug=booking_slug, id=booking_id)
