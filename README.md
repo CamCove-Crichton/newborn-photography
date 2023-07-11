@@ -125,6 +125,7 @@
 - I customised the new booking request template to add note or messages about certain inputs when the user is requesting a booking
 - Added in some validation to check if the booking date is after the due date, and if it is before the due date then a message is displayed to the user
 - Added in a function to handle the djando validation errors in the NewBooking and Edit Booking class, so if a validation error is picked up, the error is returned in a humand readable message that displays on the screen for 5 seconds
+- Used the same function that I used for handling validation errors in the NewBooking & Edit Booking classes, to handle validation errors in the NewTodo & EditTodo views
 
 ### Future Developments
 
@@ -184,6 +185,7 @@
 - I was having an issue when trying to confirm the deletion of a todo item, and was getting the error "as_view() takes 1 positional argument but 2 were given", and after reading a bit and looking on stack overflow, I realised I was missing the parentheses at the end of the as_view(), so I added them and this fixed the issue
 - My setTimeout function was not working correctly, as it was not dismissing the messages, and still had to be done manually and and after looking at my console logs, I saw a console log message, which I had removed from my javascript file, was still appearing, and so tried a hard reload to clear the cache and that solved the issue
 - Had an issue that when trying to edit a booking and get it to check the database for any existing bookings if the user trys to edit the date, so that there cannot be more than one booking in a day, but the if statement was always seeing a False value and so the code in the if statement code block was being missed even when the date had changed. After using some print statements, I found that it was because both the edited date and the booking date were the same, so I stored the original booking date in a variable before the form is validated, and used that variable in my if statement, and that fixed the issue
+- Had an issue with trying to submit the Todo item form with an error when testing the validation handling function I had in place, but it seemed to not be finding a slug and id for the reverse match but I realised after my trials of moving the slug and id assigned variables, that it was not seeing the slug and id still as I had not included the booking variable with the relevant slug & id in my context for my view that was being rendered. So once I added the booking variable into my context of my view, it worked
 
 ### Validator Testing
 
@@ -196,7 +198,6 @@
 ### Unresolved Bugs
 
 - I have an issue with the cancel button, that it is not responsive on the first click, but only on the 2nd click, so need to look into this and correct
-- Have an issue with trying to submit the Todo item form with an error when testing the validation handling, but it seems to not be finding a slug and id for the reverse match but not sure why as it should render back to the new_todo.html template. It needs more looking into
 
 ## Credits
 
