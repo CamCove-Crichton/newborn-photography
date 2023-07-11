@@ -230,9 +230,7 @@ class EditBooking(LoginRequiredMixin, generic.ListView):
             messages.success(request, "Session booking successfully updated")
             return redirect('bookings')
         else:
-            # Display error message
-            # messages.error(
-            #     request, "Invalid form data, please check your inputs")
+            # Display error messages
             handle_form_validation_errors(request, form)
             return render(request, "edit_booking.html", context)
 
@@ -318,14 +316,14 @@ class NewTodo(LoginRequiredMixin, generic.ListView):
 
         form = TodoForm(request.POST)
 
+        # Get the booking related to the todo item
+        booking_slug = request.POST['slug']
+        booking_id = request.POST['id']
+        booking = get_object_or_404(
+            Booking, slug=booking_slug, id=booking_id)
+
         if form.is_valid():
             todo_item = form.save(commit=False)
-
-            # Get the booking related to the todo item
-            booking_slug = request.POST['slug']
-            booking_id = request.POST['id']
-            booking = get_object_or_404(
-                Booking, slug=booking_slug, id=booking_id)
 
             # Set the booking_id and slug for the todo item
             todo_item.booking_id = booking
@@ -337,14 +335,14 @@ class NewTodo(LoginRequiredMixin, generic.ListView):
 
             return redirect('booking_detail', slug=booking_slug, id=booking_id)
         else:
-            # Display error message
-            messages.error(
-                request, "Invalid form data, please check your inputs")
+            # Display error messages
+            handle_form_validation_errors(request, form)
             return render(
                 request,
                 "new_todo.html",
                 {
-                    "form": form
+                    "form": form,
+                    "booking": booking,
                 },
             )
 
@@ -405,9 +403,12 @@ class EditTodo(LoginRequiredMixin, generic.ListView):
 
         todo_id = kwargs['id']
         todo_item = get_object_or_404(Todo, id=todo_id)
+        booking = todo_item.booking_id
         form = TodoForm(instance=todo_item)
         context = {
-            "form": form
+            "form": form,
+            "booking_slug": booking.slug,
+            "booking_id": booking.id,
         }
 
         update_todo = TodoForm(
@@ -429,9 +430,10 @@ class EditTodo(LoginRequiredMixin, generic.ListView):
 
             return redirect('booking_detail', slug=booking_slug, id=booking_id)
         else:
-            # Display error message
-            messages.error(
-                request, "Invalid form data, please check your inputs")
+            # Display error messages
+            # messages.error(
+            #     request, "Invalid form data, please check your inputs")
+            handle_form_validation_errors(request, update_todo)
             return render(request, "edit_todo.html", context)
 
 
