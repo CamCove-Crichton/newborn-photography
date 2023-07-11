@@ -124,6 +124,7 @@
 - Added in the ability to allow users to be able to have confirmed appointments without the need for the Admin to approve, by having it check the database for any existing appointments on the day, and if no appointments exist, then the appointment is booked in and the status is changed to confirmed, and this is the same if a user tries to edit a booking date, and if there is a booking in the system already, another one cannot be booked for the same day and a message is displayed to ask the user to selected another date
 - I customised the new booking request template to add note or messages about certain inputs when the user is requesting a booking
 - Added in some validation to check if the booking date is after the due date, and if it is before the due date then a message is displayed to the user
+- Added in a function to handle the djando validation errors in the NewBooking and Edit Booking class, so if a validation error is picked up, the error is returned in a humand readable message that displays on the screen for 5 seconds
 
 ### Future Developments
 
@@ -195,6 +196,7 @@
 ### Unresolved Bugs
 
 - I have an issue with the cancel button, that it is not responsive on the first click, but only on the 2nd click, so need to look into this and correct
+- Have an issue with trying to submit the Todo item form with an error when testing the validation handling, but it seems to not be finding a slug and id for the reverse match but not sure why as it should render back to the new_todo.html template. It needs more looking into
 
 ## Credits
 
@@ -470,6 +472,20 @@
 ```python
 {
     if not validate_booking_date(self, booking_date, due_date):
+}
+```
+
+```python
+{
+    def handle_form_validation_errors(request, form):
+    """
+    A function to handle any errors thrown when a form is validated and returns
+    errors, but will display in a human readable format using djamgo messages
+    """
+    for field, errors in form.errors.items():
+        for error in errors:
+            messages.error(
+                request, f"Invalid input in the {field} field. {error}")
 }
 ```
 
