@@ -12,7 +12,7 @@ from django.utils.decorators import method_decorator
 from django.contrib import messages
 
 from datetime import datetime
-from .utils.booking_utils import validate_booking_date
+from .utils.booking_utils import validate_booking_date, handle_form_validation_errors
 
 
 # Assitance from code institutes I think therefore I blog walkthrough
@@ -104,9 +104,10 @@ class NewBooking(LoginRequiredMixin, generic.ListView):
         # Assitance from code institutes I think therefore I blog walkthrough
         # tutorials & ChatGpt
         if new_booking_request.is_valid():
-            # Validate booking date is not before due date
             booking_date = new_booking_request.cleaned_data['booking_date']
             due_date = new_booking_request.cleaned_data['babys_due_date']
+
+            # Validate booking date is not before due date
             if not validate_booking_date(self, booking_date, due_date):
                 messages.error(
                     request, "Invalid date. Booking date cannot be before the due date.")
@@ -145,9 +146,8 @@ class NewBooking(LoginRequiredMixin, generic.ListView):
                     request, "Session booking successfully requested")
                 return redirect('bookings')
         else:
-            # Display error message
-            messages.error(
-                request, "Invalid form data, please check your inputs")
+            # Display error messages
+            handle_form_validation_errors(request, new_booking_request)
             return render(
                 request,
                 "new_booking.html",
@@ -231,8 +231,9 @@ class EditBooking(LoginRequiredMixin, generic.ListView):
             return redirect('bookings')
         else:
             # Display error message
-            messages.error(
-                request, "Invalid form data, please check your inputs")
+            # messages.error(
+            #     request, "Invalid form data, please check your inputs")
+            handle_form_validation_errors(request, form)
             return render(request, "edit_booking.html", context)
 
 
