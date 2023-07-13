@@ -1,0 +1,6 @@
+{
+    "html.format.templating": false,
+    "prettier.htmlWhitespaceSensitivity": "strict",
+    "prettier.enable": true,
+    "html.format.enable": false
+}

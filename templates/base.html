@@ -3,146 +3,186 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-        content="A newborn photography hub for clients to book, view, change or cancel appointments online">
-    <meta keywords="newborn, newborn photography, photogrphy booking, booking, photographer, newborn photographer">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="A newborn photography hub for clients to book, view, change or cancel appointments online"
+    />
+    <meta
+      keywords="newborn, newborn photography, photogrphy booking, booking, photographer, newborn photographer"
+    />
 
     <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-        href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&family=Simonetta:ital,wght@0,400;0,900;1,400;1,900&display=swap"
-        rel="stylesheet">
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&family=Simonetta:ital,wght@0,400;0,900;1,400;1,900&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- Font Awesome -->
-    <script src="https://kit.fontawesome.com/c1b12b8cf9.js" crossorigin="anonymous"></script>
+    <script
+      src="https://kit.fontawesome.com/c1b12b8cf9.js"
+      crossorigin="anonymous"
+    ></script>
 
     <!-- Bootstrap for CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous"
+    />
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/style.css" />
 
     <title>Newborn Photography Hub</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <header>
-
-        <!-- Logo, signup/login and navigation -->
-        <div>
-            <a href="/">
-                <h1>
-                    Newborn Photography Hub
-                </h1>
-            </a>
-        </div>
+      <!-- Logo, signup/login and navigation -->
+      <div class="container-fluid">
+        <a href="/">
+          <h1> Newborn Photography Hub </h1>
+        </a>
+      </div>
+      <!-- Assitance from code institutes I think therefore I blog walkthrough tutorials -->
+      <div role="navigation">
+        <ul>
+          {% if user.is_authenticated %}
+          <!-- Assistance from code institutes Hello Django walkthrough tutorials -->
+          <li>
+            <a href="#">{{ user.first_name }}</a>
+          </li>
+          <li>
+            <a href="{% url 'account_logout' %}">Logout</a>
+          </li>
+          {% else %}
+          <li>
+            <a href="{% url 'account_signup' %}">Signup</a>
+          </li>
+          <li>
+            <a href="{% url 'account_login' %}">Login</a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+      <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <!-- Assitance from code institutes I think therefore I blog walkthrough tutorials -->
-        <div>
-            <ul>
-                {% if user.is_authenticated %}
-                <!-- Assistance from code institutes Hello Django walkthrough tutorials -->
-                <li>
-                    <a href="#">{{ user.first_name }}</a>
-                </li>
-                <li>
-                    <a href="{% url 'account_logout' %}">Logout</a>
-                </li>
-                {% else %}
-                <li>
-                    <a href="{% url 'account_signup' %}">Signup</a>
-                </li>
-                <li>
-                    <a href="{% url 'account_login' %}">Login</a>
-                </li>
-                {% endif %}
+        <!-- Site Navigation -->
+        <div class="container-fluid">
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a href="{% url 'home' %}" class="nav-link">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Blogs</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Gallery</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Contact</a>
+              </li>
+              {% if user.is_authenticated %} {% if user.is_superuser %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'admin_panel' %}"
+                  >Client Bookings</a
+                >
+              </li>
+              {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'bookings' %}">Bookings</a>
+              </li>
+              {% endif %} {% endif %}
             </ul>
+          </div>
         </div>
-        <nav>
-            <!-- Assitance from code institutes I think therefore I blog walkthrough tutorials -->
-            <!-- Site Navigation -->
-            <div>
-                <ul>
-                    <li>
-                        <a href="/">Home</a>
-                    </li>
-                    <li>
-                        <a href="#">Blogs</a>
-                    </li>
-                    <li>
-                        <a href="#">Gallery</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact</a>
-                    </li>
-                    {% if user.is_authenticated %}
-                    {% if user.is_superuser %}
-                    <li>
-                        <a href="{% url 'admin_panel' %}">Client Bookings</a>
-                    </li>
-                    {% else %}
-                    <li>
-                        <a href="{% url 'bookings' %}">Bookings</a>
-                    </li>
-                    {% endif %}
-                    {% endif %}
-                </ul>
+      </nav>
+
+      <!-- Assitance from code institutes I think therefore I blog walkthrough tutorials -->
+      <!-- Messages -->
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 offset-md-2">
+            {% for message in messages %}
+            <div
+              class="alert {{ message.tags }} alert-dismissible fade show"
+              id="msg"
+              role="alert"
+            >
+              {{ message | safe }}
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Close"
+              >
+              </button>
             </div>
-        </nav>
-
-        <!-- Assitance from code institutes I think therefore I blog walkthrough tutorials -->
-        <!-- Messages -->
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8 offset-md-2">
-                    {% for message in messages %}
-                    <div class="alert {{ message.tags }} alert-dismissible fade show" id="msg" role="alert">
-                        {{ message | safe }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-
-                        </button>
-                    </div>
-
-                    {% endfor %}
-                </div>
-            </div>
+            {% endfor %}
+          </div>
         </div>
+      </div>
     </header>
 
     <!-- Assitance from code institutes I think therefore I blog walkthrough tutorials -->
     <main>
-        {% block content %}
-        <!-- Main content goes here -->
-        {% endblock content %}
+      {% block content %}
+      <!-- Main content goes here -->
+      {% endblock content %}
     </main>
 
     <!-- Footer with social links -->
     <footer>
-        <div>
-            <a href="https://en-gb.facebook.com/"><i class="fa-brands fa-facebook"></i></a>
-            <a href="https://www.instagram.com/"><i class="fa-brands fa-square-instagram"></i></a>
-            <a href="https://twitter.com/"><i class="fa-brands fa-square-twitter"></i></a>
-            <a href="https://www.linkedin.com/"><i class="fa-brands fa-linkedin"></i></a>
-        </div>
+      <div>
+        <a href="https://en-gb.facebook.com/"
+          ><i class="fa-brands fa-facebook"></i
+        ></a>
+        <a href="https://www.instagram.com/"
+          ><i class="fa-brands fa-square-instagram"></i
+        ></a>
+        <a href="https://twitter.com/"
+          ><i class="fa-brands fa-square-twitter"></i
+        ></a>
+        <a href="https://www.linkedin.com/"
+          ><i class="fa-brands fa-linkedin"></i
+        ></a>
+      </div>
     </footer>
 
     <!-- jQuery CDN Link -->
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
-        integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.7.0.min.js"
+      integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+      crossorigin="anonymous"
+    ></script>
 
     <!-- Boostrap for JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
-        crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+      crossorigin="anonymous"
+    ></script>
 
     <!-- Custom JavaScript -->
     <script type="text/javascript" src="/static/js/script.js"></script>
-</body>
-
+  </body>
 </html>

@@ -25,3 +25,17 @@ setTimeout(function () {
     let alert = new bootstrap.Alert(messages);
     alert.close();
 }, 5000);
+
+// Assistance from ChatpGpt & Code Institutes JQuery events module
+$(document).ready(function () {
+    $('.nav-link').click(function () {
+        // Remove the active class from all navigation elements
+        $('.nav-link').removeClass('active').removeAttr('aria-current');
+
+        // Add the active class and set aria-current="page" to the clicked navigation element
+        $(this).addClass('active').attr('aria-current', 'page');
+
+        // Log a message to the console
+        console.log('Navigation element clicked!');
+    });
+});
