@@ -69,6 +69,16 @@ class Home(View):
         return render(request, "index.html")
 
 
+class Blogs(View):
+    """
+    The Blogs class returns the render of the blogs.html file to return to the
+    blogs page
+    """
+
+    def get(self, request):
+        return render(request, "blogs.html")
+
+
 class NewBooking(LoginRequiredMixin, generic.ListView):
     """
     The NewBooking class is to create a view for users to fill in a form and
