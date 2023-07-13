@@ -24,4 +24,5 @@ urlpatterns = [
     path('delete_todo/<slug:slug>/<int:id>/',
          views.DeleteTodo.as_view(), name='delete_todo'),
     path('blogs/', views.Blogs.as_view(), name='blogs'),
+    path('contact/', views.Contact.as_view(), name='contact'),
 ]

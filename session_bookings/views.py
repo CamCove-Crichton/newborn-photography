@@ -79,6 +79,16 @@ class Blogs(View):
         return render(request, "blogs.html")
 
 
+class Contact(View):
+    """
+    The Contact class returns the render of the contact.html file to return to the
+    contact page
+    """
+
+    def get(self, request):
+        return render(request, "contact.html")
+
+
 class NewBooking(LoginRequiredMixin, generic.ListView):
     """
     The NewBooking class is to create a view for users to fill in a form and
