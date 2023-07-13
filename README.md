@@ -126,6 +126,7 @@
 - Added in some validation to check if the booking date is after the due date, and if it is before the due date then a message is displayed to the user
 - Added in a function to handle the djando validation errors in the NewBooking and Edit Booking class, so if a validation error is picked up, the error is returned in a humand readable message that displays on the screen for 5 seconds
 - Used the same function that I used for handling validation errors in the NewBooking & Edit Booking classes, to handle validation errors in the NewTodo & EditTodo views
+- Began adding content to the rest of the site, like the home page, the blog page and the contact page. All content I was given permission to use from Jo Cove Photography, which I have listed in the credits section
 
 ### Future Developments
 
@@ -138,6 +139,7 @@
 - To allow users the ability to like or favorite images in the gallery as poses they would like to try achieve in their photoshoot session
 - To allow users to customise their profile, like adding their address and contact number and a profile picture
 - If forms return with invalid input messages, I would like to get the form to remain with prepopulated fields that the user already input to make for a better UX
+- To expand on the types of photoshoots offered, and not just newborn shoots but also cake smash shoots, maternity shoots and family shoots
 
 ### Wireframes & Database Designs
 
@@ -198,6 +200,7 @@
 ### Unresolved Bugs
 
 - I have an issue with the cancel button, that it is not responsive on the first click, but only on the 2nd click, so need to look into this and correct
+- Have an issue with trying to utilise the bootstrap "active" class and attribute "aria-current='page'" in my nav bar, using JQuery and some control statements, but I keep getting an error about a closing endif tag, so I have temporarily removed it uo continue pushing forward, but I need to come back to it
 
 ## Credits
 
@@ -1087,6 +1090,8 @@ urlpatterns = [
 ```
 
 ### Other Credits
+
+[Jo Cove Photography](https://jocovephotography.co.uk/) - Used for all the content including images - permission given by Jo Cove Photography
 
 [Code Institute](https://codeinstitute.net/) - Used for the below assistance
 
