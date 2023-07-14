@@ -50,7 +50,7 @@
         <div class="row">
           <div class="col-md-8">
             <a href="/">
-              <h1> Newborn Photography Hub </h1>
+              <h1 class="pt-2 pr-2"> Newborn Photography Hub </h1>
             </a>
           </div>
 
@@ -59,17 +59,17 @@
             <ul>
               {% if user.is_authenticated %}
               <!-- Assistance from code institutes Hello Django walkthrough tutorials -->
-              <li class="nav-list">
-                <a href="#">{{ user.first_name }}</a>
+              <li class="nav-list nav-list d-flex justify-content-end">
+                <a href="#">{{ user.username }}</a>
               </li>
-              <li class="nav-list">
+              <li class="mt-2 nav-list d-flex justify-content-end">
                 <a href="{% url 'account_logout' %}">Logout</a>
               </li>
               {% else %}
-              <li class="nav-list">
+              <li class="mt-2 nav-list d-flex justify-content-end">
                 <a href="{% url 'account_signup' %}">Signup</a>
               </li>
-              <li class="nav-list">
+              <li class="mt-1 nav-list d-flex justify-content-end">
                 <a href="{% url 'account_login' %}">Login</a>
               </li>
               {% endif %}
