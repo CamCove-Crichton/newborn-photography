@@ -15,3 +15,12 @@ h6 {
     font-family: "Oswald", Tahoma, sans-serif;
     font-weight: 400;
 }
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.nav-list {
+    list-style: none;
+}

@@ -56,6 +56,7 @@ class Todo(models.Model):
         return f"Item: {self.title}, Complete by: {self.due_date}"
 
 
+# To be used as part of the future developments of the project
 class PersonalInfo(models.Model):
     client_id = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="client_details")
