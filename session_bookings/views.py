@@ -81,12 +81,22 @@ class Blogs(View):
 
 class Contact(View):
     """
-    The Contact class returns the render of the contact.html file to return to the
-    contact page
+    The Contact class returns the render of the contact.html file to return to
+    the contact page
     """
 
     def get(self, request):
         return render(request, "contact.html")
+
+
+class Gallery(View):
+    """
+    The Gallery class returns the render of the gallery.html file to return to
+    the gallery page
+    """
+
+    def get(self, request):
+        return render(request, "gallery.html")
 
 
 class NewBooking(LoginRequiredMixin, generic.ListView):
