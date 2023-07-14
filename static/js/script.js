@@ -34,8 +34,5 @@ $(document).ready(function () {
 
         // Add the active class and set aria-current="page" to the clicked navigation element
         $(this).addClass('active').attr('aria-current', 'page');
-
-        // Log a message to the console
-        console.log('Navigation element clicked!');
     });
 });

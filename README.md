@@ -127,6 +127,7 @@
 - Added in a function to handle the djando validation errors in the NewBooking and Edit Booking class, so if a validation error is picked up, the error is returned in a humand readable message that displays on the screen for 5 seconds
 - Used the same function that I used for handling validation errors in the NewBooking & Edit Booking classes, to handle validation errors in the NewTodo & EditTodo views
 - Began adding content to the rest of the site, like the home page, the blog page and the contact page. All content I was given permission to use from Jo Cove Photography, which I have listed in the credits section
+- Continued styling using Bootstrap as well as some custom CSS
 
 ### Future Developments
 
@@ -188,6 +189,7 @@
 - My setTimeout function was not working correctly, as it was not dismissing the messages, and still had to be done manually and and after looking at my console logs, I saw a console log message, which I had removed from my javascript file, was still appearing, and so tried a hard reload to clear the cache and that solved the issue
 - Had an issue that when trying to edit a booking and get it to check the database for any existing bookings if the user trys to edit the date, so that there cannot be more than one booking in a day, but the if statement was always seeing a False value and so the code in the if statement code block was being missed even when the date had changed. After using some print statements, I found that it was because both the edited date and the booking date were the same, so I stored the original booking date in a variable before the form is validated, and used that variable in my if statement, and that fixed the issue
 - Had an issue with trying to submit the Todo item form with an error when testing the validation handling function I had in place, but it seemed to not be finding a slug and id for the reverse match but I realised after my trials of moving the slug and id assigned variables, that it was not seeing the slug and id still as I had not included the booking variable with the relevant slug & id in my context for my view that was being rendered. So once I added the booking variable into my context of my view, it worked
+- Had an issue with trying to utilise the bootstrap "active" class in my nav bar, using JQuery and some control statements, but I keep getting an error about a closing endif tag, as I was also trying to assign the attribute "aria-current='page'" using control statements, so I removed that and just used the active class with control statements and that resolved the bug
 
 ### Validator Testing
 
@@ -200,7 +202,7 @@
 ### Unresolved Bugs
 
 - I have an issue with the cancel button, that it is not responsive on the first click, but only on the 2nd click, so need to look into this and correct
-- Have an issue with trying to utilise the bootstrap "active" class and attribute "aria-current='page'" in my nav bar, using JQuery and some control statements, but I keep getting an error about a closing endif tag, so I have temporarily removed it uo continue pushing forward, but I need to come back to it
+- I do still need to figured out how to add the attribute "aria-current='page'" for each nav element when it is clicked for better accessibility
 
 ## Credits
 
