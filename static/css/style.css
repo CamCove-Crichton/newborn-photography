@@ -1,4 +1,4 @@
-/* General Styling */
+/* ---------------------------------- General Styling */
 body {
     font-family: "Simonetta", Tahoma,
         sans-serif;
@@ -23,4 +23,30 @@ a {
 
 .nav-list {
     list-style: none;
+}
+
+/* ---------------------------------- Footer */
+.footer-icon {
+    font-size: 60px;
+    margin: 15px;
+}
+
+.footer-ht {
+    height: 300px;
+}
+
+.font-color {
+    color: #D3D3D3;
+}
+
+/* ---------------------------------- Media queries */
+/* Fore screens 575px and above */
+@media screen and (min-width: 575px) {
+    .footer-ht {
+        height: 150px;
+    }
+
+    #footer-heading {
+        font-size: 40px;
+    }
 }
