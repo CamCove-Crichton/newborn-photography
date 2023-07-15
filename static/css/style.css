@@ -40,7 +40,7 @@ a {
 }
 
 /* ---------------------------------- Media queries */
-/* Fore screens 575px and above */
+/* For screens 575px and above */
 @media screen and (min-width: 575px) {
     .footer-ht {
         height: 150px;
@@ -50,3 +50,19 @@ a {
         font-size: 40px;
     }
 }
+
+/* For screen 914px and above */
+/* @media screen and (min-width: 914px) {
+    .container-image {
+        width: 457px;
+        height: 350px;
+        overflow: hidden;
+    }
+
+    .container-image img {
+        max-width: 100%;
+        max-height: 100%;
+        display: block;
+        margin: auto;
+    }
+} */
