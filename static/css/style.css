@@ -25,6 +25,11 @@ a {
     list-style: none;
 }
 
+/* ---------------------------------- Borders */
+.border-slim {
+    border: solid 1px black;
+}
+
 /* ---------------------------------- Footer */
 .footer-icon {
     font-size: 60px;
