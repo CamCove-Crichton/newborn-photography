@@ -4,72 +4,87 @@
 <!-- Assitance from code institutes I think therefore I blog walkthrough tutorials -->
 {% block content %}
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-md-3">
-            <a href="{% url 'new_booking' %}" type="button" class="btn btn-success">New Booking</a>
-        </div>
+  <div class="row">
+    <div class="col-md-3">
+      <a href="{% url 'new_booking' %}" type="button" class="btn btn-success"
+        >New Booking</a
+      >
     </div>
+  </div>
 </div>
 <div class="container-fluid">
-    <div class="row">
-        <!-- Bookings column -->
-        <div class="col-12 mt-2">
-            <div class="row">
-                {% for booking in bookings %}
-                <div class="col-md-4">
-                    <div class="card mb-2">
-                        <div class="card-body">
-                            <div class="image-container">
-                                {% if "placeholder" in booking.featured_image.url %}
-                                <img src="https://res.cloudinary.com/dvvi4mkst/image/upload/v1686808069/baby_hug4bo.jpg"
-                                    alt="default booking image" class="card-image-top img-fluid">
-                                {% else %}
-                                <img src="{{ booking.featured_image.url }}" alt="custom booking image"
-                                    class="card-image-top img-fluid">
-                                {% endif %}
-                                <div class="card-text">
-                                    <a href="{% url 'booking_detail' booking.slug booking.id %}">
-                                        <h4>{{ booking.babys_name}}'s Newborn Shoot</h4>
-                                    </a>
-                                    <p>Client: {{ booking.client }}</p>
-                                    <p>Booking: {{ booking.booking_date }}</p>
-                                    {% if booking.location == 1 %}
-                                    <p>Location: Home</p>
-                                    {% else %}
-                                    <p>Location: Studio</p>
-                                    {% endif %}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {% if forloop.counter|divisibleby:3 %}
-            </div>
-            <div class="row">
+  <div class="row">
+    <!-- Bookings column -->
+    <div class="col-12 mt-2">
+      <div class="row">
+        {% for booking in bookings %}
+        <div class="col-md-4">
+          <div class="card mb-2">
+            <div class="card-body">
+              <div>
+                {% if "placeholder" in booking.featured_image.url %}
+                <img
+                  src="https://res.cloudinary.com/dvvi4mkst/image/upload/v1686808069/baby_hug4bo.jpg"
+                  alt="default booking image"
+                  class="card-image-top img-fluid"
+                />
+                {% else %}
+                <img
+                  src="{{ booking.featured_image.url }}"
+                  alt="custom booking image"
+                  class="card-image-top img-fluid"
+                />
                 {% endif %}
-                <!-- Assitance from code institutes Hello Django walkthrough tutorials -->
-                {% empty %}
-                <div class="container-fluid">
-                    <p>You currently have no bookings</p>
+                <div class="card-text">
+                  <a href="{% url 'booking_detail' booking.slug booking.id %}">
+                    <h4>{{ booking.babys_name}}'s Newborn Shoot</h4>
+                  </a>
+                  <p>Client: {{ booking.client }}</p>
+                  <p>Booking: {{ booking.booking_date }}</p>
+                  {% if booking.location == 1 %}
+                  <p>Location: Home</p>
+                  {% else %}
+                  <p>Location: Studio</p>
+                  {% endif %}
                 </div>
-                {% endfor %}
+              </div>
             </div>
+          </div>
         </div>
-    </div>
-    {% if is_paginated %}
-    <nav aria-label="Page navigation">
-        <ul class="pagination justify-content-center">
-            {% if page_obj.has_previous %}
-            <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; PREV </a></li>
-            {% endif %}
-            {% if page_obj.has_next %}
-            <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
 
-            {% endif %}
-        </ul>
-    </nav>
-    {% endif %}
+        {% if forloop.counter|divisibleby:3 %}
+      </div>
+      <div class="row">
+        {% endif %}
+        <!-- Assitance from code institutes Hello Django walkthrough tutorials -->
+        {% empty %}
+        <div class="container-fluid">
+          <p>You currently have no bookings</p>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  {% if is_paginated %}
+  <nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center">
+      {% if page_obj.has_previous %}
+      <li
+        ><a href="?page={{ page_obj.previous_page_number }}" class="page-link"
+          >&laquo; PREV
+        </a></li
+      >
+      {% endif %} {% if page_obj.has_next %}
+      <li
+        ><a href="?page={{ page_obj.next_page_number }}" class="page-link">
+          NEXT &raquo;</a
+        ></li
+      >
+
+      {% endif %}
+    </ul>
+  </nav>
+  {% endif %}
 </div>
 
 {% endblock content %}
