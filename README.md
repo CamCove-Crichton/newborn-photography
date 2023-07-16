@@ -130,6 +130,7 @@
 - Continued styling the base.html template using Bootstrap as well as creating some custom CSS in the style.css file, along with media queries for responsive layouts
 - Added images and styling to the home page - index.html template
 - Added images and styling to the blogs and contact pages
+- Added images and styling to the gallery page
 
 ### Future Developments
 
@@ -495,6 +496,32 @@
         for error in errors:
             messages.error(
                 request, f"Invalid input in the {field} field. {error}")
+}
+```
+
+```css
+{
+    .gallery .col-lg-4,
+.gallery .col-md-6,
+.gallery .col-sm-6 {
+    padding: 10px;
+}
+
+.image-container {
+    position: relative;
+    /* This sets the height to be equal to the width */
+    padding-bottom: 100%;
+    overflow: hidden;
+}
+
+.image-container img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Maintain the aspect ratio and fill the container */
+    object-fit: cover;
 }
 ```
 
