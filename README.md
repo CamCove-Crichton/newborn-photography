@@ -129,6 +129,7 @@
 - Began adding content to the rest of the site, like the home page, the blog page and the contact page. All content I was given permission to use from Jo Cove Photography, which I have listed in the credits section
 - Continued styling the base.html template using Bootstrap as well as creating some custom CSS in the style.css file, along with media queries for responsive layouts
 - Added images and styling to the home page - index.html template
+- Added images and styling to the blogs and contact pages
 
 ### Future Developments
 
