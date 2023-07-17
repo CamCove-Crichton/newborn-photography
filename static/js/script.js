@@ -35,4 +35,18 @@ $(document).ready(function () {
         // Add the active class and set aria-current="page" to the clicked navigation element
         $(this).addClass('active').attr('aria-current', 'page');
     });
+
+    // Show/hide the scroll-back-to-top button based on scroll position
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 100) {
+            $('#scrollBackToTopBtn').fadeIn();
+        } else {
+            $('#scrollBackToTopBtn').fadeOut();
+        }
+    });
+
+    // Scroll to the top when button is clicked
+    $('#scrollBackToTopBtn').click(function () {
+        $('html, body').animate({ scrollTop: 0 }, 'slow');
+    });
 });

@@ -72,6 +72,25 @@ a {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
 }
 
+/* Return to the top button style */
+#scrollBackToTopBtn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: none;
+    width: 30px;
+    height: 30px;
+    border: none;
+    color: #D3D3D3;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+#scrollBackToTopBtn:focus {
+    outline: none;
+}
+
 /* ---------------------------------- Footer */
 .footer-icon {
     font-size: 60px;
