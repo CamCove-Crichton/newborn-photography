@@ -1,53 +1,67 @@
 <!-- Assitance from code institutes I think therefore I blog walkthrough tutorials -->
-{% extends "base.html" %}
-
-{% block content %}
+{% extends "base.html" %} {% block content %}
 <div>
-    <h1>Booking Details</h1>
+  <h1>Booking Details</h1>
 </div>
 <ul>
-    <!-- General Details -->
-    <li>Booking Name: {{ booking.booking_name }}</li>
-    <li>Date: {{ booking.booking_date }}</li>
-    <li>Time: {{ booking.booking_time }}</li>
-    <li>Baby's Name: {{ booking.babys_name }}</li>
-    <li>Baby's Due Date: {{booking.babys_due_date }}</li>
+  <!-- General Details -->
+  <li>Booking Name: {{ booking.booking_name }}</li>
+  <li>Date: {{ booking.booking_date }}</li>
+  <li>Time: {{ booking.booking_time }}</li>
+  <li>Baby's Name: {{ booking.babys_name }}</li>
+  <li>Baby's Due Date: {{booking.babys_due_date }}</li>
 
-    <!-- Baby's Gender -->
-    {% if booking.babys_gender == 1 %}
-    <li>Baby's Gender: Male </li>
-    {% elif booking.babys_gender == 2 %}
-    <li>Baby's Gender: Female </li>
+  <!-- Baby's Gender -->
+  {% if booking.babys_gender == 1 %}
+  <li>Baby's Gender: Male </li>
+  {% elif booking.babys_gender == 2 %}
+  <li>Baby's Gender: Female </li>
+  {% else %}
+  <li>Baby's Gender: Unknown </li>
+  {% endif %}
+
+  <!-- Booking Location -->
+  {% if booking.location == 1 %}
+  <li>Location: Home</li>
+  {% else %}
+  <li>Location: Studio</li>
+  {% endif %}
+
+  <!-- Requests & How you found me -->
+  <li>Special Requests: {{ booking.special_requests|safe }}</li>
+  <li>How You Found Me: {{ booking.how_you_found_me }}</li>
+
+  <!-- Media Consent -->
+  {% if booking.consent == 1 %}
+  <li>Consent to use images: Yes</li>
+  {% else %}
+  <li>Consent to use images: No</li>
+  {% endif %}
+
+  <li
+    >Uploaded Image:
+    <!-- {{ booking.featured_image }} -->
+    {% if "placeholder" in booking.featured_image.url %}
+    <img
+      src="https://res.cloudinary.com/dvvi4mkst/image/upload/v1689588558/edited_49_3_1_sn6m0q.jpg"
+      alt="default booking image"
+      class="card-image img-fluid"
+    />
     {% else %}
-    <li>Baby's Gender: Unknown </li>
+    <img
+      src="{{ booking.featured_image.url }}"
+      alt="custom booking image"
+      class="card-image img-fluid"
+    />
     {% endif %}
+  </li>
 
-    <!-- Booking Location -->
-    {% if booking.location == 1 %}
-    <li>Location: Home</li>
-    {% else %}
-    <li>Location: Studio</li>
-    {% endif %}
-
-    <!-- Requests & How you found me -->
-    <li>Special Requests: {{ booking.special_requests|safe }}</li>
-    <li>How You Found Me: {{ booking.how_you_found_me }}</li>
-
-    <!-- Media Consent -->
-    {% if booking.consent == 1 %}
-    <li>Consent to use images: Yes</li>
-    {% else %}
-    <li>Consent to use images: No</li>
-    {% endif %}
-
-    <li>Uploaded Image: {{ booking.featured_image }}</li>
-
-    <!-- Booking Status -->
-    {% if booking.status == 1 %}
-    <li>Booking Status: Confirmed</li>
-    {% else %}
-    <li>Booking Status: Awaiting Confirmation</li>
-    {% endif %}
+  <!-- Booking Status -->
+  {% if booking.status == 1 %}
+  <li>Booking Status: Confirmed</li>
+  {% else %}
+  <li>Booking Status: Awaiting Confirmation</li>
+  {% endif %}
 </ul>
 
 <!-- Admin Todo List -->
@@ -55,76 +69,110 @@
 <h3>Todo Items:</h3>
 {% for todo in todos %}
 <a href="{% url 'todo_detail' slug=todo.slug id=todo.id %}">
-    <div class="row rounded border border-dark-subtle">
-        <div class="col-md-3">
-            <h6>Item Name:</h6>
-            {% if todo.completed == True %}
-            <p><s>{{ todo.title }}</s></p>
-            {% else %}
-            <p>{{ todo.title }}</p>
-            {% endif %}
-        </div>
-        <div class="col-md-3">
-            <h6>Due Date:</h6>
-            {% if todo.completed == True %}
-            <p><s>{{ todo.due_date }}</s></p>
-            {% else %}
-            <p>{{ todo.due_date }}</p>
-            {% endif %}
-        </div>
-        <div class="col-md-3">
-            <h6>Status</h6>
-            {% if todo.completed == True %}
-            <p>Done</p>
-            {% else %}
-            <p>In Progress</p>
-            {% endif %}
-        </div>
+  <div class="row rounded border border-dark-subtle">
+    <div class="col-md-3">
+      <h6>Item Name:</h6>
+      {% if todo.completed == True %}
+      <p><s>{{ todo.title }}</s></p>
+      {% else %}
+      <p>{{ todo.title }}</p>
+      {% endif %}
     </div>
+    <div class="col-md-3">
+      <h6>Due Date:</h6>
+      {% if todo.completed == True %}
+      <p><s>{{ todo.due_date }}</s></p>
+      {% else %}
+      <p>{{ todo.due_date }}</p>
+      {% endif %}
+    </div>
+    <div class="col-md-3">
+      <h6>Status</h6>
+      {% if todo.completed == True %}
+      <p>Done</p>
+      {% else %}
+      <p>In Progress</p>
+      {% endif %}
+    </div>
+  </div>
 </a>
 {% endfor %}
 <div class="row">
-    <div class="col-md-3">
-        <a href="{% url 'new_todo' booking.slug booking.id %}" type="button" class="btn btn-primary">Add Todo</a>
-
-    </div>
+  <div class="col-md-3">
+    <a
+      href="{% url 'new_todo' booking.slug booking.id %}"
+      type="button"
+      class="btn btn-primary"
+      >Add Todo</a
+    >
+  </div>
 </div>
 {% endif %}
 
 <!-- Edit Booking -->
 <div class="row">
-    <div class="col-md-3">
-        <a href="{% url 'edit_booking' booking.slug booking.id %}" type="button" class="btn btn-success btn-lg">Edit
-            Booking</a>
-    </div>
+  <div class="col-md-3">
+    <a
+      href="{% url 'edit_booking' booking.slug booking.id %}"
+      type="button"
+      class="btn btn-success btn-lg"
+      >Edit Booking</a
+    >
+  </div>
 
-    <!-- Button trigger modal -->
-    <div class="col-md-3">
-        <button type="button" class="deleteBtn btn btn-danger btn-lg" onclick="deleteModal('#myModal2')">
-            Delete Booking
-        </button>
-    </div>
+  <!-- Button trigger modal -->
+  <div class="col-md-3">
+    <button
+      type="button"
+      class="deleteBtn btn btn-danger btn-lg elmt-trans"
+      data-target-modal="#myModal2"
+    >
+      Delete Booking
+    </button>
+  </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="confirmCancelModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="confirmCancelModalLabel">Delete Booking</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Are you sure you want to delete this booking?</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <a href="{% url 'delete_booking' booking.slug booking.id %}" type="button"
-                        class="btn btn-danger">Confirm</a>
-                </div>
-            </div>
+  <!-- Modal -->
+  <div
+    class="modal fade"
+    id="myModal2"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="confirmCancelModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="confirmCancelModalLabel"
+            >Delete Booking</h1
+          >
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
         </div>
+        <div class="modal-body">
+          <p>Are you sure you want to delete this booking?</p>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary elmt-trans"
+            data-bs-dismiss="modal"
+            >Close</button
+          >
+          <a
+            href="{% url 'delete_booking' booking.slug booking.id %}"
+            type="button"
+            class="btn btn-danger elmt-trans"
+            >Confirm</a
+          >
+        </div>
+      </div>
     </div>
+  </div>
 </div>
 
 {% endblock content %}
