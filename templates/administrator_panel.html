@@ -6,7 +6,10 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-3">
-      <a href="{% url 'new_booking' %}" type="button" class="btn btn-success"
+      <a
+        href="{% url 'new_booking' %}"
+        type="button"
+        class="btn btn-success elmt-trans mb-2"
         >New Booking</a
       >
     </div>
@@ -19,36 +22,39 @@
       <div class="row">
         {% for booking in bookings %}
         <div class="col-md-4">
-          <div class="card mb-2">
-            <div class="card-body">
-              <div>
-                {% if "placeholder" in booking.featured_image.url %}
-                <img
-                  src="https://res.cloudinary.com/dvvi4mkst/image/upload/v1686808069/baby_hug4bo.jpg"
-                  alt="default booking image"
-                  class="card-image-top img-fluid"
-                />
-                {% else %}
-                <img
-                  src="{{ booking.featured_image.url }}"
-                  alt="custom booking image"
-                  class="card-image-top img-fluid"
-                />
-                {% endif %}
-                <div class="card-text">
-                  <a href="{% url 'booking_detail' booking.slug booking.id %}">
-                    <h4>{{ booking.babys_name}}'s Newborn Shoot</h4>
-                  </a>
-                  <p>Client: {{ booking.client }}</p>
-                  <p>Booking: {{ booking.booking_date }}</p>
-                  {% if booking.location == 1 %}
-                  <p>Location: Home</p>
+          <div
+            class="card mb-2 bg-body-tertiary elmt-trans"
+            data-bs-theme="dark"
+          >
+            <a href="{% url 'booking_detail' booking.slug booking.id %}">
+              <div class="card-body">
+                <div>
+                  {% if "placeholder" in booking.featured_image.url %}
+                  <img
+                    src="https://res.cloudinary.com/dvvi4mkst/image/upload/v1686808069/baby_hug4bo.jpg"
+                    alt="default booking image"
+                    class="card-image img-fluid"
+                  />
                   {% else %}
-                  <p>Location: Studio</p>
+                  <img
+                    src="{{ booking.featured_image.url }}"
+                    alt="custom booking image"
+                    class="card-image img-fluid"
+                  />
                   {% endif %}
+                  <div class="card-text mt-3">
+                    <h4>{{ booking.babys_name}}'s Newborn Shoot</h4>
+                    <p>Client: {{ booking.client }}</p>
+                    <p>Booking: {{ booking.booking_date }}</p>
+                    {% if booking.location == 1 %}
+                    <p>Location: Home</p>
+                    {% else %}
+                    <p>Location: Studio</p>
+                    {% endif %}
+                  </div>
                 </div>
               </div>
-            </div>
+            </a>
           </div>
         </div>
 

@@ -1,65 +1,74 @@
 <!-- Assitance from code institutes I think therefore I blog walkthrough tutorials -->
-{% extends "base.html" %}
-
-{% block content %}
+{% extends "base.html" %} {% block content %}
 
 <!-- Assitance from code institutes I think therefore I blog walkthrough tutorials -->
 {% load crispy_forms_tags %}
 
 <div>
-    <h1>Edit Booking Request</h1>
+  <h1>Edit Booking Request</h1>
 </div>
 <div class="container-fluid">
-    <!-- Assistance from ChatGpt -->
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div class="form-group">
-            {{ form.booking_name|as_crispy_field }}
-            <small class="text-muted">Please enter a unique name for your baby's newborn photoshoot</small>
-        </div>
-        <div class="form-group">
-            {{ form.booking_date|as_crispy_field }}
-            <small class="text-muted">Please only enter dates as per the accepted formats: dd-mm-yy or
-                dd-mm-yyyy</small>
-        </div>
-        <div class="form-group">
-            {{ form.booking_time|as_crispy_field }}
-            <small class="text-muted">Please enter times in a 24 hour clock format, i.e. 13:00</small>
-        </div>
-        <div class="form-group">
-            {{ form.babys_due_date|as_crispy_field }}
-            <small class="text-muted">Please only enter dates as per the accepted formats: dd-mm-yy or
-                dd-mm-yyyy</small>
-        </div>
-        <div class="form-group">
-            {{ form.babys_name|as_crispy_field }}
-        </div>
-        <div class="form-group">
-            {{ form.babys_gender|as_crispy_field }}
-        </div>
-        <div class="form-group">
-            {{ form.location|as_crispy_field }}
-            <small class="text-muted">Would you like the photoshoot to take place my studio or in your home?</small>
-        </div>
-        <div class="form-group">
-            {{ form.special_requests|as_crispy_field }}
-            <small class="text-muted">Please let me know if you have anything particular in mind for your baby's
-                photoshoot</small>
-        </div>
-        <div class="form-group">
-            {{ form.how_you_found_me|as_crispy_field }}
-        </div>
-        <div class="form-group">
-            {{ form.consent|as_crispy_field }}
-            <small class="text-muted">Please let me know if I am able to use any of the images taken during the
-                photoshoot for business promotion</small>
-        </div>
-        <div class="form-group">
-            {{ form.featured_image|as_crispy_field }}
-            <small class="text-muted">You can add a custom image to your booking if you would like</small>
-        </div>
-        <button type="submit" class="btn btn-primary btn-lg">Update</button>
-    </form>
+  <!-- Assistance from ChatGpt -->
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-group">
+      {{ form.booking_name|as_crispy_field }}
+      <small class="text-muted"
+        >Please enter a unique name for your baby's newborn photoshoot</small
+      >
+    </div>
+    <div class="form-group">
+      {{ form.booking_date|as_crispy_field }}
+      <small class="text-muted"
+        >Please only enter dates as per the accepted formats: dd-mm-yy or
+        dd-mm-yyyy</small
+      >
+    </div>
+    <div class="form-group">
+      {{ form.booking_time|as_crispy_field }}
+      <small class="text-muted"
+        >Please enter times in a 24 hour clock format, i.e. 13:00</small
+      >
+    </div>
+    <div class="form-group">
+      {{ form.babys_due_date|as_crispy_field }}
+      <small class="text-muted"
+        >Please only enter dates as per the accepted formats: dd-mm-yy or
+        dd-mm-yyyy</small
+      >
+    </div>
+    <div class="form-group"> {{ form.babys_name|as_crispy_field }} </div>
+    <div class="form-group"> {{ form.babys_gender|as_crispy_field }} </div>
+    <div class="form-group">
+      {{ form.location|as_crispy_field }}
+      <small class="text-muted"
+        >Would you like the photoshoot to take place my studio or in your
+        home?</small
+      >
+    </div>
+    <div class="form-group">
+      {{ form.special_requests|as_crispy_field }}
+      <small class="text-muted"
+        >Please let me know if you have anything particular in mind for your
+        baby's photoshoot</small
+      >
+    </div>
+    <div class="form-group"> {{ form.how_you_found_me|as_crispy_field }} </div>
+    <div class="form-group">
+      {{ form.consent|as_crispy_field }}
+      <small class="text-muted"
+        >Please let me know if I am able to use any of the images taken during
+        the photoshoot for business promotion</small
+      >
+    </div>
+    <div class="form-group">
+      {{ form.featured_image|as_crispy_field }}
+      <small class="text-muted"
+        >You can add a custom image to your booking if you would like</small
+      >
+    </div>
+    <button type="submit" class="btn btn-primary btn-lg">Update</button>
+  </form>
 </div>
 
 {% endblock content %}
