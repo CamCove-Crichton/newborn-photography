@@ -4,73 +4,152 @@
 <!-- Assitance from code institutes I think therefore I blog walkthrough tutorials -->
 {% load crispy_forms_tags %}
 
-<div>
-  <h1>Edit Booking Request</h1>
-</div>
 <div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <h1 class="text-center">Edit Booking Request</h1>
+    </div>
+  </div>
+
   <!-- Assistance from ChatGpt -->
-  <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <div class="form-group">
-      {{ form.booking_name|as_crispy_field }}
-      <small class="text-muted"
-        >Please enter a unique name for your baby's newborn photoshoot</small
-      >
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+          {{ form.booking_name|as_crispy_field }}
+          <small class="text-muted"
+            >Please enter a unique name for your baby's newborn
+            photoshoot</small
+          >
+        </div>
+        <div class="form-group">
+          {{ form.booking_date|as_crispy_field }}
+          <small class="text-muted"
+            >Please only enter dates as per the accepted formats: dd-mm-yy or
+            dd-mm-yyyy</small
+          >
+        </div>
+        <div class="form-group">
+          {{ form.booking_time|as_crispy_field }}
+          <small class="text-muted"
+            >Please enter times in a 24 hour clock format, i.e. 13:00</small
+          >
+        </div>
+        <div class="form-group">
+          {{ form.babys_due_date|as_crispy_field }}
+          <small class="text-muted"
+            >Please only enter dates as per the accepted formats: dd-mm-yy or
+            dd-mm-yyyy</small
+          >
+        </div>
+        <div class="form-group"> {{ form.babys_name|as_crispy_field }} </div>
+        <div class="form-group"> {{ form.babys_gender|as_crispy_field }} </div>
+        <div class="form-group">
+          {{ form.location|as_crispy_field }}
+          <small class="text-muted"
+            >Would you like the photoshoot to take place my studio or in your
+            home?</small
+          >
+        </div>
+        <div class="form-group">
+          {{ form.special_requests|as_crispy_field }}
+          <small class="text-muted"
+            >Please let me know if you have anything particular in mind for your
+            baby's photoshoot</small
+          >
+        </div>
+        <div class="form-group">
+          {{ form.how_you_found_me|as_crispy_field }}
+        </div>
+        <div class="form-group">
+          {{ form.consent|as_crispy_field }}
+          <small class="text-muted"
+            >Please let me know if I am able to use any of the images taken
+            during the photoshoot for business promotion</small
+          >
+        </div>
+        <div class="form-group">
+          {{ form.featured_image|as_crispy_field }}
+          <small class="text-muted"
+            >You can add a custom image to your booking if you would like</small
+          >
+        </div>
+        <div class="row mt-3 justify-content-center">
+          <div class="col-4 col-md-3 col-lg-2">
+            <button type="submit" class="btn btn-primary btn-lg elmt-trans"
+              >Update</button
+            >
+          </div>
+
+          <!-- Button trigger modal -->
+          <div class="col-4 col-md-3 col-lg-2">
+            <button
+              type="button"
+              class="deleteBtn btn btn-danger btn-lg elmt-trans"
+              data-target-modal="#myModal6"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      </form>
     </div>
-    <div class="form-group">
-      {{ form.booking_date|as_crispy_field }}
-      <small class="text-muted"
-        >Please only enter dates as per the accepted formats: dd-mm-yy or
-        dd-mm-yyyy</small
-      >
+  </div>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="myModal6"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="confirmCancelModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="confirmCancelModalLabel"
+          >Cancel Booking Edit</h1
+        >
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to cancel this booking edit?</p>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary elmt-trans"
+          data-bs-dismiss="modal"
+          >Close</button
+        >
+
+        <!-- If Admin is logged in return to admin panel else normal bookings -->
+        {% if user.is_superuser %}
+        <a
+          href="{% url 'admin_panel' %}"
+          type="button"
+          class="btn btn-primary elmt-trans"
+          >Confirm</a
+        >
+        {% else %}
+        <a
+          href="{% url 'bookings' %}"
+          type="button"
+          class="btn btn-primary elmt-trans"
+          >Confirm</a
+        >
+        {% endif %}
+      </div>
     </div>
-    <div class="form-group">
-      {{ form.booking_time|as_crispy_field }}
-      <small class="text-muted"
-        >Please enter times in a 24 hour clock format, i.e. 13:00</small
-      >
-    </div>
-    <div class="form-group">
-      {{ form.babys_due_date|as_crispy_field }}
-      <small class="text-muted"
-        >Please only enter dates as per the accepted formats: dd-mm-yy or
-        dd-mm-yyyy</small
-      >
-    </div>
-    <div class="form-group"> {{ form.babys_name|as_crispy_field }} </div>
-    <div class="form-group"> {{ form.babys_gender|as_crispy_field }} </div>
-    <div class="form-group">
-      {{ form.location|as_crispy_field }}
-      <small class="text-muted"
-        >Would you like the photoshoot to take place my studio or in your
-        home?</small
-      >
-    </div>
-    <div class="form-group">
-      {{ form.special_requests|as_crispy_field }}
-      <small class="text-muted"
-        >Please let me know if you have anything particular in mind for your
-        baby's photoshoot</small
-      >
-    </div>
-    <div class="form-group"> {{ form.how_you_found_me|as_crispy_field }} </div>
-    <div class="form-group">
-      {{ form.consent|as_crispy_field }}
-      <small class="text-muted"
-        >Please let me know if I am able to use any of the images taken during
-        the photoshoot for business promotion</small
-      >
-    </div>
-    <div class="form-group">
-      {{ form.featured_image|as_crispy_field }}
-      <small class="text-muted"
-        >You can add a custom image to your booking if you would like</small
-      >
-    </div>
-    <button type="submit" class="btn btn-primary btn-lg elmt-trans"
-      >Update</button
-    >
-  </form>
+  </div>
 </div>
 
 {% endblock content %}
