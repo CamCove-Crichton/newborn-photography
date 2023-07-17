@@ -61,6 +61,11 @@ a {
     object-fit: cover;
 }
 
+.booking-image-container {
+    width: 300px;
+    height: 250px;
+}
+
 /* ---------------------------------- Effects */
 /* A smooth transition effect */
 .elmt-trans {
