@@ -3,22 +3,6 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log('Page is loaded');
 });
 
-// assistance from ChatGpt
-// Function to call a modal to confirm a cancel or delete request
-function deleteModal(targetModal) {
-    let deleteButtons = document.getElementsByClassName("deleteBtn");
-
-    for (let deleteButton of deleteButtons) {
-        deleteButton.addEventListener("click", handleDeleteButtonClick.bind(null, targetModal), { once: true });
-    }
-
-    function handleDeleteButtonClick(targetModal) {
-        console.log("Delete button clicked");
-        let modal = document.querySelector(targetModal);
-        $(modal).modal("show");
-    }
-}
-
 // Assistance from code institutes I think therefore I blog walkthrough tutorials
 setTimeout(function () {
     let messages = document.getElementById('msg');
@@ -28,6 +12,15 @@ setTimeout(function () {
 
 // Assistance from ChatpGpt & Code Institutes JQuery events module
 $(document).ready(function () {
+    // Assistance from ChatGpt
+    // Trigger modal to display upon click event
+    $(document).on("click", ".deleteBtn", function () {
+        console.log("Delete button clicked");
+        var targetModal = $(this).attr("data-target-modal");
+        $(targetModal).modal("show");
+    });
+
+    // A function to remove the active class and aria-current attribute and assign to clicked nav element
     $('.nav-link').click(function () {
         // Remove the active class from all navigation elements
         $('.nav-link').removeClass('active').removeAttr('aria-current');
