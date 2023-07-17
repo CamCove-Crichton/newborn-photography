@@ -131,6 +131,10 @@
 - Added images and styling to the home page - index.html template
 - Added images and styling to the blogs and contact pages
 - Added images and styling to the gallery page
+- Added stying to the bookings and admin panel pages
+- Began styling the new booking and edit booking pages
+- I then added in a button for the user to use to return to the top of the page using a button with custom css and jquery
+- I went back to the issue I had with the cancel function in my javascript file and refactored it to jquery to get the functionality working correctly
 
 ### Future Developments
 
@@ -194,6 +198,7 @@
 - Had an issue that when trying to edit a booking and get it to check the database for any existing bookings if the user trys to edit the date, so that there cannot be more than one booking in a day, but the if statement was always seeing a False value and so the code in the if statement code block was being missed even when the date had changed. After using some print statements, I found that it was because both the edited date and the booking date were the same, so I stored the original booking date in a variable before the form is validated, and used that variable in my if statement, and that fixed the issue
 - Had an issue with trying to submit the Todo item form with an error when testing the validation handling function I had in place, but it seemed to not be finding a slug and id for the reverse match but I realised after my trials of moving the slug and id assigned variables, that it was not seeing the slug and id still as I had not included the booking variable with the relevant slug & id in my context for my view that was being rendered. So once I added the booking variable into my context of my view, it worked
 - Had an issue with trying to utilise the bootstrap "active" class in my nav bar, using JQuery and some control statements, but I keep getting an error about a closing endif tag, as I was also trying to assign the attribute "aria-current='page'" using control statements, so I removed that and just used the active class with control statements and that resolved the bug
+- I had an issue with the cancel button, that it was not responsive on the first click, but only on the 2nd click, so after much thought, I looked into refactoring the code using JQuery, to which I got the console.log message logging with every click including the first click, but then I was not getting the modal and realised that my html code was still referring to the old javascript function I had setup, so I adjusted the code in the html file to assign the custom data-modal-target arrtibute to the modal id I wanted the jquery function to search for to display the correct bootstrap modal
 
 ### Validator Testing
 
@@ -205,7 +210,6 @@
 
 ### Unresolved Bugs
 
-- I have an issue with the cancel button, that it is not responsive on the first click, but only on the 2nd click, so need to look into this and correct
 - I do still need to figured out how to add the attribute "aria-current='page'" for each nav element when it is clicked for better accessibility
 
 ## Credits
@@ -284,21 +288,13 @@
 }
 ```
 
-```javascript
+```jquery
 {
-    function deleteModal(targetModal) {
-    let deleteButtons = document.getElementsByClassName("deleteBtn");
-
-    for (let deleteButton of deleteButtons) {
-        deleteButton.addEventListener("click", handleDeleteButtonClick.bind(null, targetModal), { once: true });
-    }
-
-    function handleDeleteButtonClick(targetModal) {
+    $(document).on("click", ".deleteBtn", function () {
         console.log("Delete button clicked");
-        let modal = document.querySelector(targetModal);
-        $(modal).modal("show");
-    }
-}
+        var targetModal = $(this).attr("data-target-modal");
+        $(targetModal).modal("show");
+    });
 }
 ```
 
@@ -522,6 +518,45 @@
     height: 100%;
     /* Maintain the aspect ratio and fill the container */
     object-fit: cover;
+}
+```
+
+```jquery
+{
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 100) {
+            $('#scrollBackToTopBtn').fadeIn();
+        } else {
+            $('#scrollBackToTopBtn').fadeOut();
+        }
+    });
+
+    // Scroll to the top when button is clicked
+    $('#scrollBackToTopBtn').click(function () {
+        $('html, body').animate({ scrollTop: 0 }, 'slow');
+    });
+}
+```
+
+```css
+{
+    #scrollBackToTopBtn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: none;
+    width: 30px;
+    height: 30px;
+    border: none;
+    color: #D3D3D3;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+#scrollBackToTopBtn:focus {
+    outline: none;
+}
 }
 ```
 
