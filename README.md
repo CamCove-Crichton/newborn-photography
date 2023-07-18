@@ -135,6 +135,8 @@
 - Began styling the new booking and edit booking pages
 - I then added in a button for the user to use to return to the top of the page using a button with custom css and jquery
 - I went back to the issue I had with the cancel function in my javascript file and refactored it to jquery to get the functionality working correctly
+- Continued styling the new booking and edit booking templates
+- Worked on the arrangement and styling in the booking_detail template
 
 ### Future Developments
 
