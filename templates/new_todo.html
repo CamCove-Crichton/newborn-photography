@@ -4,61 +4,79 @@
 <!-- Assitance from code institutes I think therefore I blog walkthrough tutorials -->
 {% load crispy_forms_tags %}
 
-<div>
-  <h1>New Todo Item:</h1>
-</div>
 <div class="container-fluid">
-  <!-- Assistance from ChatGpt -->
-  <form method="post">
-    {% csrf_token %}
-    <input type="hidden" name="slug" value="{{ booking.slug }}" />
-    <input type="hidden" name="id" value="{{ booking.id }}" />
-    <div class="container-fluid">
-      <div class="form-group">
-        {{ form.title|as_crispy_field }}
-        <small class="text-muted">Please enter a name for this Todo item</small>
-      </div>
-      <div class="form-group">
-        {{ form.details|as_crispy_field }}
-        <small class="text-muted"
-          >Please enter the details for this Todo item</small
-        >
-      </div>
-      <div class="form-group">
-        {{ form.due_date|as_crispy_field }}
-        <small class="text-muted"
-          >Please enter the due date for this Todo item in an accepted format:
-          dd-mm-yy or dd-mm-yyyy</small
-        >
-      </div>
-      <div class="form-group">
-        {{ form.due_time|as_crispy_field }}
-        <small class="text-muted"
-          >Please enter times in a 24 hour clock format, i.e. 13:00</small
-        >
-      </div>
-      <div class="form-group"> {{ form.completed|as_crispy_field }} </div>
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <h1 class="text-center">New Todo Item:</h1>
     </div>
-    <div class="container-fluid">
-      <div class="row mt-3">
-        <div class="col-md-1">
-          <button type="submit" class="btn btn-primary btn-lg elmt-trans"
-            >Submit</button
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <!-- Assistance from ChatGpt -->
+      <form method="post">
+        {% csrf_token %}
+        <!-- Hidden inputs for views getting slug and id values -->
+        <input type="hidden" name="slug" value="{{ booking.slug }}" />
+        <input type="hidden" name="id" value="{{ booking.id }}" />
+
+        <!-- Todo Titel -->
+        <div class="form-group">
+          {{ form.title|as_crispy_field }}
+          <small class="text-muted"
+            >Please enter a name for this Todo item</small
           >
         </div>
-        <!-- Button trigger modal -->
-        <div class="col-md-1">
-          <button
-            type="button"
-            class="deleteBtn btn btn-danger btn-lg elmt-trans"
-            data-target-modal="#myModal3"
+
+        <!-- Todo details -->
+        <div class="form-group">
+          {{ form.details|as_crispy_field }}
+          <small class="text-muted"
+            >Please enter the details for this Todo item</small
           >
-            Cancel
-          </button>
         </div>
-      </div>
+
+        <!-- Todo due date -->
+        <div class="form-group">
+          {{ form.due_date|as_crispy_field }}
+          <small class="text-muted"
+            >Please enter the due date for this Todo item in an accepted format:
+            dd-mm-yy or dd-mm-yyyy</small
+          >
+        </div>
+
+        <!-- Todo due time -->
+        <div class="form-group">
+          {{ form.due_time|as_crispy_field }}
+          <small class="text-muted"
+            >Please enter times in a 24 hour clock format, i.e. 13:00</small
+          >
+        </div>
+
+        <!-- Status -->
+        <div class="form-group"> {{ form.completed|as_crispy_field }} </div>
+
+        <!-- Submit button -->
+        <div class="row mt-3 justify-content-center">
+          <div class="col-4 col-md-3 col-lg-2">
+            <button type="submit" class="btn btn-primary elmt-trans"
+              >Submit</button
+            >
+          </div>
+
+          <!-- Button trigger modal -->
+          <div class="col-4 col-md-3 col-lg-2">
+            <button
+              type="button"
+              class="deleteBtn btn btn-danger elmt-trans"
+              data-target-modal="#myModal3"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      </form>
     </div>
-  </form>
+  </div>
 </div>
 
 <!-- Modal -->
