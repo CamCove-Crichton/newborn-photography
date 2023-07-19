@@ -137,6 +137,7 @@
 - I went back to the issue I had with the cancel function in my javascript file and refactored it to jquery to get the functionality working correctly
 - Continued styling the new booking and edit booking templates
 - Worked on the arrangement and styling in the booking_detail template
+- Removed the personal info model from the models and admin database structure, as there was not enough time, so it will be part of the future developments
 
 ### Future Developments
 
@@ -147,7 +148,48 @@
 - To allow users to be able to like and comment on blog posts
 - To have the admin be able to update images on the gallery page
 - To allow users the ability to like or favorite images in the gallery as poses they would like to try achieve in their photoshoot session
-- To allow users to customise their profile, like adding their address and contact number and a profile picture
+- To allow users to customise their profile, like adding their address and contact number and a profile picture with the use of the below model class and admin class
+
+```python
+{
+    # To be used as part of the future developments of the project
+class PersonalInfo(models.Model):
+    client_id = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="client_details")
+    house_num = models.CharField(max_length=50, null=False, blank=False)
+    street = models.CharField(max_length=100, null=False, blank=False)
+    city = models.CharField(max_length=85, null=False, blank=False)
+    county = models.CharField(max_length=15, null=True)
+    postcode = models.CharField(max_length=10, null=False, blank=False)
+    mobile_num = models.CharField(max_length=15, null=False, blank=False)
+    created_on = models.DateTimeField(auto_now_add=True)
+    slug = models.SlugField(max_length=100, unique=True)
+
+    def __str__(self):
+        return (
+            f"Address: {self.house_num}\n"
+            f"{self.street}\n"
+            f"{self.city}\n"
+            f"{self.county}\n"
+            f"{self.postcode}\n"
+            f"Mobile: {self.mobile_num}"
+        )
+}
+```
+
+```python
+{
+    # Assitance from code institutes I think therefore I blog walkthrough tutorials
+@admin.register(PersonalInfo)
+class PersonalInfoAdmin(admin.ModelAdmin):
+
+    prepopulated_fields = {'slug': ('client_id',)}
+    list_filter = ('city', 'postcode', 'created_on')
+    list_display = ('client_id', 'city', 'postcode', 'created_on')
+    search_fields = ['street', 'city', 'county', 'postcode']
+}
+```
+
 - If forms return with invalid input messages, I would like to get the form to remain with prepopulated fields that the user already input to make for a better UX
 - To expand on the types of photoshoots offered, and not just newborn shoots but also cake smash shoots, maternity shoots and family shoots
 - To allow users to add reviews as well as read other previous client reviews
