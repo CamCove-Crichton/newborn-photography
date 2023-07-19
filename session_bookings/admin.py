@@ -1,6 +1,6 @@
 from django.contrib import admin
 # Assitance from code institutes I think therefore I blog walkthrough tutorials
-from .models import Booking, Todo, PersonalInfo
+from .models import Booking, Todo
 from django_summernote.admin import SummernoteModelAdmin
 
 
@@ -30,13 +30,3 @@ class TodoAdmin(SummernoteModelAdmin):
     list_display = ('title', 'due_date', 'completed', 'created_on')
     search_fields = ['title', 'details']
     summernote_fields = ('details')
-
-
-# Assitance from code institutes I think therefore I blog walkthrough tutorials
-@admin.register(PersonalInfo)
-class PersonalInfoAdmin(admin.ModelAdmin):
-
-    prepopulated_fields = {'slug': ('client_id',)}
-    list_filter = ('city', 'postcode', 'created_on')
-    list_display = ('client_id', 'city', 'postcode', 'created_on')
-    search_fields = ['street', 'city', 'county', 'postcode']

@@ -60,7 +60,7 @@
               {% if user.is_authenticated %}
               <!-- Assistance from code institutes Hello Django walkthrough tutorials -->
               <li class="nav-list nav-list d-flex justify-content-end">
-                <a href="#">{{ user.username }}</a>
+                <p>{{ user.username }}</p>
               </li>
               <li class="mt-2 nav-list d-flex justify-content-end">
                 <a href="{% url 'account_logout' %}">Logout</a>

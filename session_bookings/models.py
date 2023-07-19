@@ -54,27 +54,3 @@ class Todo(models.Model):
 
     def __str__(self):
         return f"Item: {self.title}, Complete by: {self.due_date}"
-
-
-# To be used as part of the future developments of the project
-class PersonalInfo(models.Model):
-    client_id = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="client_details")
-    house_num = models.CharField(max_length=50, null=False, blank=False)
-    street = models.CharField(max_length=100, null=False, blank=False)
-    city = models.CharField(max_length=85, null=False, blank=False)
-    county = models.CharField(max_length=15, null=True)
-    postcode = models.CharField(max_length=10, null=False, blank=False)
-    mobile_num = models.CharField(max_length=15, null=False, blank=False)
-    created_on = models.DateTimeField(auto_now_add=True)
-    slug = models.SlugField(max_length=100, unique=True)
-
-    def __str__(self):
-        return (
-            f"Address: {self.house_num}\n"
-            f"{self.street}\n"
-            f"{self.city}\n"
-            f"{self.county}\n"
-            f"{self.postcode}\n"
-            f"Mobile: {self.mobile_num}"
-        )
