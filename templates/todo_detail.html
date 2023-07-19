@@ -1,11 +1,52 @@
 <!-- Assitance from code institutes I think therefore I blog walkthrough tutorials -->
 {% extends "base.html" %} {% block content %}
-<div>
-  <h1>Todo Item Details</h1>
-</div>
-<ul>
+
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-8">
+      <h1 class="text-center">Todo Item Details</h1>
+    </div>
+  </div>
+
+  <div class="row mt-3 justify-content-start ms-2">
+    <!-- Todo title -->
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+      <h6>Title:</h6>
+      <p>{{ todo_item.title }}</p>
+    </div>
+
+    <!-- Todo details -->
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+      <h6>Details:</h6>
+      <p>{{ todo_item.details }}</p>
+    </div>
+
+    <!-- Todo due date -->
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+      <h6>Due Date:</h6>
+      <p>{{ todo_item.due_date }}</p>
+    </div>
+
+    <!-- Todo due time -->
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+      <h6>Due Time:</h6>
+      <p>{{ todo_item.due_time }}</p>
+    </div>
+
+    <!-- Todo status -->
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+      <h6>Status:</h6>
+      {% if todo_item.completed == True %}
+      <p>Done</p>
+      {% else %}
+      <p>In Progress</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- <ul> -->
   <!-- General Details -->
-  <li>Title: {{ todo_item.title }}</li>
+  <!-- <li>Title: {{ todo_item.title }}</li>
   <li>Details: {{ todo_item.details }}</li>
   <li>Due Date: {{ todo_item.due_date }}</li>
   <li>Due Time: {{ todo_item.due_time }}</li>
@@ -13,31 +54,32 @@
   <li>Status: Done</li>
   {% else %}
   <li>Status: In Progress</li>
-  {% endif %}
-</ul>
+  {% endif %} -->
+  <!-- </ul> -->
 
-<!-- Edit Todo -->
-<div class="row">
-  <div class="col-md-3">
-    <a
-      href="{% url 'edit_todo' slug=todo_item.slug id=todo_item.id %}"
-      type="button"
-      class="btn btn-success elmt-trans"
-      >Edit Todo Item</a
-    >
+  <!-- Edit Todo -->
+  <div class="row justify-content-center mt-3">
+    <div class="col-4 col-sm-3 col-md-3 col-lg-2">
+      <a
+        href="{% url 'edit_todo' slug=todo_item.slug id=todo_item.id %}"
+        type="button"
+        class="btn btn-success elmt-trans"
+        >Edit Todo</a
+      >
+    </div>
+
+    <!-- Delete Todo -->
+    <!-- Button trigger modal -->
+    <div class="col-4 col-sm-3 col-md-3 col-lg-2">
+      <button
+        type="button"
+        class="deleteBtn btn btn-danger elmt-trans"
+        data-target-modal="#myModal5"
+      >
+        Delete
+      </button>
+    </div>
   </div>
-</div>
-
-<!-- Delete Todo -->
-<!-- Button trigger modal -->
-<div class="col-md-1">
-  <button
-    type="button"
-    class="deleteBtn btn btn-danger elmt-trans"
-    data-target-modal="#myModal5"
-  >
-    Delete
-  </button>
 </div>
 
 <!-- Modal -->
