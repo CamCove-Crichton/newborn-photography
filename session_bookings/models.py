@@ -13,8 +13,8 @@ USAGE_CONSENT = ((0, "No"), (1, "Yes"))
 
 
 class Booking(models.Model):
-    booking_name = models.CharField(max_length=250, unique=True)
-    slug = models.SlugField(max_length=250, unique=True)
+    booking_name = models.CharField(max_length=250, unique=False)
+    slug = models.SlugField(max_length=250, unique=False)
     client = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="bookings")
     booking_date = models.DateField(auto_now=False, null=False)
@@ -42,7 +42,7 @@ class Todo(models.Model):
     booking_id = models.ForeignKey(
         Booking, on_delete=models.CASCADE, related_name="todo")
     title = models.CharField(max_length=100, null=False, blank=False)
-    slug = models.SlugField(max_length=100, unique=True)
+    slug = models.SlugField(max_length=100, unique=False)
     details = models.TextField(null=True, blank=True)
     due_date = models.DateField(auto_now=False, blank=True, default=None)
     due_time = models.TimeField(auto_now=False, blank=True, default='12:00')
