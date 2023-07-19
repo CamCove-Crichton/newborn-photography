@@ -138,6 +138,7 @@
 - Continued styling the new booking and edit booking templates
 - Worked on the arrangement and styling in the booking_detail template
 - Removed the personal info model from the models and admin database structure, as there was not enough time, so it will be part of the future developments
+- Added styling to the new_todo, edit_todo and todo_detail templates
 
 ### Future Developments
 
