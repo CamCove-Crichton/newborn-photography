@@ -12,7 +12,11 @@ from django.utils.decorators import method_decorator
 from django.contrib import messages
 
 from datetime import datetime
-from .utils.booking_utils import validate_booking_date, handle_form_validation_errors
+from .utils.booking_utils import (
+    validate_booking_date,
+    handle_form_validation_errors,
+    booking_date_vs_todays_date,
+)
 
 
 # Assitance from code institutes I think therefore I blog walkthrough
@@ -140,12 +144,25 @@ class NewBooking(LoginRequiredMixin, generic.ListView):
             # Validate booking date is not before due date
             if not validate_booking_date(self, booking_date, due_date):
                 messages.error(
-                    request, "Invalid date. Booking date cannot be before the due date.")
+                    request, "Invalid date. Booking date cannot be before the\
+                         due date.")
                 return render(
                     request,
                     "new_booking.html",
                     {
-                        "form": BookingForm()
+                        "form": new_booking_request
+                    },
+                )
+
+            # Validate booking date is not before the current date
+            if not booking_date_vs_todays_date(booking_date):
+                messages.error(request, "Invalid date. Booking date cannot be\
+                     today or before the current date")
+                return render(
+                    request,
+                    "new_booking.html",
+                    {
+                        "form": new_booking_request
                     },
                 )
 
@@ -154,12 +171,13 @@ class NewBooking(LoginRequiredMixin, generic.ListView):
                 booking_date=booking_date).first()
             if existing_booking:
                 messages.error(
-                    request, "The selected date is unavailable, please choose a different date.")
+                    request, "The selected date is unavailable, please choose\
+                         a different date.")
                 return render(
                     request,
                     "new_booking.html",
                     {
-                        "form": BookingForm()
+                        "form": new_booking_request
                     },
                 )
             else:
@@ -182,7 +200,7 @@ class NewBooking(LoginRequiredMixin, generic.ListView):
                 request,
                 "new_booking.html",
                 {
-                    "form": BookingForm()
+                    "form": new_booking_request
                 },
             )
 
@@ -238,7 +256,8 @@ class EditBooking(LoginRequiredMixin, generic.ListView):
                 if duplicate_booking:
                     # Display error message
                     messages.error(
-                        request, "The selected date is unavailable, please choose a different date.")
+                        request, "The selected date is unavailable, please\
+                             choose a different date.")
                     return render(request, "edit_booking.html", context)
 
             # Validate booking date is not before due date
@@ -247,7 +266,8 @@ class EditBooking(LoginRequiredMixin, generic.ListView):
             if not validate_booking_date(self, booking_date, due_date):
                 # Display error message
                 messages.error(
-                    request, "Invalid date. Booking date cannot be before the due date.")
+                    request, "Invalid date. Booking date cannot be before the\
+                         due date.")
                 return render(request, "edit_booking.html", context)
 
             edited_booking.client = request.user
