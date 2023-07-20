@@ -118,7 +118,6 @@ class NewBooking(LoginRequiredMixin, generic.ListView):
         Fetches the content to display from the BookingForm() which uses
         crispy forms and is located in the forms.py file
         """
-
         return render(
             request,
             "new_booking.html",
@@ -143,6 +142,7 @@ class NewBooking(LoginRequiredMixin, generic.ListView):
 
             # Validate booking date is not before due date
             if not validate_booking_date(self, booking_date, due_date):
+                # Display error message
                 messages.error(
                     request, "Invalid date. Booking date cannot be before the\
                          due date.")
@@ -156,6 +156,7 @@ class NewBooking(LoginRequiredMixin, generic.ListView):
 
             # Validate booking date is not before the current date
             if not booking_date_vs_todays_date(booking_date):
+                # Display error message
                 messages.error(request, "Invalid date. Booking date cannot be\
                      today or before the current date")
                 return render(
@@ -170,6 +171,7 @@ class NewBooking(LoginRequiredMixin, generic.ListView):
             existing_booking = Booking.objects.filter(
                 booking_date=booking_date).first()
             if existing_booking:
+                # Display error message
                 messages.error(
                     request, "The selected date is unavailable, please choose\
                          a different date.")
@@ -270,6 +272,13 @@ class EditBooking(LoginRequiredMixin, generic.ListView):
                          due date.")
                 return render(request, "edit_booking.html", context)
 
+            # Validate booking date is not before the current date
+            if not booking_date_vs_todays_date(booking_date):
+                # Display error message
+                messages.error(request, "Invalid date. Booking date cannot be\
+                     today or before the current date")
+                return render(request, "edit_booking.html", context)
+
             edited_booking.client = request.user
             edited_booking.slug = slugify(edited_booking.booking_name)
             edited_booking.featured_image = form.cleaned_data[
@@ -313,6 +322,10 @@ class DeleteBooking(LoginRequiredMixin, generic.ListView):
 @method_decorator(
     staff_member_required(login_url='account_login'), name='dispatch')
 class AdministratorView(generic.ListView):
+    """
+    A view for the superuser/admin of the site, so when logged in they are
+    able to view all the bookings made by any user
+    """
 
     model = Booking
     template_name = 'administrator_panel.html'
@@ -338,7 +351,6 @@ class NewTodo(LoginRequiredMixin, generic.ListView):
         Fetches the content to display from the TodoForm() which uses
         crispy forms and is located in the forms.py file
         """
-
         # Get the slug and id from the URL parameters
         slug = self.kwargs['slug']
         booking_id = self.kwargs['id']
@@ -358,12 +370,10 @@ class NewTodo(LoginRequiredMixin, generic.ListView):
 
     # Assitance from code institutes I think therefore I blog walkthrough
     # tutorials & ChatGpt
-
     def post(self, request, *args, **kwargs):
         """
         Submits the new todo item, when it is valid, to the database
         """
-
         form = TodoForm(request.POST)
 
         # Get the booking related to the todo item
@@ -450,7 +460,6 @@ class EditTodo(LoginRequiredMixin, generic.ListView):
         """
         Submits the updated Todo request, when it is valid, to the database
         """
-
         todo_id = kwargs['id']
         todo_item = get_object_or_404(Todo, id=todo_id)
         booking = todo_item.booking_id
@@ -481,8 +490,6 @@ class EditTodo(LoginRequiredMixin, generic.ListView):
             return redirect('booking_detail', slug=booking_slug, id=booking_id)
         else:
             # Display error messages
-            # messages.error(
-            #     request, "Invalid form data, please check your inputs")
             handle_form_validation_errors(request, update_todo)
             return render(request, "edit_todo.html", context)
 
