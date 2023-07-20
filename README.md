@@ -141,6 +141,7 @@
 - Added styling to the new_todo, edit_todo and todo_detail templates
 - Updated the NewBooking view so if booking request forms return with invalid input messages, the form returns with prepopulated fields that the user already input to make for a better UX
 - I created a validation to assist with checking if the booking date being requested is not today's date or before today's date
+- Added in a favicon to the head of the base.html template for an icon for the site to go with the title of the site
 
 ### Future Developments
 
