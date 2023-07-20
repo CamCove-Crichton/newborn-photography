@@ -139,6 +139,8 @@
 - Worked on the arrangement and styling in the booking_detail template
 - Removed the personal info model from the models and admin database structure, as there was not enough time, so it will be part of the future developments
 - Added styling to the new_todo, edit_todo and todo_detail templates
+- Updated the NewBooking view so if booking request forms return with invalid input messages, the form returns with prepopulated fields that the user already input to make for a better UX
+- I created a validation to assist with checking if the booking date being requested is not today's date or before today's date
 
 ### Future Developments
 
@@ -191,7 +193,6 @@ class PersonalInfoAdmin(admin.ModelAdmin):
 }
 ```
 
-- If forms return with invalid input messages, I would like to get the form to remain with prepopulated fields that the user already input to make for a better UX
 - To expand on the types of photoshoots offered, and not just newborn shoots but also cake smash shoots, maternity shoots and family shoots
 - To allow users to add reviews as well as read other previous client reviews
 
