@@ -606,6 +606,34 @@ class PersonalInfoAdmin(admin.ModelAdmin):
 }
 ```
 
+```python
+{
+    def booking_date_vs_todays_date(datedata):
+    """
+    A function to handle the validation of the booking date not being before
+    today's date
+    """
+    formats = ['%d-%m-%y', '%d-%m-%Y']
+
+    # Convert the date object to a string using strftime()
+    datedata_str = datedata.strftime('%d-%m-%y')
+
+    for fmt in formats:
+        try:
+            booking_date = datetime.strptime(datedata_str, fmt)
+            today = date.today()
+
+            if booking_date.date() > today:
+                return True
+            else:
+                return False
+        except ValueError:
+            pass
+
+    return False
+}
+```
+
 [Bootstrap](https://getbootstrap.com/) - Used Bootstrap to assist with styling
 
 ```html

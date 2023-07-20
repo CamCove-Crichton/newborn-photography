@@ -3,6 +3,7 @@ from datetime import datetime, date
 from django.contrib import messages
 
 
+# Assitance from Chatgpt
 def validate_booking_date(self, date1, date2):
     """
     Validates the booking date is not before the due date when
@@ -23,6 +24,7 @@ def validate_booking_date(self, date1, date2):
         return False
 
 
+# Assitance from Chatgpt
 def handle_form_validation_errors(request, form):
     """
     A function to handle any errors thrown when a form is validated and returns
@@ -34,6 +36,7 @@ def handle_form_validation_errors(request, form):
                 request, f"Invalid input in the {field} field. {error}")
 
 
+# Assitance from Chatgpt
 def booking_date_vs_todays_date(datedata):
     """
     A function to handle the validation of the booking date not being before
