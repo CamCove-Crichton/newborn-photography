@@ -142,6 +142,8 @@
 - Updated the NewBooking view so if booking request forms return with invalid input messages, the form returns with prepopulated fields that the user already input to make for a better UX
 - I created a validation to assist with checking if the booking date being requested is not today's date or before today's date
 - Added in a favicon to the head of the base.html template for an icon for the site to go with the title of the site
+- Updated the validation function name for validating date inputs for bookings, so it made sense to allow me to use it again in the Todos views for validation by renaming it to date_input_vs_todays_date, in turn adding a date validation to the new todos and the edit todos views
+- Added in a validation function for checking the booking time being requested in the new booking or when editing a booking, that you cannot book a time slot before 9am and after 3pm
 
 ### Future Developments
 
@@ -196,6 +198,7 @@ class PersonalInfoAdmin(admin.ModelAdmin):
 
 - To expand on the types of photoshoots offered, and not just newborn shoots but also cake smash shoots, maternity shoots and family shoots
 - To allow users to add reviews as well as read other previous client reviews
+- I would like to add in some styling to link with the custom validations, so when an error is raised, the field that the error refers to is highlighted for a better UX
 
 ### Wireframes & Database Designs
 
