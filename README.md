@@ -201,6 +201,8 @@ class PersonalInfoAdmin(admin.ModelAdmin):
 - To allow users to add reviews as well as read other previous client reviews
 - I would like to add in some styling to link with the custom validations, so when an error is raised, the field that the error refers to is highlighted for a better UX
 - I would like to add in a feature that removes the booking from the bookings page and admin panel if the booking date has passed the current date, and then have a view or something along those lines where a user and admin can view previous bookings
+- It would be great to add a feature for the admin to be able to view all the clients in the database that have signed up to the site
+- To be able to have the admin have a calendar view to view all the bookings in the database
 
 ### Wireframes & Database Designs
 
