@@ -60,3 +60,27 @@ def booking_date_vs_todays_date(datedata):
             pass
 
     return False
+
+
+def validate_booking_time(timedata):
+    """
+    A function to validate the booking time requested falls between 9am and 3pm
+    """
+    # Convert booking time input to a string
+    timedata_str = timedata.strftime('%H:%M')
+
+    try:
+        # Convert the string to a time object
+        time_object = datetime.strptime(timedata_str, '%H:%M').time()
+
+        # Set start and end times to check against
+        start_time = datetime.strptime('09:00', '%H:%M').time()
+        end_time = datetime.strptime('15:00', '%H:%M').time()
+
+        # Check if booking falls in the specified time range
+        if start_time <= time_object <= end_time:
+            return True
+        else:
+            return False
+    except ValueError:
+        return False

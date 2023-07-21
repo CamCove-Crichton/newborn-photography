@@ -16,6 +16,7 @@ from .utils.booking_utils import (
     validate_booking_date,
     handle_form_validation_errors,
     booking_date_vs_todays_date,
+    validate_booking_time,
 )
 
 
@@ -139,6 +140,7 @@ class NewBooking(LoginRequiredMixin, generic.ListView):
         if new_booking_request.is_valid():
             booking_date = new_booking_request.cleaned_data['booking_date']
             due_date = new_booking_request.cleaned_data['babys_due_date']
+            booking_time = new_booking_request.cleaned_data['booking_time']
 
             # Validate booking date is not before due date
             if not validate_booking_date(self, booking_date, due_date):
@@ -175,6 +177,19 @@ class NewBooking(LoginRequiredMixin, generic.ListView):
                 messages.error(
                     request, "The selected date is unavailable, please choose\
                          a different date.")
+                return render(
+                    request,
+                    "new_booking.html",
+                    {
+                        "form": new_booking_request
+                    },
+                )
+
+            # Validate booking time falls in appropriate time range
+            if not validate_booking_time(booking_time):
+                # Display error message
+                messages.error(request, "Invalid time. Booking time cannot be\
+                     outside the times of 9am and 3pm")
                 return render(
                     request,
                     "new_booking.html",
@@ -249,6 +264,7 @@ class EditBooking(LoginRequiredMixin, generic.ListView):
         # tutorials & ChatGpt
         if form.is_valid():
             edited_booking = form.save(commit=False)
+            edited_booking_time = edited_booking.booking_time
             # Check if the booking date has been modifed
             if edited_booking.booking_date != unedited_date:
                 # Perform duplicate data check
@@ -277,6 +293,13 @@ class EditBooking(LoginRequiredMixin, generic.ListView):
                 # Display error message
                 messages.error(request, "Invalid date. Booking date cannot be\
                      today or before the current date")
+                return render(request, "edit_booking.html", context)
+
+            # Validate booking time falls in appropriate time range
+            if not validate_booking_time(edited_booking_time):
+                # Display error message
+                messages.error(request, "Invalid time. Booking time cannot be\
+                     outside the times of 9am and 3pm")
                 return render(request, "edit_booking.html", context)
 
             edited_booking.client = request.user
