@@ -15,7 +15,7 @@ from datetime import datetime
 from .utils.booking_utils import (
     validate_booking_date,
     handle_form_validation_errors,
-    booking_date_vs_todays_date,
+    date_input_vs_todays_date,
     validate_booking_time,
 )
 
@@ -157,7 +157,7 @@ class NewBooking(LoginRequiredMixin, generic.ListView):
                 )
 
             # Validate booking date is not before the current date
-            if not booking_date_vs_todays_date(booking_date):
+            if not date_input_vs_todays_date(booking_date):
                 # Display error message
                 messages.error(request, "Invalid date. Booking date cannot be\
                      today or before the current date")
@@ -289,7 +289,7 @@ class EditBooking(LoginRequiredMixin, generic.ListView):
                 return render(request, "edit_booking.html", context)
 
             # Validate booking date is not before the current date
-            if not booking_date_vs_todays_date(booking_date):
+            if not date_input_vs_todays_date(booking_date):
                 # Display error message
                 messages.error(request, "Invalid date. Booking date cannot be\
                      today or before the current date")
@@ -406,6 +406,21 @@ class NewTodo(LoginRequiredMixin, generic.ListView):
             Booking, slug=booking_slug, id=booking_id)
 
         if form.is_valid():
+            todo_due_date = form.cleaned_data['due_date']
+            # Validate Todo due date is not before the current date
+            if not date_input_vs_todays_date(todo_due_date):
+                # Display error message
+                messages.error(request, "Invalid date. Due date cannot be\
+                     today or before the current date")
+                return render(
+                    request,
+                    "new_todo.html",
+                    {
+                        "form": form,
+                        "booking": booking,
+                    },
+                )
+
             todo_item = form.save(commit=False)
 
             # Set the booking_id and slug for the todo item
@@ -500,6 +515,15 @@ class EditTodo(LoginRequiredMixin, generic.ListView):
         # tutorials & ChatGpt
         if update_todo.is_valid():
             todo_item = update_todo.save(commit=False)
+            edited_due_date = todo_item.due_date
+
+            # Validate edited Todo due date is not before the current date
+            if not date_input_vs_todays_date(edited_due_date):
+                # Display error message
+                messages.error(request, "Invalid date. Due date cannot be\
+                     today or before the current date")
+                return render(request, "edit_todo.html", context)
+
             todo_item.slug = slugify(todo_item.title)
             todo_item.save()
 

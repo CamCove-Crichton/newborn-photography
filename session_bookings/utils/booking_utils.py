@@ -37,9 +37,9 @@ def handle_form_validation_errors(request, form):
 
 
 # Assitance from Chatgpt
-def booking_date_vs_todays_date(datedata):
+def date_input_vs_todays_date(datedata):
     """
-    A function to handle the validation of the booking date not being before
+    A function to handle the validation of a date input not being before
     today's date
     """
     formats = ['%d-%m-%y', '%d-%m-%Y']
