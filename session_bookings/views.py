@@ -17,6 +17,7 @@ from .utils.booking_utils import (
     handle_form_validation_errors,
     date_input_vs_todays_date,
     validate_booking_time,
+    due_date_vs_booking_date,
 )
 
 
@@ -407,11 +408,26 @@ class NewTodo(LoginRequiredMixin, generic.ListView):
 
         if form.is_valid():
             todo_due_date = form.cleaned_data['due_date']
+            booking_date = booking.booking_date
             # Validate Todo due date is not before the current date
             if not date_input_vs_todays_date(todo_due_date):
                 # Display error message
                 messages.error(request, "Invalid date. Due date cannot be\
                      today or before the current date")
+                return render(
+                    request,
+                    "new_todo.html",
+                    {
+                        "form": form,
+                        "booking": booking,
+                    },
+                )
+
+            # Validate Todo due date is not after the session booking date
+            if not due_date_vs_booking_date(todo_due_date, booking_date):
+                # Display error message
+                messages.error(request, "Invalid due date. Todo due date\
+                     cannot fall after the booking date of the session")
                 return render(
                     request,
                     "new_todo.html",
@@ -516,12 +532,20 @@ class EditTodo(LoginRequiredMixin, generic.ListView):
         if update_todo.is_valid():
             todo_item = update_todo.save(commit=False)
             edited_due_date = todo_item.due_date
+            booking_date = booking.booking_date
 
             # Validate edited Todo due date is not before the current date
             if not date_input_vs_todays_date(edited_due_date):
                 # Display error message
                 messages.error(request, "Invalid date. Due date cannot be\
                      today or before the current date")
+                return render(request, "edit_todo.html", context)
+
+            # Validate Todo due date is not after the session booking date
+            if not due_date_vs_booking_date(edited_due_date, booking_date):
+                # Display error message
+                messages.error(request, "Invalid due date. Todo due date\
+                     cannot fall after the booking date of the session")
                 return render(request, "edit_todo.html", context)
 
             todo_item.slug = slugify(todo_item.title)

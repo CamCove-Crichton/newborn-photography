@@ -84,3 +84,32 @@ def validate_booking_time(timedata):
             return False
     except ValueError:
         return False
+
+
+def due_date_vs_booking_date(due_date_data, booking_date_data):
+    """
+    A function to handle the validation of a due date input not being after
+    the booking date
+    """
+    formats = ['%d-%m-%y', '%d-%m-%Y']
+
+    # Convert the date objects to a string using strftime()
+    due_date_data_str = due_date_data.strftime('%d-%m-%y')
+    booking_date_data_str = booking_date_data.strftime('%d-%m-%y')
+
+    for fmt in formats:
+        try:
+            # Convert string variables to date objects and assign to variables
+            due_date = datetime.strptime(due_date_data_str, fmt)
+            booking_date = datetime.strptime(booking_date_data_str, fmt)
+
+            # Check due date is before booking date
+            if due_date.date() <= booking_date.date():
+                return True
+            else:
+                return False
+        except ValueError:
+            # If format is not correct try the next format
+            pass
+
+    return False
