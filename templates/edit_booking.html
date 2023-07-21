@@ -16,6 +16,7 @@
     <div class="col-md-8">
       <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
+        <!-- Booking name -->
         <div class="form-group">
           {{ form.booking_name|as_crispy_field }}
           <small class="text-muted"
@@ -23,6 +24,8 @@
             photoshoot</small
           >
         </div>
+
+        <!-- Booking date -->
         <div class="form-group">
           {{ form.booking_date|as_crispy_field }}
           <small class="text-muted"
@@ -30,12 +33,17 @@
             dd-mm-yyyy</small
           >
         </div>
+
+        <!-- Booking time -->
         <div class="form-group">
           {{ form.booking_time|as_crispy_field }}
           <small class="text-muted"
-            >Please enter times in a 24 hour clock format, i.e. 13:00</small
+            >Please enter times in a 24 hour clock format, i.e. 13:00. Accepted
+            booking times from 09:00 to 15:00</small
           >
         </div>
+
+        <!-- Babys due date -->
         <div class="form-group">
           {{ form.babys_due_date|as_crispy_field }}
           <small class="text-muted"
@@ -43,8 +51,14 @@
             dd-mm-yyyy</small
           >
         </div>
+
+        <!-- Babys name -->
         <div class="form-group"> {{ form.babys_name|as_crispy_field }} </div>
+
+        <!-- Babys gender -->
         <div class="form-group"> {{ form.babys_gender|as_crispy_field }} </div>
+
+        <!-- Location -->
         <div class="form-group">
           {{ form.location|as_crispy_field }}
           <small class="text-muted"
@@ -52,6 +66,8 @@
             home?</small
           >
         </div>
+
+        <!-- Special requests -->
         <div class="form-group">
           {{ form.special_requests|as_crispy_field }}
           <small class="text-muted"
@@ -59,9 +75,13 @@
             baby's photoshoot</small
           >
         </div>
+
+        <!-- How you found me -->
         <div class="form-group">
           {{ form.how_you_found_me|as_crispy_field }}
         </div>
+
+        <!-- Media consent -->
         <div class="form-group">
           {{ form.consent|as_crispy_field }}
           <small class="text-muted"
@@ -69,6 +89,8 @@
             during the photoshoot for business promotion</small
           >
         </div>
+
+        <!-- Featured Image -->
         <div class="form-group">
           {{ form.featured_image|as_crispy_field }}
           <small class="text-muted"
