@@ -226,6 +226,12 @@ class PersonalInfoAdmin(admin.ModelAdmin):
 
 ## Testing
 
+- All tests were run on Google Chrome, Mozilla Firefox and Mircosoft Edge
+
+| Test | Expected Result | Pass/Fail |
+| ----------- | ----------- | ----------- |
+| All templates on mobile display | Login, Logout and Signup to fit under the site heading but still on the far right, Nav bar in a collapsed menu, main body items adjust to fit in the small layout and the footer icons compact into two icons per row | |
+
 *Manual Testing Goes here*
 *Include Responsiveness, Browser compatibility, resolved bugs, unresolved bugs, Lighthouse, code validation, User Stories Testing, Features Testing*
 **Remember to make the manual testing write-up visual! - Share Test cases, uses tables where appropriate, and include screenshots where possible!**
