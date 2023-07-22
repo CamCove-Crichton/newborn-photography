@@ -249,6 +249,18 @@ class PersonalInfoAdmin(admin.ModelAdmin):
 | Complete a Todo | Allow the admin to be able to mark an existing todo item as completed or not completed for individual bookings once it is completed | Pass |
 | Delete a Todo | Allow the admin to be able to delete an existing todo item for individual bookings should it no longer be required | Pass |
 | Appointment Approval | Have bookings automatically be confirmed if there is not an existing booking in the database, and if there is an existing booking, it returns a message to say the date is unavailable | Pass |
+| Validate Booking Date | If a user or admin tries to update or request a booking date the falls before the due date, that an error message is returned to inform the booking date cannot be before the due date | Pass |
+| Handle Form Validation Errors | If a user or admin tries to update or request a booking with any fields that have incorrect formats of input, the error is handled by returning a human readable message | Pass |
+| Date input validation | If the date entered for the booking date or the todo due date is the current date or before the current date, an message will be displayed informing the user of the error | Pass |
+| Validate Booking Time | If the booking time requested or edited, falls outside of the time range of 9am and 3pm, then a message is displayed to inform the user the time is invalid | Pass |
+| Validate Todo due date | If the todo due date falls after the booking date, then a message is displayed to inform the user the todo due date cannot fall after the session booking date | Pass |
+| Message Display Timeout | Display messages clear off the screen after five seconds | Pass |
+| Modal Pop Up | When a cancel or delete button is clicked, a modal pops up to confirm the cancellation or deletion as a form of defensive programming | Pass |
+| Back to top icon display | When the user begins to scroll down on any page, a back to top button displays in the bottom right of the screen | Pass |
+| Back to top icon functionality | When the user begins to scroll down on any page, and the back to top button is clicked, the page scrolls back to the top of the page | Pass |
+| Pagination | When there is more than 6 bookings for a user or for the admin, then a next and previous button displays to allow the user or admin to go to the following bookings | Pass |
+| Footer Links | When the footer links are clicked, they open in a new tab | Pass |
+| Favicon & Site Title | The favicon and site title displays in the window tab on every template | Pass |
 
 *Manual Testing Goes here*
 *Include Responsiveness, Browser compatibility, resolved bugs, unresolved bugs, Lighthouse, code validation, User Stories Testing, Features Testing*
