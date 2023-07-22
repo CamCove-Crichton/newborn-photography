@@ -50,9 +50,9 @@ class BookingDetail(View):
     the user
     """
 
-    def get(self, request, slug, *args, **kwargs):
+    def get(self, request, slug, id, *args, **kwargs):
         # Assistance from ChatGpt
-        booking = get_object_or_404(Booking, slug=slug)
+        booking = get_object_or_404(Booking, slug=slug, id=id)
         todos = Todo.objects.filter(booking_id=booking)
 
         return render(
