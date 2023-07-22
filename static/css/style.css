@@ -64,6 +64,7 @@ a {
 .booking-image-container {
     width: 300px;
     height: 250px;
+    overflow: hidden;
 }
 
 /* ---------------------------------- Effects */

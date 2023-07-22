@@ -230,7 +230,25 @@ class PersonalInfoAdmin(admin.ModelAdmin):
 
 | Test | Expected Result | Pass/Fail |
 | ----------- | ----------- | ----------- |
-| All templates on mobile display | Login, Logout and Signup to fit under the site heading but still on the far right, Nav bar in a collapsed menu, main body items adjust to fit in the small layout and the footer icons compact into two icons per row | |
+| All templates on mobile display | Login, Logout and Signup to fit under the site heading but still on the far right, Nav bar in a collapsed menu, main body items adjust to fit in the small layout and the footer icons compact into two icons per row | Pass |
+| All templates on medium display | Login, Logout and Signup to fit inline with the site heading on the far right, Nav bar in a collapsed menu, main body items adjust to fit in the medium layout and the footer icons move into one icon row | Pass |
+| All templates on large display | Login, Logout and Signup to fit inline with the site heading on the far right, Nav bar in a single line just under the logo, main body items adjust to fit in the large layout and the footer icons move into one icon row | Pass |
+| User signup | Allow a user to sign up to the site to be able to request, view, edit and delete thier own bookings | Pass |
+| User login | Allow signed up users to login to the site to be able to request, view, edit and delete thier own bookings | Pass |
+| Admin login | Allow the admin to login to the site to be able to view, edit and delete all bookings in the database, as well as add new bookings as the admin | Pass |
+| Request Booking | Allow the user to be able to request a new booking through the site | Pass |
+| User Bookings | Allow the user to be able to view a list/page of all the bookings they have booked in, displaying the minimum details | Pass |
+| View Booking | Allow the user to be able to view the details of an existing booking | Pass |
+| Edit Booking | Allow the user to be able to edit the details of an existing booking | Pass |
+| Special requests | Allow the user to be able to add special requests with the details when requesting or editing a booking | Pass |
+| Cancel Appointment/Delete Booking | Allow the user to be able to delete a booking if no longer required | Pass |
+| Appointment Details | Allow the admin to be able to view the full details of an a client's booking when selecting it | Pass |
+| Todo List/Create Todo | Allow the admin to be able to add a todo item for individual bookings to fulfil all special requests | Pass |
+| View a Todo | Allow the admin to be able to view a todo item for individual bookings to fulfil all special requests | Pass |
+| Edit a Todo | Allow the admin to be able to edit an existing todo item for individual bookings should it require updating | Pass |
+| Complete a Todo | Allow the admin to be able to mark an existing todo item as completed or not completed for individual bookings once it is completed | Pass |
+| Delete a Todo | Allow the admin to be able to delete an existing todo item for individual bookings should it no longer be required | Pass |
+| Appointment Approval | Have bookings automatically be confirmed if there is not an existing booking in the database, and if there is an existing booking, it returns a message to say the date is unavailable | Pass |
 
 *Manual Testing Goes here*
 *Include Responsiveness, Browser compatibility, resolved bugs, unresolved bugs, Lighthouse, code validation, User Stories Testing, Features Testing*
@@ -259,6 +277,9 @@ class PersonalInfoAdmin(admin.ModelAdmin):
 - Had an issue with trying to submit the Todo item form with an error when testing the validation handling function I had in place, but it seemed to not be finding a slug and id for the reverse match but I realised after my trials of moving the slug and id assigned variables, that it was not seeing the slug and id still as I had not included the booking variable with the relevant slug & id in my context for my view that was being rendered. So once I added the booking variable into my context of my view, it worked
 - Had an issue with trying to utilise the bootstrap "active" class in my nav bar, using JQuery and some control statements, but I keep getting an error about a closing endif tag, as I was also trying to assign the attribute "aria-current='page'" using control statements, so I removed that and just used the active class with control statements and that resolved the bug
 - I had an issue with the cancel button, that it was not responsive on the first click, but only on the 2nd click, so after much thought, I looked into refactoring the code using JQuery, to which I got the console.log message logging with every click including the first click, but then I was not getting the modal and realised that my html code was still referring to the old javascript function I had setup, so I adjusted the code in the html file to assign the custom data-modal-target arrtibute to the modal id I wanted the jquery function to search for to display the correct bootstrap modal
+- Found a bug during testing that due to the slug now not being a unique field and having more than one booking have the same slug, the view was not able to display the selected booking as it found two of the same name, so because the url already had the id in it, I was able to update the BookingDetail view to also get the booking id when getting the booking object, which resolved the bug as it was then able to get the correct object when selected
+- During testing I found that the filtering of the bookings in the BookingsList view was filtering with the dates from the latest booking date to the nearest booking date, so I corrected that so it showed the bookings from nearest booking to latest booking
+- I found during testing that if an image uploaded to a booking, and was too big for the css container, it was overflowing outside of it, so I updated the css class to hide the overflow
 
 ### Validator Testing
 

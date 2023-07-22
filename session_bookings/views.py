@@ -38,7 +38,7 @@ class BookingList(LoginRequiredMixin, generic.ListView):
         # Assitance from ChatGpt
         user = self.request.user
         queryset = super().get_queryset().filter(client=user).order_by(
-            '-booking_date')
+            'booking_date')
 
         return queryset
 
