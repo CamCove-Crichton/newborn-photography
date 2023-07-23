@@ -145,6 +145,8 @@
 - Updated the validation function name for validating date inputs for bookings, so it made sense to allow me to use it again in the Todos views for validation by renaming it to date_input_vs_todays_date, in turn adding a date validation to the new todos and the edit todos views
 - Added in a validation function for checking the booking time being requested in the new booking or when editing a booking, that you cannot book a time slot before 9am and after 3pm
 - Added in a validation for the Todo due dates in the NewTodo and EditTodo views, so that the due date for the Todo item cannot be after the session booking date
+- Performed manual testing on the site and created a table of tests in the README.md file
+- Perfromed Lighthouse checks on all templates and updated templates slightly to improve the accessibility
 
 ### Future Developments
 
@@ -346,6 +348,14 @@ class PersonalInfoAdmin(admin.ModelAdmin):
 - forms.py - All clear, no errors found
 
 *Lighthouse perfromace check*
+
+- index.html Lighthouse check
+
+![index template lighthouse check](/static/README%20images/lighthouse/index.png)
+
+- blogs.html Lighthouse check
+
+![blogs template lighthouse check](/static/README%20images/lighthouse/blogs.png)
 
 ### Unresolved Bugs
 
