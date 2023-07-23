@@ -295,10 +295,56 @@ class PersonalInfoAdmin(admin.ModelAdmin):
 
 ### Validator Testing
 
-*W3C Nu HTML Checker*
-*W3C Jigsaw CSS Validator*
-*JS Hint Validator*
-*PEP8 Python Validator*
+- HTML Files that the html code was passed through the HTML validator
+
+[W3C Nu HTML Checker](https://validator.w3.org/nu/)
+
+- base.html - Document checking completed. No errors or warnings to show. (After removing any server side templating tags)
+- booking_detail.html - Document checking completed. No errors or warnings to show. (After removing any server side templating tags)
+- todo_detail.html - Document checking completed. No errors or warnings to show. (After removing any server side templating tags)
+- edit_todo.html - Document checking completed. No errors or warnings to show. (After removing any server side templating tags)
+- new_todo.html - Document checking completed. No errors or warnings to show. (After removing any server side templating tags)
+- blogs.html - Document checking completed. No errors or warnings to show.
+- contact.html - Document checking completed. No errors or warnings to show.
+- gallery.html - Document checking completed. No errors or warnings to show.
+- edit_booking.html - Document checking completed. No errors or warnings to show. (After removing any server side templating tags)
+- new_booking.html - Document checking completed. No errors or warnings to show. (After removing any server side templating tags)
+- administrator_panel.html - Document checking completed. No errors or warnings to show. (After removing any server side templating tags)
+- bookings.html - Document checking completed. No errors or warnings to show. (After removing any server side templating tags)
+- index.html - Document checking completed. No errors or warnings to show.
+- signup.html - Document checking completed. No errors or warnings to show. (After removing any server side templating tags)
+- logout.html - Document checking completed. No errors or warnings to show. (After removing any server side templating tags)
+- login.html - Document checking completed. No errors or warnings to show. (After removing any server side templating tags)
+
+---
+
+- CSS Files that css code was passed through the CSS Validator
+
+[W3C Jigsaw CSS Validator](https://jigsaw.w3.org/css-validator/#validate_by_input)
+
+- style.css - No errors found
+
+---
+
+- Javascript Files that the javascript and jquery code was passed through the JS Hint validator
+
+[JS Hint](https://jshint.com/)
+
+- script.js - No errors found after ensuring JS Hint was aware of using version 6 and JQuery and Bootstrap
+
+---
+
+- Files that python code was passed through the Python Linter
+  
+[CI Python Linter](https://pep8ci.herokuapp.com/)
+
+- admin.py - All clear, no errors found
+- models.py - All clear, no errors found
+- booking_utils.py - All clear, no errors found
+- views.py - All clear, no errors found
+- urls.py - All clear, no errors found
+- forms.py - All clear, no errors found
+
 *Lighthouse perfromace check*
 
 ### Unresolved Bugs
