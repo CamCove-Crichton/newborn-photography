@@ -4,35 +4,35 @@
 <div class="container-fluid">
   <div class="row justify-content-center">
     <div class="col-8">
-      <h1 class="text-center">Booking Details</h1>
+      <h2 class="text-center">Booking Details</h2>
     </div>
   </div>
   <div class="row mt-3 justify-content-start ms-2">
     <!-- General Details -->
     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-      <h6>Booking Name:</h6>
+      <h3>Booking Name:</h3>
       <p>{{ booking.booking_name }}</p>
     </div>
     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-      <h6>Date:</h6>
+      <h3>Date:</h3>
       <p>{{ booking.booking_date }}</p>
     </div>
     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-      <h6>Time:</h6>
+      <h3>Time:</h3>
       <p>{{ booking.booking_time }}</p>
     </div>
     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-      <h6>Baby's Name:</h6>
+      <h3>Baby's Name:</h3>
       <p>{{ booking.babys_name }}</p>
     </div>
     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-      <h6>Baby's Due Date:</h6>
+      <h3>Baby's Due Date:</h3>
       <p>{{booking.babys_due_date }}</p>
     </div>
 
     <!-- Baby's Gender -->
     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-      <h6>Baby's Gender:</h6>
+      <h3>Baby's Gender:</h3>
       {% if booking.babys_gender == 1 %}
       <p>Male</p>
       {% elif booking.babys_gender == 2 %}
@@ -44,7 +44,7 @@
 
     <!-- Booking Location -->
     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-      <h6>Location:</h6>
+      <h3>Location:</h3>
       {% if booking.location == 1 %}
       <p>Home</p>
       {% else %}
@@ -54,7 +54,7 @@
 
     <!-- Requests & How you found me -->
     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-      <h6>Special Requests:</h6>
+      <h3>Special Requests:</h3>
       {% if booking.special_requests %}
       <p>{{ booking.special_requests|safe }}</p>
       {% else %}
@@ -62,13 +62,13 @@
       {% endif %}
     </div>
     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-      <h6>How You Found Me:</h6>
+      <h3>How You Found Me:</h3>
       <p>{{ booking.how_you_found_me }}</p>
     </div>
 
     <!-- Media Consent -->
     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-      <h6>Consent to use images:</h6>
+      <h3>Consent to use images:</h3>
       {% if booking.consent == 1 %}
       <p>Yes</p>
       {% else %}
@@ -78,7 +78,7 @@
 
     <!-- Booking Status -->
     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-      <h6>Booking Status:</h6>
+      <h3>Booking Status:</h3>
       {% if booking.status == 1 %}
       <p>Confirmed</p>
       {% else %}
@@ -90,7 +90,7 @@
   <!-- Booking Image -->
   <div class="row justify-content-start ms-2">
     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-      <h6>Uploaded Image:</h6>
+      <h3>Uploaded Image:</h3>
       {% if "placeholder" in booking.featured_image.url %}
       <div class="booking-image-container mt-3">
         <img
@@ -116,7 +116,7 @@
   <div class="container text-center">
     <hr />
     <div class="row">
-      <h3>Todo Items:</h3>
+      <h4>Todo Items:</h4>
     </div>
     {% for todo in todos %}
     <a href="{% url 'todo_detail' slug=todo.slug id=todo.id %}">
@@ -125,7 +125,7 @@
         data-bs-theme="dark"
       >
         <div class="col-4 col-sm-4 col-md-4">
-          <h6>Item Name:</h6>
+          <h5>Item Name:</h5>
           {% if todo.completed == True %}
           <p><s>{{ todo.title }}</s></p>
           {% else %}
@@ -133,7 +133,7 @@
           {% endif %}
         </div>
         <div class="col-4 col-sm-4 col-md-4">
-          <h6>Due Date:</h6>
+          <h5>Due Date:</h5>
           {% if todo.completed == True %}
           <p><s>{{ todo.due_date }}</s></p>
           {% else %}
@@ -141,7 +141,7 @@
           {% endif %}
         </div>
         <div class="col-4 col-sm-4 col-md-4">
-          <h6>Status</h6>
+          <h5>Status</h5>
           {% if todo.completed == True %}
           <p>Done</p>
           {% else %}
@@ -204,8 +204,8 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="confirmCancelModalLabel"
-          >Delete Booking</h1
+        <h2 class="modal-title fs-5" id="confirmCancelModalLabel"
+          >Delete Booking</h2
         >
         <button
           type="button"
