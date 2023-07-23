@@ -353,9 +353,37 @@ class PersonalInfoAdmin(admin.ModelAdmin):
 
 ![index template lighthouse check](/static/README%20images/lighthouse/index.png)
 
+---
+
 - blogs.html Lighthouse check
 
 ![blogs template lighthouse check](/static/README%20images/lighthouse/blogs.png)
+
+---
+
+- gallery.html Lighthouse check
+
+![gallery template lighthouse check](/static/README%20images/lighthouse/gallery.png)
+
+---
+
+- contact.html Lighthouse check
+
+![contact template lighthouse check](/static/README%20images/lighthouse/contact.png)
+
+---
+
+- bookings.html Lighthouse check
+
+![bookings template lighthouse check](/static/README%20images/lighthouse/bookings.png)
+
+---
+
+- administrator_panel.html Lighthouse check
+
+![administrator panel template lighthouse check](/static/README%20images/lighthouse/admin-panel.png)
+
+---
 
 ### Unresolved Bugs
 
