@@ -44,25 +44,11 @@
     </div>
   </div>
 
-  <!-- <ul> -->
-  <!-- General Details -->
-  <!-- <li>Title: {{ todo_item.title }}</li>
-  <li>Details: {{ todo_item.details }}</li>
-  <li>Due Date: {{ todo_item.due_date }}</li>
-  <li>Due Time: {{ todo_item.due_time }}</li>
-  {% if todo_item.completed == True %}
-  <li>Status: Done</li>
-  {% else %}
-  <li>Status: In Progress</li>
-  {% endif %} -->
-  <!-- </ul> -->
-
   <!-- Edit Todo -->
   <div class="row justify-content-center mt-3">
     <div class="col-4 col-sm-3 col-md-3 col-lg-2">
       <a
         href="{% url 'edit_todo' slug=todo_item.slug id=todo_item.id %}"
-        type="button"
         class="btn btn-success elmt-trans"
         >Edit Todo</a
       >
@@ -116,7 +102,6 @@
         >
         <a
           href="{% url 'delete_todo' slug=todo_item.slug id=todo_item.id %}"
-          type="button"
           class="btn btn-primary elmt-trans"
           >Confirm</a
         >

@@ -16,7 +16,7 @@
       <form method="post">
         {% csrf_token %}
 
-        <!-- Todo Titel -->
+        <!-- Todo title -->
         <div class="form-group">
           {{ form.title|as_crispy_field }}
           <small class="text-muted"
@@ -110,7 +110,6 @@
         >
         <a
           href="{% url 'booking_detail' booking_slug booking_id %}"
-          type="button"
           class="btn btn-primary elmt-trans"
           >Confirm</a
         >

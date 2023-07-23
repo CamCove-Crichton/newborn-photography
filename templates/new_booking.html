@@ -153,17 +153,11 @@
 
         <!-- If Admin is logged in return to admin panel else normal bookings -->
         {% if user.is_superuser %}
-        <a
-          href="{% url 'admin_panel' %}"
-          type="button"
-          class="btn btn-primary elmt-trans"
+        <a href="{% url 'admin_panel' %}" class="btn btn-primary elmt-trans"
           >Confirm</a
         >
         {% else %}
-        <a
-          href="{% url 'bookings' %}"
-          type="button"
-          class="btn btn-primary elmt-trans"
+        <a href="{% url 'bookings' %}" class="btn btn-primary elmt-trans"
           >Confirm</a
         >
         {% endif %}
