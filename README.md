@@ -259,6 +259,174 @@ class PersonalInfoAdmin(admin.ModelAdmin):
 
 ### Finished Site Screen Grabs
 
+- Landing/Home page
+
+![websites landing and home page](/static/README%20images/features/index%20landing%20page.png)
+
+---
+
+- Signup page
+
+![websites signup page](/static/README%20images/features/signup%20page.png)
+
+---
+
+- Sign-in page
+
+![websites sign-in page](/static/README%20images/features/sign-in%20page.png)
+
+---
+
+- Signed in message
+
+![signed in message](/static/README%20images/features/signed-in%20message.png)
+
+---
+
+- Sign-out page
+
+![websites sign-out page](/static/README%20images/features/sign-out%20page.png)
+
+---
+
+- Signed out message
+
+![signed out message](/static/README%20images/features/signed-out%20message.png)
+
+---
+
+- Signed in user navbar
+
+![websites user signed in navbar](/static/README%20images/features/Signed%20in%20user%20navbar.png)
+
+---
+
+- Signed in admin navbar
+
+![websites admin signed in navbar](/static/README%20images/features/Signed%20in%20admin%20navbar.png)
+
+---
+
+- Blogs page
+
+![websites blog page](/static/README%20images/features/blogs%20page.png)
+
+---
+
+- Gallery page
+
+![websites gallery page](/static/README%20images/features/gallery%20page.png)
+
+---
+
+- Contact page
+
+![websites contact page](/static/README%20images/features/contact%20page.png)
+
+---
+
+- Clients' bookings page
+
+![websites users bookings page](/static/README%20images/features/client%20bookings%20page.png)
+
+---
+
+- Admin bookings page
+
+![websites admin bookings page](/static/README%20images/features/admin%20client%20bookings.png)
+
+---
+
+- New booking request
+
+![websites new booking request page](/static/README%20images/features/new%20booking%20request%20page.png)
+
+---
+
+- Booking details
+
+![websites booking details page](/static/README%20images/features/booking%20details%20page.png)
+
+---
+
+- Edit booking
+
+![websites edit booking page](/static/README%20images/features/edit%20booking%20page.png)
+
+---
+
+- Cancel booking request confirmation
+
+![cancel booking request confirmation modal](/static/README%20images/features/Cancel%20booking%20edit%20confirmation.png)
+
+---
+
+- Delete booking confirmation
+
+![delete booking confirmation modal](/static/README%20images/features/Delete%20booking%20confirmation.png)
+
+---
+
+- Todo items per booking for admin access only
+
+![websites list of todo items per booking](/static/README%20images/features/todo%20items%20in%20booking%20details%20page.png)
+
+---
+
+- New todo item
+
+![websites new todo item page](/static/README%20images/features/new%20todo%20item.png)
+
+---
+
+- Todo item details
+
+![websites todo items details page](/static/README%20images/features/todo%20item%20details%20page.png)
+
+---
+
+- Edit todo item
+
+![websites edit todo item page](/static/README%20images/features/edit%20todo%20item.png)
+
+---
+
+- Cancel todo item edit confirmation
+
+![cancel editing todo item confirmation modal](/static/README%20images/features/cancel%20todo%20edit%20confirmation.png)
+
+---
+
+- Delete todo item confirmation
+
+![delete todo item confirmation modal](/static/README%20images/features/delete%20todo%20item%20confirmation.png)
+
+---
+
+- Success message
+
+![websites confirmation or success message](/static/README%20images/features/successful%20booking%20message.png)
+
+---
+
+- Error message
+
+![websites error message](/static/README%20images/features/validation%20error%20message.png)
+
+---
+
+- Back to top button
+
+![websites back to top button](/static/README%20images/features/back%20to%20top%20button.png)
+
+---
+
+- Site footer
+
+![websites footer](/static/README%20images/features/site%20footer.png)
+
+---
+
 ## Testing
 
 - All tests were run on Google Chrome, Mozilla Firefox and Mircosoft Edge
