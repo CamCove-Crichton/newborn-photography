@@ -208,8 +208,41 @@ class PersonalInfoAdmin(admin.ModelAdmin):
 
 ### Wireframes & Database Designs
 
-*Wireframes go here*
-*Database Designs go here*
+- Home page wireframe
+
+![landing page wireframe](/static/README%20images/wireframes/Index%20page.png)
+
+---
+
+- Signup/Login page wireframe
+
+![signup or login page wireframe](/static/README%20images/wireframes/signup%20page.png)
+
+---
+
+- Booking request page wrieframe
+
+![booking request page wireframe](/static/README%20images/wireframes/booking%20request%20page.png)
+
+---
+
+- User bookings page wireframe
+
+![user bookings page wireframe](/static/README%20images/wireframes/user%20bookings%20page.png)
+
+---
+
+- Admin panel page wireframe
+
+![admin bookings panel page wireframe](/static/README%20images/wireframes/admin%20page.png)
+
+---
+
+- Database structure
+
+![database structure design](/static/README%20images/other/database%20structure.png)
+
+---
 
 ### Technologies
 
@@ -264,9 +297,7 @@ class PersonalInfoAdmin(admin.ModelAdmin):
 | Footer Links | When the footer links are clicked, they open in a new tab | Pass |
 | Favicon & Site Title | The favicon and site title displays in the window tab on every template | Pass |
 
-*Manual Testing Goes here*
-*Include Responsiveness, Browser compatibility, resolved bugs, unresolved bugs, Lighthouse, code validation, User Stories Testing, Features Testing*
-**Remember to make the manual testing write-up visual! - Share Test cases, uses tables where appropriate, and include screenshots where possible!**
+---
 
 ### Resolved Bugs
 
@@ -347,7 +378,7 @@ class PersonalInfoAdmin(admin.ModelAdmin):
 - urls.py - All clear, no errors found
 - forms.py - All clear, no errors found
 
-*Lighthouse perfromace check*
+---
 
 - index.html Lighthouse check
 
@@ -382,6 +413,60 @@ class PersonalInfoAdmin(admin.ModelAdmin):
 - administrator_panel.html Lighthouse check
 
 ![administrator panel template lighthouse check](/static/README%20images/lighthouse/admin-panel.png)
+
+---
+
+- new_booking.html Lighthouse check
+
+![new booking template lighthouse check](/static/README%20images/lighthouse/new-booking.png)
+
+---
+
+- booking_detail.html Lighthouse check
+
+![booking detail template lighthouse check](/static/README%20images/lighthouse/booking-detail.png)
+
+---
+
+- edit_booking.html Lighthouse check
+
+![edit booking template lighthouse check](/static/README%20images/lighthouse/edit-booking.png)
+
+---
+
+- new_todo.html Lighthouse check
+
+![new todo template lighthouse check](/static/README%20images/lighthouse/new-todo.png)
+
+---
+
+- todo_detail.html Lighthouse check
+
+![todo detail template lighthouse check](/static/README%20images/lighthouse/todo-details.png)
+
+---
+
+- edit_todo.html Lighthouse check
+
+![edit todo template lighthouse check](/static/README%20images/lighthouse/edit-todo.png)
+
+---
+
+- signup.html Lighthouse check
+
+![signup template lighthouse check](/static/README%20images/lighthouse/signup.png)
+
+---
+
+- login.html Lighthouse check
+
+![login template lighthouse check](/static/README%20images/lighthouse/sign-in.png)
+
+---
+
+- logout.html Lighthouse check
+
+![logout template lighthouse check](/static/README%20images/lighthouse/sign-out.png)
 
 ---
 
