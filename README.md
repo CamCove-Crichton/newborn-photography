@@ -355,7 +355,7 @@ class PersonalInfoAdmin(admin.ModelAdmin):
 
 ---
 
-- Cancel booking request confirmation
+- Cancel booking edit confirmation
 
 ![cancel booking request confirmation modal](/static/README%20images/features/Cancel%20booking%20edit%20confirmation.png)
 
