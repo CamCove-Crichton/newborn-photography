@@ -66,7 +66,7 @@ Cloning a repository creates a local copy of the repository on your machine, all
 
 ### Am I Responsive
 
-*screengrab goes here*
+![am i responsive screen grab](/static/README%20images/other/Amiresponsive.png)
 
 ## Development
 
