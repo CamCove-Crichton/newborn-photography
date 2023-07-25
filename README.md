@@ -10,7 +10,9 @@
 
 ## Deployment
 
-*website links go here*
+- Deployed site link:
+  
+[Newborn Photography Hub](https://newborn-photography-hub.herokuapp.com/)
 
 - Installed required technologies for the bare bones of the project, Django, Cloudinary, PostgreSQL & Psycopg2
 - Added these to the requirements.txt file
@@ -40,8 +42,27 @@
 - Create the media, static and templates directories
 - Create a Profile
 - Deployed app with Heroku through Github
+- Updated DEBUG to False
+- Removed DISABLE_COLLECTSTATIC config var in my heroku app, and redeployed with Heroku through Github
 
-*Forking & Cloning goes here*
+---
+
+### Forking
+
+Forking a repository allows you to create a personal copy of the original repository under your Github account. This enables you to freely experiment with and make changes to the code without affecting the original repository
+
+### Cloning
+
+Cloning a repository creates a local copy of the repository on your machine, allowing you to work on it offline and make changes. Follow the below steps to clone the repository.
+
+1. On the repository page, click the "Code" button
+2. Copy the repository's URL (HTTPS or SSH)
+3. Open your terminal or command prompt
+4. Navigate to the desired directory where you want to clone the repository
+5. Use the 'git clone' command followed by the repository URL
+6. Press Enter, and the repository will be cloned to your local machine
+
+---
 
 ### Am I Responsive
 
@@ -147,6 +168,7 @@
 - Added in a validation for the Todo due dates in the NewTodo and EditTodo views, so that the due date for the Todo item cannot be after the session booking date
 - Performed manual testing on the site and created a table of tests in the README.md file
 - Perfromed Lighthouse checks on all templates and updated templates slightly to improve the accessibility
+- Uploaded all my static images to cloudinary and removed them locally
 
 ### Future Developments
 
@@ -464,6 +486,7 @@ class PersonalInfoAdmin(admin.ModelAdmin):
 | Pagination | When there is more than 6 bookings for a user or for the admin, then a next and previous button displays to allow the user or admin to go to the following bookings | Pass |
 | Footer Links | When the footer links are clicked, they open in a new tab | Pass |
 | Favicon & Site Title | The favicon and site title displays in the window tab on every template | Pass |
+| Return to correct template | When making a booking, editing a booking or deleting a booking as an admin, it returns to the admin panel | Fail |
 
 ---
 
@@ -641,6 +664,7 @@ class PersonalInfoAdmin(admin.ModelAdmin):
 ### Unresolved Bugs
 
 - I do still need to figured out how to add the attribute "aria-current='page'" for each nav element when it is clicked for better accessibility
+- There is an issue with an admin making a booking, editing a booking or deleting a booking, that it returns to the bookings.html template and not the administrator_panel.html template, but I ran out of time before being able to give it the time it required. I will come back to it
 
 ## Credits
 
