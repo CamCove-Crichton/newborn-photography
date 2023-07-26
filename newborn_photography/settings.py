@@ -114,14 +114,6 @@ WSGI_APPLICATION = 'newborn_photography.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 # Assitance from code institutes I think therefore I blog walkthrough tutorials
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
-# Assitance from code institutes I think therefore I blog walkthrough tutorials
 DATABASES = {
     'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
 }
